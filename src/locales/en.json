@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "home": "Home",
+    "vocabulary": "Vocabulary",
+    "flashcard": "Flashcard",
+    "test": "Test"
+  },
+  "home": {
+    "title": "Learn Chinese every day",
+    "subtitle": "HSK 1–6 vocabulary, flashcards, listening practice and tests, all in one place.",
+    "start": "Start learning",
+    "features": {
+      "vocab_title": "Vocabulary",
+      "vocab_desc": "Browse words by HSK level with pinyin, meanings and examples.",
+      "flashcard_title": "Flashcards",
+      "flashcard_desc": "Review vocabulary with flashcards to remember longer.",
+      "listening_title": "Listening",
+      "listening_desc": "Hear native pronunciation and train your ear.",
+      "test_title": "Tests",
+      "test_desc": "Take quizzes to track your learning progress."
+    }
+  },
+  "vocab": {
+    "search_placeholder": "Search by hanzi, pinyin or Vietnamese meaning...",
+    "all": "All",
+    "showing": "Showing {{count}} / {{total}} words",
+    "empty": "No words found.",
+    "speak": "Pronounce"
+  },
+  "flashcard": {
+    "due": "due for review",
+    "learned": "learned",
+    "total": "total",
+    "start": "Start review",
+    "show_answer": "Show answer",
+    "again": "Again",
+    "hard": "Hard",
+    "good": "Good",
+    "easy": "Easy",
+    "done": "Done!",
+    "reviewed": "Reviewed {{count}} words today",
+    "add_words": "Add new words",
+    "choose_level": "Choose an HSK level to add to your deck:",
+    "new_count": "{{count}} new",
+    "added": "Added {{count}} HSK {{level}} words to your deck.",
+    "empty_hint": "Your deck is empty. Click \"Add new words\" to get started.",
+    "back_home": "Back to home",
+    "back_dashboard": "View stats",
+    "quit": "Quit session"
+  },
+  "auth": {
+    "welcome": "Hello, {{name}}!",
+    "logout": "Log out",
+    "sync_on": "Cloud sync: On",
+    "sync_off": "Saved offline",
+    "syncing": "Syncing",
+    "login_to_sync": "Sign in to save to the cloud",
+    "sync_error": "Could not sync with the cloud: {{message}}",
+    "migrate_failed": "Signed in, but your offline data could not be uploaded yet (it is still kept on this device): {{message}}"
+  },
+  "common": {
+    "search": "Search",
+    "loading": "Loading...",
+    "login": "Log in",
+    "logout": "Log out",
+    "login_google": "Sign in with Google",
+    "skip_login": "Continue without signing in",
+    "toggle_lang": "Switch language",
+    "coming_soon": "Coming soon",
+    "firebase_missing": "Firebase is not configured. Fill in the variables in .env.local to enable sign-in."
+  }
+}

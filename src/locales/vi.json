@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "home": "Trang chủ",
+    "vocabulary": "Từ vựng",
+    "flashcard": "Flashcard",
+    "test": "Kiểm tra"
+  },
+  "home": {
+    "title": "Học Tiếng Trung mỗi ngày",
+    "subtitle": "Từ vựng HSK 1–6, flashcard, luyện nghe và bài kiểm tra, tất cả ở một nơi.",
+    "start": "Bắt đầu học",
+    "features": {
+      "vocab_title": "Từ vựng",
+      "vocab_desc": "Tra cứu từ vựng theo cấp độ HSK với pinyin, nghĩa và ví dụ.",
+      "flashcard_title": "Flashcard",
+      "flashcard_desc": "Ôn tập từ vựng bằng thẻ ghi nhớ để nhớ lâu hơn.",
+      "listening_title": "Luyện nghe",
+      "listening_desc": "Nghe phát âm chuẩn và luyện phản xạ nghe.",
+      "test_title": "Kiểm tra",
+      "test_desc": "Làm bài kiểm tra để đánh giá tiến độ học tập."
+    }
+  },
+  "vocab": {
+    "search_placeholder": "Tìm theo chữ Hán, pinyin hoặc nghĩa tiếng Việt...",
+    "all": "Tất cả",
+    "showing": "Hiển thị {{count}} / {{total}} từ",
+    "empty": "Không tìm thấy từ nào.",
+    "speak": "Phát âm"
+  },
+  "flashcard": {
+    "due": "từ đến hạn",
+    "learned": "đã học",
+    "total": "tổng",
+    "start": "Bắt đầu ôn tập",
+    "show_answer": "Hiện đáp án",
+    "again": "Lại",
+    "hard": "Khó",
+    "good": "Tốt",
+    "easy": "Dễ",
+    "done": "Hoàn thành!",
+    "reviewed": "Ôn được {{count}} từ hôm nay",
+    "add_words": "Thêm từ mới",
+    "choose_level": "Chọn cấp độ HSK để thêm từ vào bộ thẻ:",
+    "new_count": "{{count}} từ mới",
+    "added": "Đã thêm {{count}} từ HSK {{level}} vào bộ thẻ.",
+    "empty_hint": "Bộ thẻ đang trống. Bấm \"Thêm từ mới\" để bắt đầu.",
+    "back_home": "Về trang chủ",
+    "back_dashboard": "Xem thống kê",
+    "quit": "Thoát phiên ôn tập"
+  },
+  "auth": {
+    "welcome": "Xin chào, {{name}}!",
+    "logout": "Đăng xuất",
+    "sync_on": "Đồng bộ cloud: Bật",
+    "sync_off": "Lưu offline",
+    "syncing": "Đang đồng bộ",
+    "login_to_sync": "Đăng nhập để lưu cloud",
+    "sync_error": "Không đồng bộ được với cloud: {{message}}",
+    "migrate_failed": "Đã đăng nhập nhưng chưa đưa được dữ liệu offline lên cloud (dữ liệu vẫn được giữ trên máy): {{message}}"
+  },
+  "common": {
+    "search": "Tìm kiếm",
+    "loading": "Đang tải...",
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "login_google": "Đăng nhập với Google",
+    "skip_login": "Tiếp tục không đăng nhập",
+    "toggle_lang": "Đổi ngôn ngữ",
+    "coming_soon": "Sắp ra mắt",
+    "firebase_missing": "Chưa cấu hình Firebase. Hãy điền các biến trong .env.local để bật đăng nhập."
+  }
+}
