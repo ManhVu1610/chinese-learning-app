@@ -28,3 +28,6 @@ dist-ssr/
 *.njsproj
 *.sln
 *.sw?
+
+# Font gốc (không deploy; chỉ dùng để tạo public/fonts bằng scripts/build-fonts.mjs)
+fonts-src/

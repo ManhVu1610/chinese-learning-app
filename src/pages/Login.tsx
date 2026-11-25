@@ -34,15 +34,17 @@ export default function Login() {
 
   return (
     <section className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
-      <div className="w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-        <p className="text-4xl font-bold text-[#DC2626]">汉字</p>
-        <h1 className="mt-3 text-2xl font-bold">{t('common.login')}</h1>
+      <div className="box w-full max-w-sm p-8 text-center">
+        <span className="inline-block border-2 border-ink bg-brick px-3 py-1 text-3xl font-bold text-card shadow-block-sm">
+          汉字
+        </span>
+        <h1 className="mt-4 text-2xl font-bold">{t('common.login')}</h1>
 
         <button
           type="button"
           onClick={loginWithGoogle}
           disabled={!isFirebaseConfigured || loading}
-          className="mt-6 flex w-full items-center justify-center gap-3 rounded-lg border border-slate-300 bg-white px-4 py-2.5 font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+          className="btn mt-6 w-full gap-3"
         >
           <svg viewBox="0 0 48 48" className="h-5 w-5" aria-hidden="true">
             <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z" />
@@ -56,15 +58,19 @@ export default function Login() {
         <button
           type="button"
           onClick={() => navigate('/')}
-          className="mt-3 w-full rounded-lg px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-100"
+          className="mt-4 w-full py-2 text-sm font-semibold text-ink-soft underline decoration-2 underline-offset-4 hover:text-ink"
         >
           {t('common.skip_login')}
         </button>
 
         {!isFirebaseConfigured && (
-          <p className="mt-4 text-xs text-amber-600">{t('common.firebase_missing')}</p>
+          <p className="mt-4 border-2 border-ink bg-apricot px-3 py-2 text-left text-xs">
+            {t('common.firebase_missing')}
+          </p>
         )}
-        {error && <p className="mt-4 text-xs text-red-600">{error}</p>}
+        {error && (
+          <p className="mt-4 border-2 border-ink bg-coral px-3 py-2 text-left text-xs">{error}</p>
+        )}
       </div>
     </section>
   )

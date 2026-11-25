@@ -1,0 +1,219 @@
+{
+  "_ghi_chu": "Bản sửa cho radicals_50.json của Learn (Learn chỉ đọc). Mỗi khoá là số thứ tự bộ thủ; pinyin/examples ở đây thay cho dữ liệu gốc. Từ ví dụ được chọn sao cho thông dụng và CÓ CHỨA bộ thủ đó.",
+  "2": { "examples": [
+    { "hanzi": "刀子", "pinyin": "dāozi", "meaning_vi": "con dao" },
+    { "hanzi": "剪刀", "pinyin": "jiǎndāo", "meaning_vi": "cái kéo" },
+    { "hanzi": "到达", "pinyin": "dàodá", "meaning_vi": "đến nơi" }
+  ] },
+  "4": { "examples": [
+    { "hanzi": "出口", "pinyin": "chūkǒu", "meaning_vi": "lối ra; xuất khẩu" },
+    { "hanzi": "吃饭", "pinyin": "chīfàn", "meaning_vi": "ăn cơm" },
+    { "hanzi": "喝水", "pinyin": "hē shuǐ", "meaning_vi": "uống nước" }
+  ] },
+  "5": { "examples": [
+    { "hanzi": "国家", "pinyin": "guójiā", "meaning_vi": "quốc gia" },
+    { "hanzi": "围绕", "pinyin": "wéirào", "meaning_vi": "bao quanh" },
+    { "hanzi": "公园", "pinyin": "gōngyuán", "meaning_vi": "công viên" }
+  ] },
+  "6": { "examples": [
+    { "hanzi": "土地", "pinyin": "tǔdì", "meaning_vi": "đất đai" },
+    { "hanzi": "地方", "pinyin": "dìfang", "meaning_vi": "nơi, chỗ" },
+    { "hanzi": "泥土", "pinyin": "nítǔ", "meaning_vi": "bùn đất" }
+  ] },
+  "7": { "examples": [
+    { "hanzi": "大家", "pinyin": "dàjiā", "meaning_vi": "mọi người" },
+    { "hanzi": "巨大", "pinyin": "jùdà", "meaning_vi": "khổng lồ" },
+    { "hanzi": "大街", "pinyin": "dàjiē", "meaning_vi": "đường phố lớn" }
+  ] },
+  "8": { "examples": [
+    { "hanzi": "妈妈", "pinyin": "māma", "meaning_vi": "mẹ" },
+    { "hanzi": "女儿", "pinyin": "nǚ'ér", "meaning_vi": "con gái" },
+    { "hanzi": "姐姐", "pinyin": "jiějie", "meaning_vi": "chị gái" }
+  ] },
+  "9": { "examples": [
+    { "hanzi": "安全", "pinyin": "ānquán", "meaning_vi": "an toàn" },
+    { "hanzi": "家庭", "pinyin": "jiātíng", "meaning_vi": "gia đình" },
+    { "hanzi": "汉字", "pinyin": "Hànzì", "meaning_vi": "chữ Hán" }
+  ] },
+  "11": { "examples": [
+    { "hanzi": "毛巾", "pinyin": "máojīn", "meaning_vi": "khăn mặt" },
+    { "hanzi": "头巾", "pinyin": "tóujīn", "meaning_vi": "khăn trùm đầu" },
+    { "hanzi": "帽子", "pinyin": "màozi", "meaning_vi": "cái mũ" }
+  ] },
+  "12": { "examples": [
+    { "hanzi": "广场", "pinyin": "guǎngchǎng", "meaning_vi": "quảng trường" },
+    { "hanzi": "商店", "pinyin": "shāngdiàn", "meaning_vi": "cửa hàng" },
+    { "hanzi": "起床", "pinyin": "qǐchuáng", "meaning_vi": "thức dậy" }
+  ] },
+  "13": { "examples": [
+    { "hanzi": "街道", "pinyin": "jiēdào", "meaning_vi": "đường phố" },
+    { "hanzi": "很好", "pinyin": "hěn hǎo", "meaning_vi": "rất tốt" },
+    { "hanzi": "行动", "pinyin": "xíngdòng", "meaning_vi": "hành động" }
+  ] },
+  "14": { "examples": [
+    { "hanzi": "心情", "pinyin": "xīnqíng", "meaning_vi": "tâm trạng" },
+    { "hanzi": "快乐", "pinyin": "kuàilè", "meaning_vi": "vui vẻ" },
+    { "hanzi": "忘记", "pinyin": "wàngjì", "meaning_vi": "quên" }
+  ] },
+  "15": { "examples": [
+    { "hanzi": "手机", "pinyin": "shǒujī", "meaning_vi": "điện thoại di động" },
+    { "hanzi": "打开", "pinyin": "dǎkāi", "meaning_vi": "mở ra" },
+    { "hanzi": "找到", "pinyin": "zhǎodào", "meaning_vi": "tìm thấy" }
+  ] },
+  "16": { "examples": [
+    { "hanzi": "改变", "pinyin": "gǎibiàn", "meaning_vi": "thay đổi" },
+    { "hanzi": "教室", "pinyin": "jiàoshì", "meaning_vi": "phòng học" },
+    { "hanzi": "收入", "pinyin": "shōurù", "meaning_vi": "thu nhập" }
+  ] },
+  "17": { "examples": [
+    { "hanzi": "日期", "pinyin": "rìqī", "meaning_vi": "ngày tháng" },
+    { "hanzi": "明天", "pinyin": "míngtiān", "meaning_vi": "ngày mai" },
+    { "hanzi": "时间", "pinyin": "shíjiān", "meaning_vi": "thời gian" }
+  ] },
+  "19": { "pinyin": "shuǐ", "examples": [
+    { "hanzi": "河水", "pinyin": "héshuǐ", "meaning_vi": "nước sông" },
+    { "hanzi": "汉语", "pinyin": "Hànyǔ", "meaning_vi": "tiếng Hán" },
+    { "hanzi": "游泳", "pinyin": "yóuyǒng", "meaning_vi": "bơi lội" }
+  ] },
+  "20": { "examples": [
+    { "hanzi": "火车", "pinyin": "huǒchē", "meaning_vi": "tàu hoả" },
+    { "hanzi": "灭火", "pinyin": "mièhuǒ", "meaning_vi": "dập lửa" },
+    { "hanzi": "热水", "pinyin": "rèshuǐ", "meaning_vi": "nước nóng" }
+  ] },
+  "21": { "pinyin": "niú", "examples": [
+    { "hanzi": "牛奶", "pinyin": "niúnǎi", "meaning_vi": "sữa bò" },
+    { "hanzi": "水牛", "pinyin": "shuǐniú", "meaning_vi": "con trâu" },
+    { "hanzi": "特别", "pinyin": "tèbié", "meaning_vi": "đặc biệt" }
+  ] },
+  "22": { "examples": [
+    { "hanzi": "小狗", "pinyin": "xiǎogǒu", "meaning_vi": "chó con" },
+    { "hanzi": "猫咪", "pinyin": "māomī", "meaning_vi": "mèo con" },
+    { "hanzi": "警犬", "pinyin": "jǐngquǎn", "meaning_vi": "chó nghiệp vụ" }
+  ] },
+  "23": { "examples": [
+    { "hanzi": "玉石", "pinyin": "yùshí", "meaning_vi": "ngọc" },
+    { "hanzi": "玩具", "pinyin": "wánjù", "meaning_vi": "đồ chơi" },
+    { "hanzi": "现在", "pinyin": "xiànzài", "meaning_vi": "bây giờ" }
+  ] },
+  "24": { "examples": [
+    { "hanzi": "田地", "pinyin": "tiándì", "meaning_vi": "ruộng đất" },
+    { "hanzi": "稻田", "pinyin": "dàotián", "meaning_vi": "ruộng lúa" },
+    { "hanzi": "男人", "pinyin": "nánrén", "meaning_vi": "đàn ông" }
+  ] },
+  "25": { "pinyin": "nè" },
+  "26": { "examples": [
+    { "hanzi": "眼睛", "pinyin": "yǎnjing", "meaning_vi": "con mắt" },
+    { "hanzi": "目光", "pinyin": "mùguāng", "meaning_vi": "ánh mắt" },
+    { "hanzi": "看见", "pinyin": "kànjiàn", "meaning_vi": "nhìn thấy" }
+  ] },
+  "27": { "examples": [
+    { "hanzi": "石头", "pinyin": "shítou", "meaning_vi": "hòn đá" },
+    { "hanzi": "石桥", "pinyin": "shíqiáo", "meaning_vi": "cầu đá" },
+    { "hanzi": "研究", "pinyin": "yánjiū", "meaning_vi": "nghiên cứu" }
+  ] },
+  "28": { "examples": [
+    { "hanzi": "禾苗", "pinyin": "hémiáo", "meaning_vi": "mạ lúa" },
+    { "hanzi": "秋天", "pinyin": "qiūtiān", "meaning_vi": "mùa thu" },
+    { "hanzi": "种子", "pinyin": "zhǒngzi", "meaning_vi": "hạt giống" }
+  ] },
+  "29": { "examples": [
+    { "hanzi": "竹林", "pinyin": "zhúlín", "meaning_vi": "rừng trúc" },
+    { "hanzi": "竹叶", "pinyin": "zhúyè", "meaning_vi": "lá trúc" },
+    { "hanzi": "铅笔", "pinyin": "qiānbǐ", "meaning_vi": "bút chì" }
+  ] },
+  "30": { "examples": [
+    { "hanzi": "米饭", "pinyin": "mǐfàn", "meaning_vi": "cơm" },
+    { "hanzi": "糯米", "pinyin": "nuòmǐ", "meaning_vi": "gạo nếp" },
+    { "hanzi": "米粉", "pinyin": "mǐfěn", "meaning_vi": "bún gạo" }
+  ] },
+  "31": { "examples": [
+    { "hanzi": "丝绸", "pinyin": "sīchóu", "meaning_vi": "lụa" },
+    { "hanzi": "毛线", "pinyin": "máoxiàn", "meaning_vi": "len" },
+    { "hanzi": "报纸", "pinyin": "bàozhǐ", "meaning_vi": "tờ báo" }
+  ] },
+  "32": { "examples": [
+    { "hanzi": "鸡肉", "pinyin": "jīròu", "meaning_vi": "thịt gà" },
+    { "hanzi": "牛肉", "pinyin": "niúròu", "meaning_vi": "thịt bò" },
+    { "hanzi": "肚子", "pinyin": "dùzi", "meaning_vi": "cái bụng" }
+  ] },
+  "33": { "examples": [
+    { "hanzi": "草地", "pinyin": "cǎodì", "meaning_vi": "bãi cỏ" },
+    { "hanzi": "青草", "pinyin": "qīngcǎo", "meaning_vi": "cỏ xanh" },
+    { "hanzi": "茶叶", "pinyin": "cháyè", "meaning_vi": "lá trà" }
+  ] },
+  "34": { "examples": [
+    { "hanzi": "昆虫", "pinyin": "kūnchóng", "meaning_vi": "côn trùng" },
+    { "hanzi": "蚂蚁", "pinyin": "mǎyǐ", "meaning_vi": "con kiến" },
+    { "hanzi": "螳螂", "pinyin": "tángláng", "meaning_vi": "bọ ngựa" }
+  ] },
+  "35": { "examples": [
+    { "hanzi": "衣服", "pinyin": "yīfu", "meaning_vi": "quần áo" },
+    { "hanzi": "外衣", "pinyin": "wàiyī", "meaning_vi": "áo khoác" },
+    { "hanzi": "裤子", "pinyin": "kùzi", "meaning_vi": "cái quần" }
+  ] },
+  "36": { "examples": [
+    { "hanzi": "语言", "pinyin": "yǔyán", "meaning_vi": "ngôn ngữ" },
+    { "hanzi": "说话", "pinyin": "shuōhuà", "meaning_vi": "nói chuyện" },
+    { "hanzi": "方言", "pinyin": "fāngyán", "meaning_vi": "tiếng địa phương" }
+  ] },
+  "37": { "examples": [
+    { "hanzi": "贝壳", "pinyin": "bèiké", "meaning_vi": "vỏ sò" },
+    { "hanzi": "宝贝", "pinyin": "bǎobèi", "meaning_vi": "bảo bối, cục cưng" },
+    { "hanzi": "购物", "pinyin": "gòuwù", "meaning_vi": "mua sắm" }
+  ] },
+  "38": { "examples": [
+    { "hanzi": "足球", "pinyin": "zúqiú", "meaning_vi": "bóng đá" },
+    { "hanzi": "跑步", "pinyin": "pǎobù", "meaning_vi": "chạy bộ" },
+    { "hanzi": "足够", "pinyin": "zúgòu", "meaning_vi": "đủ" }
+  ] },
+  "40": { "examples": [
+    { "hanzi": "这里", "pinyin": "zhèlǐ", "meaning_vi": "ở đây" },
+    { "hanzi": "迅速", "pinyin": "xùnsù", "meaning_vi": "nhanh chóng" },
+    { "hanzi": "近路", "pinyin": "jìnlù", "meaning_vi": "đường tắt" }
+  ] },
+  "41": { "examples": [
+    { "hanzi": "邮局", "pinyin": "yóujú", "meaning_vi": "bưu điện" },
+    { "hanzi": "那里", "pinyin": "nàlǐ", "meaning_vi": "ở đó" },
+    { "hanzi": "部分", "pinyin": "bùfen", "meaning_vi": "bộ phận, phần" }
+  ] },
+  "42": { "examples": [
+    { "hanzi": "黄金", "pinyin": "huángjīn", "meaning_vi": "vàng" },
+    { "hanzi": "金属", "pinyin": "jīnshǔ", "meaning_vi": "kim loại" },
+    { "hanzi": "钱包", "pinyin": "qiánbāo", "meaning_vi": "ví tiền" }
+  ] },
+  "44": { "examples": [
+    { "hanzi": "医院", "pinyin": "yīyuàn", "meaning_vi": "bệnh viện" },
+    { "hanzi": "阳光", "pinyin": "yángguāng", "meaning_vi": "ánh nắng" },
+    { "hanzi": "附近", "pinyin": "fùjìn", "meaning_vi": "gần đây" }
+  ] },
+  "45": { "examples": [
+    { "hanzi": "下雨", "pinyin": "xià yǔ", "meaning_vi": "trời mưa" },
+    { "hanzi": "雨水", "pinyin": "yǔshuǐ", "meaning_vi": "nước mưa" },
+    { "hanzi": "下雪", "pinyin": "xià xuě", "meaning_vi": "tuyết rơi" }
+  ] },
+  "46": { "examples": [
+    { "hanzi": "书页", "pinyin": "shūyè", "meaning_vi": "trang sách" },
+    { "hanzi": "页码", "pinyin": "yèmǎ", "meaning_vi": "số trang" },
+    { "hanzi": "问题", "pinyin": "wèntí", "meaning_vi": "vấn đề, câu hỏi" }
+  ] },
+  "47": { "examples": [
+    { "hanzi": "食物", "pinyin": "shíwù", "meaning_vi": "thức ăn" },
+    { "hanzi": "饭店", "pinyin": "fàndiàn", "meaning_vi": "nhà hàng" },
+    { "hanzi": "饺子", "pinyin": "jiǎozi", "meaning_vi": "sủi cảo" }
+  ] },
+  "48": { "examples": [
+    { "hanzi": "马上", "pinyin": "mǎshàng", "meaning_vi": "ngay lập tức" },
+    { "hanzi": "骑马", "pinyin": "qí mǎ", "meaning_vi": "cưỡi ngựa" },
+    { "hanzi": "马车", "pinyin": "mǎchē", "meaning_vi": "xe ngựa" }
+  ] },
+  "49": { "examples": [
+    { "hanzi": "金鱼", "pinyin": "jīnyú", "meaning_vi": "cá vàng" },
+    { "hanzi": "鱼塘", "pinyin": "yútáng", "meaning_vi": "ao cá" },
+    { "hanzi": "钓鱼", "pinyin": "diàoyú", "meaning_vi": "câu cá" }
+  ] },
+  "50": { "examples": [
+    { "hanzi": "小鸟", "pinyin": "xiǎoniǎo", "meaning_vi": "chim nhỏ" },
+    { "hanzi": "鸟巢", "pinyin": "niǎocháo", "meaning_vi": "tổ chim" },
+    { "hanzi": "飞鸟", "pinyin": "fēiniǎo", "meaning_vi": "chim bay" }
+  ] }
+}

@@ -1,0 +1,1210 @@
+[
+  {
+    "word": "就",
+    "reading": "jiù",
+    "yinHan": "TỰU",
+    "meaning": "Thì, ngay, liền",
+    "example": "我马上就来。",
+    "exampleMeaning": "Tôi đến ngay đây."
+  },
+  {
+    "word": "要",
+    "reading": "yào",
+    "yinHan": "YẾU",
+    "meaning": "Muốn, cần, sẽ",
+    "example": "我要一杯水。",
+    "exampleMeaning": "Tôi muốn một cốc nước."
+  },
+  {
+    "word": "知道",
+    "reading": "zhīdào",
+    "yinHan": "TRI ĐẠO",
+    "meaning": "Biết",
+    "example": "我知道他是谁。",
+    "exampleMeaning": "Tôi biết anh ấy là ai."
+  },
+  {
+    "word": "吧",
+    "reading": "ba",
+    "yinHan": "",
+    "meaning": "Nhé, đi",
+    "example": "我们走吧。",
+    "exampleMeaning": "Chúng ta đi thôi."
+  },
+  {
+    "word": "到",
+    "reading": "dào",
+    "yinHan": "ĐÁO",
+    "meaning": "Đến",
+    "example": "我到家了。",
+    "exampleMeaning": "Tôi về đến nhà rồi."
+  },
+  {
+    "word": "对",
+    "reading": "duì",
+    "yinHan": "ĐỐI",
+    "meaning": "Đúng",
+    "example": "你说得对。",
+    "exampleMeaning": "Bạn nói đúng."
+  },
+  {
+    "word": "也",
+    "reading": "yě",
+    "yinHan": "DÃ",
+    "meaning": "Cũng",
+    "example": "我也是学生。",
+    "exampleMeaning": "Tôi cũng là học sinh."
+  },
+  {
+    "word": "还",
+    "reading": "hái",
+    "yinHan": "HOÀN",
+    "meaning": "Còn, vẫn",
+    "example": "他还在睡觉。",
+    "exampleMeaning": "Anh ấy vẫn đang ngủ."
+  },
+  {
+    "word": "让",
+    "reading": "ràng",
+    "yinHan": "NHƯỜNG",
+    "meaning": "Để, cho phép, bảo",
+    "example": "妈妈让我早点睡。",
+    "exampleMeaning": "Mẹ bảo tôi ngủ sớm."
+  },
+  {
+    "word": "给",
+    "reading": "gěi",
+    "yinHan": "CẤP",
+    "meaning": "Cho, đưa",
+    "example": "请给我一杯水。",
+    "exampleMeaning": "Làm ơn cho tôi một cốc nước."
+  },
+  {
+    "word": "过",
+    "reading": "guò",
+    "yinHan": "QUÁ",
+    "meaning": "Qua, đã từng",
+    "example": "我去过北京。",
+    "exampleMeaning": "Tôi đã từng đến Bắc Kinh."
+  },
+  {
+    "word": "得",
+    "reading": "de",
+    "yinHan": "ĐẮC",
+    "meaning": "Được (trợ từ bổ ngữ)",
+    "example": "他跑得很快。",
+    "exampleMeaning": "Anh ấy chạy rất nhanh."
+  },
+  {
+    "word": "真",
+    "reading": "zhēn",
+    "yinHan": "CHÂN",
+    "meaning": "Thật, thực sự",
+    "example": "这个真好吃。",
+    "exampleMeaning": "Cái này thật ngon."
+  },
+  {
+    "word": "着",
+    "reading": "zhe",
+    "yinHan": "TRƯỚC",
+    "meaning": "Đang (trợ từ trạng thái)",
+    "example": "门开着。",
+    "exampleMeaning": "Cửa đang mở."
+  },
+  {
+    "word": "可以",
+    "reading": "kěyǐ",
+    "yinHan": "KHẢ DĨ",
+    "meaning": "Có thể, được",
+    "example": "我可以进来吗？",
+    "exampleMeaning": "Tôi vào được không?"
+  },
+  {
+    "word": "别",
+    "reading": "bié",
+    "yinHan": "BIỆT",
+    "meaning": "Đừng",
+    "example": "别笑！",
+    "exampleMeaning": "Đừng cười!"
+  },
+  {
+    "word": "走",
+    "reading": "zǒu",
+    "yinHan": "TẨU",
+    "meaning": "Đi, đi bộ",
+    "example": "我们走路去。",
+    "exampleMeaning": "Chúng ta đi bộ đến."
+  },
+  {
+    "word": "告诉",
+    "reading": "gàosu",
+    "yinHan": "CÁO TỐ",
+    "meaning": "Nói cho biết",
+    "example": "请告诉我你的名字。",
+    "exampleMeaning": "Xin hãy cho tôi biết tên bạn."
+  },
+  {
+    "word": "因为",
+    "reading": "yīnwèi",
+    "yinHan": "NHÂN VÌ",
+    "meaning": "Bởi vì",
+    "example": "因为下雨，我不去。",
+    "exampleMeaning": "Vì trời mưa nên tôi không đi."
+  },
+  {
+    "word": "再",
+    "reading": "zài",
+    "yinHan": "TÁI",
+    "meaning": "Lại, nữa",
+    "example": "请再说一遍。",
+    "exampleMeaning": "Xin hãy nói lại một lần nữa."
+  },
+  {
+    "word": "快",
+    "reading": "kuài",
+    "yinHan": "KHOÁI",
+    "meaning": "Nhanh",
+    "example": "他跑得很快。",
+    "exampleMeaning": "Anh ấy chạy rất nhanh."
+  },
+  {
+    "word": "但是",
+    "reading": "dànshì",
+    "yinHan": "ĐÃN THỊ",
+    "meaning": "Nhưng",
+    "example": "汉语难，但是有意思。",
+    "exampleMeaning": "Tiếng Hán khó nhưng thú vị."
+  },
+  {
+    "word": "已经",
+    "reading": "yǐjīng",
+    "yinHan": "DĨ KINH",
+    "meaning": "Đã",
+    "example": "他已经走了。",
+    "exampleMeaning": "Anh ấy đã đi rồi."
+  },
+  {
+    "word": "为什么",
+    "reading": "wèishénme",
+    "yinHan": "VỊ THẬM MA",
+    "meaning": "Tại sao",
+    "example": "你为什么不去？",
+    "exampleMeaning": "Tại sao bạn không đi?"
+  },
+  {
+    "word": "觉得",
+    "reading": "juéde",
+    "yinHan": "GIÁC ĐẮC",
+    "meaning": "Cảm thấy",
+    "example": "我觉得很冷。",
+    "exampleMeaning": "Tôi cảm thấy rất lạnh."
+  },
+  {
+    "word": "它",
+    "reading": "tā",
+    "yinHan": "THA",
+    "meaning": "Nó",
+    "example": "它是我的狗。",
+    "exampleMeaning": "Nó là con chó của tôi."
+  },
+  {
+    "word": "从",
+    "reading": "cóng",
+    "yinHan": "TÙNG",
+    "meaning": "Từ",
+    "example": "我从北京来。",
+    "exampleMeaning": "Tôi đến từ Bắc Kinh."
+  },
+  {
+    "word": "找",
+    "reading": "zhǎo",
+    "yinHan": "TRẢO",
+    "meaning": "Tìm",
+    "example": "我在找我的手机。",
+    "exampleMeaning": "Tôi đang tìm điện thoại."
+  },
+  {
+    "word": "最",
+    "reading": "zuì",
+    "yinHan": "TỐI",
+    "meaning": "Nhất",
+    "example": "我最喜欢苹果。",
+    "exampleMeaning": "Tôi thích táo nhất."
+  },
+  {
+    "word": "可能",
+    "reading": "kěnéng",
+    "yinHan": "KHẢ NĂNG",
+    "meaning": "Có thể, có khả năng",
+    "example": "他可能不会来。",
+    "exampleMeaning": "Có thể anh ấy sẽ không đến."
+  },
+  {
+    "word": "次",
+    "reading": "cì",
+    "yinHan": "THỨ",
+    "meaning": "Lần",
+    "example": "我去过两次北京。",
+    "exampleMeaning": "Tôi đã đến Bắc Kinh hai lần."
+  },
+  {
+    "word": "出",
+    "reading": "chū",
+    "yinHan": "XUẤT",
+    "meaning": "Ra",
+    "example": "他出去了。",
+    "exampleMeaning": "Anh ấy ra ngoài rồi."
+  },
+  {
+    "word": "孩子",
+    "reading": "háizi",
+    "yinHan": "HÀI TỬ",
+    "meaning": "Đứa trẻ, con cái",
+    "example": "这个孩子很可爱。",
+    "exampleMeaning": "Đứa trẻ này rất đáng yêu."
+  },
+  {
+    "word": "所以",
+    "reading": "suǒyǐ",
+    "yinHan": "SỞ DĨ",
+    "meaning": "Cho nên",
+    "example": "下雨了，所以我不去。",
+    "exampleMeaning": "Trời mưa rồi, cho nên tôi không đi."
+  },
+  {
+    "word": "两",
+    "reading": "liǎng",
+    "yinHan": "LƯỠNG",
+    "meaning": "Hai",
+    "example": "我有两个朋友。",
+    "exampleMeaning": "Tôi có hai người bạn."
+  },
+  {
+    "word": "错",
+    "reading": "cuò",
+    "yinHan": "THÁC",
+    "meaning": "Sai",
+    "example": "对不起，我错了。",
+    "exampleMeaning": "Xin lỗi, tôi sai rồi."
+  },
+  {
+    "word": "等",
+    "reading": "děng",
+    "yinHan": "ĐẲNG",
+    "meaning": "Đợi, chờ",
+    "example": "请等一下。",
+    "exampleMeaning": "Xin chờ một chút."
+  },
+  {
+    "word": "问题",
+    "reading": "wèntí",
+    "yinHan": "VẤN ĐỀ",
+    "meaning": "Vấn đề, câu hỏi",
+    "example": "我有一个问题。",
+    "exampleMeaning": "Tôi có một câu hỏi."
+  },
+  {
+    "word": "一起",
+    "reading": "yìqǐ",
+    "yinHan": "NHẤT KHỞI",
+    "meaning": "Cùng nhau",
+    "example": "我们一起去吧。",
+    "exampleMeaning": "Chúng ta cùng đi nhé."
+  },
+  {
+    "word": "开始",
+    "reading": "kāishǐ",
+    "yinHan": "KHAI THỦY",
+    "meaning": "Bắt đầu",
+    "example": "电影开始了。",
+    "exampleMeaning": "Bộ phim bắt đầu rồi."
+  },
+  {
+    "word": "时间",
+    "reading": "shíjiān",
+    "yinHan": "THỜI GIAN",
+    "meaning": "Thời gian",
+    "example": "你有时间吗？",
+    "exampleMeaning": "Bạn có thời gian không?"
+  },
+  {
+    "word": "事情",
+    "reading": "shìqing",
+    "yinHan": "SỰ TÌNH",
+    "meaning": "Sự việc, việc",
+    "example": "我有一件事情。",
+    "exampleMeaning": "Tôi có một việc."
+  },
+  {
+    "word": "一下",
+    "reading": "yíxià",
+    "yinHan": "NHẤT HẠ",
+    "meaning": "Một chút, thử",
+    "example": "请等一下。",
+    "exampleMeaning": "Xin chờ một chút."
+  },
+  {
+    "word": "非常",
+    "reading": "fēicháng",
+    "yinHan": "PHI THƯỜNG",
+    "meaning": "Vô cùng, rất",
+    "example": "今天非常热。",
+    "exampleMeaning": "Hôm nay vô cùng nóng."
+  },
+  {
+    "word": "希望",
+    "reading": "xīwàng",
+    "yinHan": "HI VỌNG",
+    "meaning": "Hy vọng",
+    "example": "我希望你快乐。",
+    "exampleMeaning": "Tôi hy vọng bạn vui vẻ."
+  },
+  {
+    "word": "准备",
+    "reading": "zhǔnbèi",
+    "yinHan": "CHUẨN BỊ",
+    "meaning": "Chuẩn bị",
+    "example": "我准备去北京。",
+    "exampleMeaning": "Tôi chuẩn bị đi Bắc Kinh."
+  },
+  {
+    "word": "比",
+    "reading": "bǐ",
+    "yinHan": "TỶ",
+    "meaning": "So với, hơn",
+    "example": "他比我高。",
+    "exampleMeaning": "Anh ấy cao hơn tôi."
+  },
+  {
+    "word": "问",
+    "reading": "wèn",
+    "yinHan": "VẤN",
+    "meaning": "Hỏi",
+    "example": "我想问一个问题。",
+    "exampleMeaning": "Tôi muốn hỏi một câu."
+  },
+  {
+    "word": "件",
+    "reading": "jiàn",
+    "yinHan": "KIỆN",
+    "meaning": "Cái, chiếc (lượng từ)",
+    "example": "这件衣服很好看。",
+    "exampleMeaning": "Bộ quần áo này rất đẹp."
+  },
+  {
+    "word": "意思",
+    "reading": "yìsi",
+    "yinHan": "Ý TƯ",
+    "meaning": "Ý nghĩa",
+    "example": "这是什么意思？",
+    "exampleMeaning": "Cái này có nghĩa là gì?"
+  },
+  {
+    "word": "第一",
+    "reading": "dì-yī",
+    "yinHan": "ĐỆ NHẤT",
+    "meaning": "Thứ nhất, đầu tiên",
+    "example": "他是第一名。",
+    "exampleMeaning": "Anh ấy đứng thứ nhất."
+  },
+  {
+    "word": "进",
+    "reading": "jìn",
+    "yinHan": "TIẾN",
+    "meaning": "Vào",
+    "example": "请进！",
+    "exampleMeaning": "Mời vào!"
+  },
+  {
+    "word": "大家",
+    "reading": "dàjiā",
+    "yinHan": "ĐẠI GIA",
+    "meaning": "Mọi người",
+    "example": "大家好！",
+    "exampleMeaning": "Chào mọi người!"
+  },
+  {
+    "word": "新",
+    "reading": "xīn",
+    "yinHan": "TÂN",
+    "meaning": "Mới",
+    "example": "我买了一部新手机。",
+    "exampleMeaning": "Tôi mua một chiếc điện thoại mới."
+  },
+  {
+    "word": "您",
+    "reading": "nín",
+    "yinHan": "NÂM",
+    "meaning": "Ngài, ông, bà",
+    "example": "您好！",
+    "exampleMeaning": "Chào ngài!"
+  },
+  {
+    "word": "穿",
+    "reading": "chuān",
+    "yinHan": "XUYÊN",
+    "meaning": "Mặc",
+    "example": "她穿红衣服。",
+    "exampleMeaning": "Cô ấy mặc áo đỏ."
+  },
+  {
+    "word": "送",
+    "reading": "sòng",
+    "yinHan": "TỐNG",
+    "meaning": "Tặng, tiễn",
+    "example": "我送你一本书。",
+    "exampleMeaning": "Tôi tặng bạn một quyển sách."
+  },
+  {
+    "word": "玩",
+    "reading": "wán",
+    "yinHan": "NGOẠN",
+    "meaning": "Chơi",
+    "example": "我们去公园玩吧。",
+    "exampleMeaning": "Chúng ta đi công viên chơi nhé."
+  },
+  {
+    "word": "长",
+    "reading": "cháng",
+    "yinHan": "TRƯỜNG",
+    "meaning": "Dài",
+    "example": "这条路很长。",
+    "exampleMeaning": "Con đường này rất dài."
+  },
+  {
+    "word": "小时",
+    "reading": "xiǎoshí",
+    "yinHan": "TIỂU THỜI",
+    "meaning": "Giờ, tiếng đồng hồ",
+    "example": "我等了一个小时。",
+    "exampleMeaning": "Tôi đã đợi một tiếng."
+  },
+  {
+    "word": "完",
+    "reading": "wán",
+    "yinHan": "HOÀN",
+    "meaning": "Xong, hết",
+    "example": "我写完了。",
+    "exampleMeaning": "Tôi viết xong rồi."
+  },
+  {
+    "word": "每",
+    "reading": "měi",
+    "yinHan": "MỖI",
+    "meaning": "Mỗi",
+    "example": "我每天跑步。",
+    "exampleMeaning": "Mỗi ngày tôi chạy bộ."
+  },
+  {
+    "word": "公司",
+    "reading": "gōngsī",
+    "yinHan": "CÔNG TY",
+    "meaning": "Công ty",
+    "example": "他在公司工作。",
+    "exampleMeaning": "Anh ấy làm việc ở công ty."
+  },
+  {
+    "word": "帮助",
+    "reading": "bāngzhù",
+    "yinHan": "BANG TRỢ",
+    "meaning": "Giúp đỡ",
+    "example": "谢谢你的帮助。",
+    "exampleMeaning": "Cảm ơn sự giúp đỡ của bạn."
+  },
+  {
+    "word": "晚上",
+    "reading": "wǎnshang",
+    "yinHan": "VÃN THƯỢNG",
+    "meaning": "Buổi tối",
+    "example": "晚上好！",
+    "exampleMeaning": "Chào buổi tối!"
+  },
+  {
+    "word": "说话",
+    "reading": "shuōhuà",
+    "yinHan": "THUYẾT THOẠI",
+    "meaning": "Nói chuyện",
+    "example": "请别说话。",
+    "exampleMeaning": "Xin đừng nói chuyện."
+  },
+  {
+    "word": "门",
+    "reading": "mén",
+    "yinHan": "MÔN",
+    "meaning": "Cửa",
+    "example": "请关门。",
+    "exampleMeaning": "Xin hãy đóng cửa."
+  },
+  {
+    "word": "女",
+    "reading": "nǚ",
+    "yinHan": "NỮ",
+    "meaning": "Nữ",
+    "example": "她是女老师。",
+    "exampleMeaning": "Cô ấy là giáo viên nữ."
+  },
+  {
+    "word": "忙",
+    "reading": "máng",
+    "yinHan": "MANG",
+    "meaning": "Bận",
+    "example": "我今天很忙。",
+    "exampleMeaning": "Hôm nay tôi rất bận."
+  },
+  {
+    "word": "卖",
+    "reading": "mài",
+    "yinHan": "MẠI",
+    "meaning": "Bán",
+    "example": "他在卖水果。",
+    "exampleMeaning": "Anh ấy đang bán hoa quả."
+  },
+  {
+    "word": "高",
+    "reading": "gāo",
+    "yinHan": "CAO",
+    "meaning": "Cao",
+    "example": "他很高。",
+    "exampleMeaning": "Anh ấy rất cao."
+  },
+  {
+    "word": "房间",
+    "reading": "fángjiān",
+    "yinHan": "PHÒNG GIAN",
+    "meaning": "Phòng",
+    "example": "我的房间很大。",
+    "exampleMeaning": "Phòng của tôi rất rộng."
+  },
+  {
+    "word": "路",
+    "reading": "lù",
+    "yinHan": "LỘ",
+    "meaning": "Đường",
+    "example": "这条路很长。",
+    "exampleMeaning": "Con đường này rất dài."
+  },
+  {
+    "word": "懂",
+    "reading": "dǒng",
+    "yinHan": "ĐỔNG",
+    "meaning": "Hiểu",
+    "example": "我听不懂。",
+    "exampleMeaning": "Tôi nghe không hiểu."
+  },
+  {
+    "word": "正在",
+    "reading": "zhèngzài",
+    "yinHan": "CHÍNH TẠI",
+    "meaning": "Đang",
+    "example": "他正在睡觉。",
+    "exampleMeaning": "Anh ấy đang ngủ."
+  },
+  {
+    "word": "笑",
+    "reading": "xiào",
+    "yinHan": "TIẾU",
+    "meaning": "Cười",
+    "example": "她笑了。",
+    "exampleMeaning": "Cô ấy cười rồi."
+  },
+  {
+    "word": "远",
+    "reading": "yuǎn",
+    "yinHan": "VIỄN",
+    "meaning": "Xa",
+    "example": "学校离我家很远。",
+    "exampleMeaning": "Trường học cách nhà tôi rất xa."
+  },
+  {
+    "word": "妻子",
+    "reading": "qīzi",
+    "yinHan": "THÊ TỬ",
+    "meaning": "Vợ",
+    "example": "他的妻子是医生。",
+    "exampleMeaning": "Vợ anh ấy là bác sĩ."
+  },
+  {
+    "word": "丈夫",
+    "reading": "zhàngfu",
+    "yinHan": "TRƯỢNG PHU",
+    "meaning": "Chồng",
+    "example": "她的丈夫很高。",
+    "exampleMeaning": "Chồng cô ấy rất cao."
+  },
+  {
+    "word": "离",
+    "reading": "lí",
+    "yinHan": "LY",
+    "meaning": "Cách, rời",
+    "example": "学校离家很近。",
+    "exampleMeaning": "Trường học cách nhà rất gần."
+  },
+  {
+    "word": "往",
+    "reading": "wǎng",
+    "yinHan": "VÃNG",
+    "meaning": "Hướng về, đi về phía",
+    "example": "请往前走。",
+    "exampleMeaning": "Xin hãy đi về phía trước."
+  },
+  {
+    "word": "男",
+    "reading": "nán",
+    "yinHan": "NAM",
+    "meaning": "Nam",
+    "example": "他是男老师。",
+    "exampleMeaning": "Anh ấy là thầy giáo."
+  },
+  {
+    "word": "眼睛",
+    "reading": "yǎnjing",
+    "yinHan": "NHÃN TINH",
+    "meaning": "Mắt",
+    "example": "她的眼睛很大。",
+    "exampleMeaning": "Mắt cô ấy rất to."
+  },
+  {
+    "word": "快乐",
+    "reading": "kuàilè",
+    "yinHan": "KHOÁI LẠC",
+    "meaning": "Vui vẻ",
+    "example": "生日快乐！",
+    "exampleMeaning": "Chúc mừng sinh nhật!"
+  },
+  {
+    "word": "虽然",
+    "reading": "suīrán",
+    "yinHan": "TUY NHIÊN",
+    "meaning": "Tuy, mặc dù",
+    "example": "虽然很累，但是很开心。",
+    "exampleMeaning": "Tuy mệt nhưng rất vui."
+  },
+  {
+    "word": "早上",
+    "reading": "zǎoshang",
+    "yinHan": "TẢO THƯỢNG",
+    "meaning": "Buổi sáng sớm",
+    "example": "早上好！",
+    "exampleMeaning": "Chào buổi sáng!"
+  },
+  {
+    "word": "药",
+    "reading": "yào",
+    "yinHan": "DƯỢC",
+    "meaning": "Thuốc",
+    "example": "他在吃药。",
+    "exampleMeaning": "Anh ấy đang uống thuốc."
+  },
+  {
+    "word": "身体",
+    "reading": "shēntǐ",
+    "yinHan": "THÂN THỂ",
+    "meaning": "Cơ thể, sức khỏe",
+    "example": "祝你身体健康！",
+    "exampleMeaning": "Chúc bạn mạnh khỏe!"
+  },
+  {
+    "word": "黑",
+    "reading": "hēi",
+    "yinHan": "HẮC",
+    "meaning": "Đen",
+    "example": "我有一件黑衣服。",
+    "exampleMeaning": "Tôi có một bộ đồ đen."
+  },
+  {
+    "word": "咖啡",
+    "reading": "kāfēi",
+    "yinHan": "CA PHÊ",
+    "meaning": "Cà phê",
+    "example": "我想喝咖啡。",
+    "exampleMeaning": "Tôi muốn uống cà phê."
+  },
+  {
+    "word": "日",
+    "reading": "rì",
+    "yinHan": "NHẬT",
+    "meaning": "Ngày, mặt trời",
+    "example": "今天是几月几日？",
+    "exampleMeaning": "Hôm nay là ngày mấy tháng mấy?"
+  },
+  {
+    "word": "休息",
+    "reading": "xiūxi",
+    "yinHan": "HƯU TỨC",
+    "meaning": "Nghỉ ngơi",
+    "example": "我想休息一下。",
+    "exampleMeaning": "Tôi muốn nghỉ một lát."
+  },
+  {
+    "word": "外",
+    "reading": "wài",
+    "yinHan": "NGOẠI",
+    "meaning": "Bên ngoài",
+    "example": "外面在下雨。",
+    "exampleMeaning": "Bên ngoài đang mưa."
+  },
+  {
+    "word": "生日",
+    "reading": "shēngrì",
+    "yinHan": "SINH NHẬT",
+    "meaning": "Sinh nhật",
+    "example": "今天是我的生日。",
+    "exampleMeaning": "Hôm nay là sinh nhật của tôi."
+  },
+  {
+    "word": "哥哥",
+    "reading": "gēge",
+    "yinHan": "CA CA",
+    "meaning": "Anh trai",
+    "example": "我哥哥是医生。",
+    "exampleMeaning": "Anh trai tôi là bác sĩ."
+  },
+  {
+    "word": "票",
+    "reading": "piào",
+    "yinHan": "PHIẾU",
+    "meaning": "Vé",
+    "example": "我买了两张票。",
+    "exampleMeaning": "Tôi mua hai tấm vé."
+  },
+  {
+    "word": "手机",
+    "reading": "shǒujī",
+    "yinHan": "THỦ CƠ",
+    "meaning": "Điện thoại di động",
+    "example": "我的手机坏了。",
+    "exampleMeaning": "Điện thoại của tôi hỏng rồi."
+  },
+  {
+    "word": "洗",
+    "reading": "xǐ",
+    "yinHan": "TẨY",
+    "meaning": "Rửa, giặt",
+    "example": "我洗手。",
+    "exampleMeaning": "Tôi rửa tay."
+  },
+  {
+    "word": "跳舞",
+    "reading": "tiàowǔ",
+    "yinHan": "KHIÊU VŨ",
+    "meaning": "Nhảy múa",
+    "example": "她喜欢跳舞。",
+    "exampleMeaning": "Cô ấy thích nhảy múa."
+  },
+  {
+    "word": "弟弟",
+    "reading": "dìdi",
+    "yinHan": "ĐỆ ĐỆ",
+    "meaning": "Em trai",
+    "example": "我弟弟八岁。",
+    "exampleMeaning": "Em trai tôi tám tuổi."
+  },
+  {
+    "word": "妹妹",
+    "reading": "mèimei",
+    "yinHan": "MUỘI MUỘI",
+    "meaning": "Em gái",
+    "example": "我妹妹很可爱。",
+    "exampleMeaning": "Em gái tôi rất đáng yêu."
+  },
+  {
+    "word": "红",
+    "reading": "hóng",
+    "yinHan": "HỒNG",
+    "meaning": "Đỏ",
+    "example": "这朵花是红的。",
+    "exampleMeaning": "Bông hoa này màu đỏ."
+  },
+  {
+    "word": "慢",
+    "reading": "màn",
+    "yinHan": "MẠN",
+    "meaning": "Chậm",
+    "example": "请说慢一点儿。",
+    "exampleMeaning": "Xin hãy nói chậm một chút."
+  },
+  {
+    "word": "近",
+    "reading": "jìn",
+    "yinHan": "CẬN",
+    "meaning": "Gần",
+    "example": "我家离学校很近。",
+    "exampleMeaning": "Nhà tôi cách trường rất gần."
+  },
+  {
+    "word": "白",
+    "reading": "bái",
+    "yinHan": "BẠCH",
+    "meaning": "Trắng",
+    "example": "纸是白色的。",
+    "exampleMeaning": "Tờ giấy màu trắng."
+  },
+  {
+    "word": "姐姐",
+    "reading": "jiějie",
+    "yinHan": "TỶ TỶ",
+    "meaning": "Chị gái",
+    "example": "我姐姐在北京。",
+    "exampleMeaning": "Chị gái tôi ở Bắc Kinh."
+  },
+  {
+    "word": "介绍",
+    "reading": "jièshào",
+    "yinHan": "GIỚI THIỆU",
+    "meaning": "Giới thiệu",
+    "example": "我来介绍一下。",
+    "exampleMeaning": "Để tôi giới thiệu một chút."
+  },
+  {
+    "word": "鱼",
+    "reading": "yú",
+    "yinHan": "NGƯ",
+    "meaning": "Cá",
+    "example": "我喜欢吃鱼。",
+    "exampleMeaning": "Tôi thích ăn cá."
+  },
+  {
+    "word": "累",
+    "reading": "lèi",
+    "yinHan": "LŨY",
+    "meaning": "Mệt",
+    "example": "我今天很累。",
+    "exampleMeaning": "Hôm nay tôi rất mệt."
+  },
+  {
+    "word": "课",
+    "reading": "kè",
+    "yinHan": "KHÓA",
+    "meaning": "Bài học, tiết học",
+    "example": "今天有汉语课。",
+    "exampleMeaning": "Hôm nay có tiết tiếng Hán."
+  },
+  {
+    "word": "上班",
+    "reading": "shàngbān",
+    "yinHan": "THƯỢNG BAN",
+    "meaning": "Đi làm",
+    "example": "我八点上班。",
+    "exampleMeaning": "Tám giờ tôi đi làm."
+  },
+  {
+    "word": "旁边",
+    "reading": "pángbiān",
+    "yinHan": "BÀNG BIÊN",
+    "meaning": "Bên cạnh",
+    "example": "学校旁边有商店。",
+    "exampleMeaning": "Bên cạnh trường có cửa hàng."
+  },
+  {
+    "word": "运动",
+    "reading": "yùndòng",
+    "yinHan": "VẬN ĐỘNG",
+    "meaning": "Vận động, thể thao",
+    "example": "我喜欢运动。",
+    "exampleMeaning": "Tôi thích thể thao."
+  },
+  {
+    "word": "去年",
+    "reading": "qùnián",
+    "yinHan": "KHỨ NIÊN",
+    "meaning": "Năm ngoái",
+    "example": "我去年去了北京。",
+    "exampleMeaning": "Năm ngoái tôi đã đến Bắc Kinh."
+  },
+  {
+    "word": "报纸",
+    "reading": "bàozhǐ",
+    "yinHan": "BÁO CHỈ",
+    "meaning": "Báo",
+    "example": "他在看报纸。",
+    "exampleMeaning": "Anh ấy đang đọc báo."
+  },
+  {
+    "word": "颜色",
+    "reading": "yánsè",
+    "yinHan": "NHAN SẮC",
+    "meaning": "Màu sắc",
+    "example": "你喜欢什么颜色？",
+    "exampleMeaning": "Bạn thích màu gì?"
+  },
+  {
+    "word": "机场",
+    "reading": "jīchǎng",
+    "yinHan": "CƠ TRƯỜNG",
+    "meaning": "Sân bay",
+    "example": "机场离这儿很远。",
+    "exampleMeaning": "Sân bay cách đây rất xa."
+  },
+  {
+    "word": "唱歌",
+    "reading": "chànggē",
+    "yinHan": "XƯỚNG CA",
+    "meaning": "Hát",
+    "example": "她喜欢唱歌。",
+    "exampleMeaning": "Cô ấy thích hát."
+  },
+  {
+    "word": "千",
+    "reading": "qiān",
+    "yinHan": "THIÊN",
+    "meaning": "Nghìn",
+    "example": "这里有一千人。",
+    "exampleMeaning": "Ở đây có một nghìn người."
+  },
+  {
+    "word": "好吃",
+    "reading": "hǎochī",
+    "yinHan": "HẢO CẬT",
+    "meaning": "Ngon",
+    "example": "这个菜很好吃。",
+    "exampleMeaning": "Món này rất ngon."
+  },
+  {
+    "word": "考试",
+    "reading": "kǎoshì",
+    "yinHan": "KHẢO THÍ",
+    "meaning": "Thi, kỳ thi",
+    "example": "明天有汉语考试。",
+    "exampleMeaning": "Ngày mai có kỳ thi tiếng Hán."
+  },
+  {
+    "word": "左边",
+    "reading": "zuǒbian",
+    "yinHan": "TẢ BIÊN",
+    "meaning": "Bên trái",
+    "example": "商店在左边。",
+    "exampleMeaning": "Cửa hàng ở bên trái."
+  },
+  {
+    "word": "姓",
+    "reading": "xìng",
+    "yinHan": "TÍNH",
+    "meaning": "Họ",
+    "example": "您贵姓？",
+    "exampleMeaning": "Ngài họ gì ạ?"
+  },
+  {
+    "word": "百",
+    "reading": "bǎi",
+    "yinHan": "BÁCH",
+    "meaning": "Trăm",
+    "example": "一百个人。",
+    "exampleMeaning": "Một trăm người."
+  },
+  {
+    "word": "雪",
+    "reading": "xuě",
+    "yinHan": "TUYẾT",
+    "meaning": "Tuyết",
+    "example": "外面下雪了。",
+    "exampleMeaning": "Bên ngoài tuyết rơi rồi."
+  },
+  {
+    "word": "贵",
+    "reading": "guì",
+    "yinHan": "QUÝ",
+    "meaning": "Đắt",
+    "example": "这个太贵了！",
+    "exampleMeaning": "Cái này đắt quá!"
+  },
+  {
+    "word": "生病",
+    "reading": "shēngbìng",
+    "yinHan": "SINH BỆNH",
+    "meaning": "Bị ốm",
+    "example": "他生病了。",
+    "exampleMeaning": "Anh ấy bị ốm rồi."
+  },
+  {
+    "word": "游泳",
+    "reading": "yóuyǒng",
+    "yinHan": "DU VỊNH",
+    "meaning": "Bơi lội",
+    "example": "我喜欢游泳。",
+    "exampleMeaning": "Tôi thích bơi lội."
+  },
+  {
+    "word": "牛奶",
+    "reading": "niúnǎi",
+    "yinHan": "NGƯU NÃI",
+    "meaning": "Sữa bò",
+    "example": "我每天喝牛奶。",
+    "exampleMeaning": "Mỗi ngày tôi uống sữa."
+  },
+  {
+    "word": "右边",
+    "reading": "yòubian",
+    "yinHan": "HỮU BIÊN",
+    "meaning": "Bên phải",
+    "example": "银行在右边。",
+    "exampleMeaning": "Ngân hàng ở bên phải."
+  },
+  {
+    "word": "便宜",
+    "reading": "piányi",
+    "yinHan": "TIỆN NGHI",
+    "meaning": "Rẻ",
+    "example": "这个很便宜。",
+    "exampleMeaning": "Cái này rất rẻ."
+  },
+  {
+    "word": "起床",
+    "reading": "qǐchuáng",
+    "yinHan": "KHỞI SÀNG",
+    "meaning": "Thức dậy",
+    "example": "我六点起床。",
+    "exampleMeaning": "Sáu giờ tôi thức dậy."
+  },
+  {
+    "word": "鸡蛋",
+    "reading": "jīdàn",
+    "yinHan": "KÊ ĐẢN",
+    "meaning": "Trứng gà",
+    "example": "我吃了一个鸡蛋。",
+    "exampleMeaning": "Tôi đã ăn một quả trứng gà."
+  },
+  {
+    "word": "题",
+    "reading": "tí",
+    "yinHan": "ĐỀ",
+    "meaning": "Đề, câu hỏi (bài thi)",
+    "example": "这个题很难。",
+    "exampleMeaning": "Câu hỏi này rất khó."
+  },
+  {
+    "word": "零",
+    "reading": "líng",
+    "yinHan": "LINH",
+    "meaning": "Số không",
+    "example": "我的号码是零一二。",
+    "exampleMeaning": "Số của tôi là không một hai."
+  },
+  {
+    "word": "手表",
+    "reading": "shǒubiǎo",
+    "yinHan": "THỦ BIỂU",
+    "meaning": "Đồng hồ đeo tay",
+    "example": "我有一块手表。",
+    "exampleMeaning": "Tôi có một chiếc đồng hồ đeo tay."
+  },
+  {
+    "word": "旅游",
+    "reading": "lǚyóu",
+    "yinHan": "LỮ DU",
+    "meaning": "Du lịch",
+    "example": "我想去北京旅游。",
+    "exampleMeaning": "Tôi muốn đi Bắc Kinh du lịch."
+  },
+  {
+    "word": "服务员",
+    "reading": "fúwùyuán",
+    "yinHan": "PHỤC VỤ VIÊN",
+    "meaning": "Nhân viên phục vụ",
+    "example": "服务员，买单！",
+    "exampleMeaning": "Phục vụ ơi, tính tiền!"
+  },
+  {
+    "word": "宾馆",
+    "reading": "bīnguǎn",
+    "yinHan": "TÂN QUÁN",
+    "meaning": "Khách sạn",
+    "example": "这个宾馆很干净。",
+    "exampleMeaning": "Khách sạn này rất sạch sẽ."
+  },
+  {
+    "word": "教室",
+    "reading": "jiàoshì",
+    "yinHan": "GIÁO THẤT",
+    "meaning": "Phòng học",
+    "example": "教室里有二十个学生。",
+    "exampleMeaning": "Trong phòng học có hai mươi học sinh."
+  },
+  {
+    "word": "跑步",
+    "reading": "pǎobù",
+    "yinHan": "BÀO BỘ",
+    "meaning": "Chạy bộ",
+    "example": "我每天早上跑步。",
+    "exampleMeaning": "Mỗi sáng tôi chạy bộ."
+  },
+  {
+    "word": "阴",
+    "reading": "yīn",
+    "yinHan": "ÂM",
+    "meaning": "Âm u, nhiều mây",
+    "example": "今天天阴。",
+    "exampleMeaning": "Hôm nay trời âm u."
+  },
+  {
+    "word": "面条",
+    "reading": "miàntiáo",
+    "yinHan": "MIẾN ĐIỀU",
+    "meaning": "Mì sợi",
+    "example": "我想吃面条。",
+    "exampleMeaning": "Tôi muốn ăn mì."
+  },
+  {
+    "word": "铅笔",
+    "reading": "qiānbǐ",
+    "yinHan": "DUYÊN BÚT",
+    "meaning": "Bút chì",
+    "example": "我有一支铅笔。",
+    "exampleMeaning": "Tôi có một cây bút chì."
+  },
+  {
+    "word": "火车站",
+    "reading": "huǒchēzhàn",
+    "yinHan": "HỎA XA TRẠM",
+    "meaning": "Ga tàu hỏa",
+    "example": "火车站在哪儿？",
+    "exampleMeaning": "Ga tàu hỏa ở đâu?"
+  },
+  {
+    "word": "西瓜",
+    "reading": "xīguā",
+    "yinHan": "TÂY QUA",
+    "meaning": "Dưa hấu",
+    "example": "我喜欢吃西瓜。",
+    "exampleMeaning": "Tôi thích ăn dưa hấu."
+  },
+  {
+    "word": "羊肉",
+    "reading": "yángròu",
+    "yinHan": "DƯƠNG NHỤC",
+    "meaning": "Thịt cừu",
+    "example": "我不吃羊肉。",
+    "exampleMeaning": "Tôi không ăn thịt cừu."
+  },
+  {
+    "word": "晴",
+    "reading": "qíng",
+    "yinHan": "TÌNH",
+    "meaning": "Trời nắng, trời quang",
+    "example": "今天天晴。",
+    "exampleMeaning": "Hôm nay trời nắng."
+  },
+  {
+    "word": "公共汽车",
+    "reading": "gōnggòng qìchē",
+    "yinHan": "CÔNG CỘNG KHÍ XA",
+    "meaning": "Xe buýt",
+    "example": "我坐公共汽车去学校。",
+    "exampleMeaning": "Tôi đi xe buýt đến trường."
+  },
+  {
+    "word": "打篮球",
+    "reading": "dǎ lánqiú",
+    "yinHan": "ĐẢ LAM CẦU",
+    "meaning": "Chơi bóng rổ",
+    "example": "他喜欢打篮球。",
+    "exampleMeaning": "Anh ấy thích chơi bóng rổ."
+  },
+  {
+    "word": "踢足球",
+    "reading": "tī zúqiú",
+    "yinHan": "THÍCH TÚC CẦU",
+    "meaning": "Đá bóng",
+    "example": "我们在踢足球。",
+    "exampleMeaning": "Chúng tôi đang đá bóng."
+  }
+]

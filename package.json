@@ -12,8 +12,11 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "firebase": "^10.14.1",
+    "hanzi-writer": "^3.7.3",
     "i18next": "^27.2.7",
     "lucide-react": "^1.79.0",
+    "opencc-js": "^1.4.2",
+    "pinyin-pro": "^3.29.5",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-i18next": "^18.0.3",
@@ -27,6 +30,7 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "oxlint": "^1.90.0",
+    "subset-font": "^2.9.0",
     "tailwindcss": "^4.3.5",
     "typescript": "~7.0.2",
     "vite": "^8.3.6"

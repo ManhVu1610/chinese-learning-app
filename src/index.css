@@ -1,1 +1,248 @@
 @import "tailwindcss";
+
+/*
+ * Giao diện "cute": màu pastel ngọt (hồng, bơ, bạc hà, xanh sữa, tím oải hương),
+ * bo tròn nhiều, viền nâu tím mềm, bóng đổ chỉ rơi xuống dưới như nhãn dán phồng.
+ * Tên token giữ nguyên như trước (paper, ink, brick, sand…) để mọi trang tự đổi theo.
+ */
+@theme {
+  --color-paper: #fff5f8; /* nền trang: hồng kem */
+  --color-card: #fffefc; /* nền ô */
+  --color-ink: #574559; /* viền và chữ chính: nâu tím */
+  --color-ink-soft: #7d6a80; /* chữ phụ */
+  --color-ink-muted: #a593a7; /* chữ mờ */
+  --color-line: #f1dbe5; /* đường kẻ nhạt */
+
+  --color-brick: #d6587f; /* màu nhấn: hồng dâu */
+  --color-brick-soft: #ffe1eb;
+  --color-sand: #ffeaa6; /* vàng bơ */
+  --color-sage: #c9efd6; /* xanh bạc hà */
+  --color-sky: #cfe5ff; /* xanh sữa */
+  --color-coral: #ffd0dc; /* hồng phấn */
+  --color-apricot: #ffdcc4; /* cam đào */
+  --color-lilac: #e6dcff; /* tím oải hương */
+
+  --shadow-block: 0 5px 0 0 var(--color-ink);
+  --shadow-block-sm: 0 3px 0 0 var(--color-ink);
+  --shadow-block-lg: 0 8px 0 0 var(--color-ink);
+
+  /* Playpen Sans cho chữ Việt/Anh/pinyin; chữ Hán tự rơi sang App Kai (LXGW WenKai đã cắt gọn) nhờ unicode-range. */
+  --font-sans: "Playpen Sans", "App Kai", "KaiTi", "STKaiti", system-ui, sans-serif;
+  --font-kai: "App Kai", "KaiTi", "STKaiti", "Kaiti SC", serif;
+
+  --animate-wiggle: wiggle 0.5s ease-in-out;
+  --animate-float: float 4s ease-in-out infinite;
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    75% {
+      transform: rotate(10deg);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--color-paper);
+    /* Nền chấm bi nhỏ */
+    background-image: radial-gradient(var(--color-line) 1.6px, transparent 1.6px);
+    background-size: 24px 24px;
+    color: var(--color-ink);
+  }
+  ::selection {
+    background-color: var(--color-coral);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+/* In phiếu luyện viết: chỉ in trang A4, lề do @page lo. */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .worksheet-preview,
+  .worksheet-preview > div {
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .worksheet-preview .ws-scale {
+    transform: none !important;
+    width: auto !important;
+  }
+  .worksheet-sheet {
+    /* Hơi hẹp hơn vùng in 186 mm để đường kẻ ô ngoài cùng không bị cắt. */
+    width: 185mm !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+  .worksheet-paged .ws-page {
+    width: auto !important;
+    height: 273mm !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    break-after: page;
+  }
+  .worksheet-paged .ws-page:last-child {
+    break-after: auto;
+  }
+}
+
+/* Mẫu in theo trang cố định (giấy ô trống, bìa vở): mỗi trang là một tờ A4 riêng. */
+.worksheet-paged .ws-page {
+  box-sizing: border-box;
+  width: 210mm;
+  height: 297mm;
+  padding: 12mm;
+  overflow: hidden;
+  background: #fff;
+}
+.worksheet-paged .ws-page + .ws-page {
+  margin-top: 6mm;
+}
+@media screen {
+  .worksheet-paged .ws-page {
+    box-shadow: 0 1mm 3mm rgb(0 0 0 / 0.12);
+  }
+}
+
+@layer components {
+  /* Mọi khung viền 2px đều bo tròn (lớp rounded-* của Tailwind vẫn ghi đè được). */
+  [class~="border-2"] {
+    border-radius: 0.875rem;
+  }
+
+  /* Ô / khung: bo tròn lớn, bóng phồng phía dưới */
+  .box {
+    background-color: var(--color-card);
+    border: 2px solid var(--color-ink);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-block);
+  }
+
+  /* Nút dạng viên kẹo: nhấn xuống thì lún như nút cao su */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.125rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    background-color: var(--color-card);
+    border: 2px solid var(--color-ink);
+    border-radius: 9999px;
+    box-shadow: var(--shadow-block-sm);
+    transition:
+      transform 100ms ease,
+      box-shadow 100ms ease,
+      background-color 150ms ease;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 0 var(--color-ink);
+  }
+  .btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 0 0 0 var(--color-ink);
+  }
+  .btn:focus-visible {
+    outline: 3px solid var(--color-lilac);
+    outline-offset: 2px;
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+    color: var(--color-ink-muted);
+    background-color: #f6eef2;
+    border-color: var(--color-ink-muted);
+    box-shadow: none;
+    transform: none;
+  }
+
+  /* Nút dạng ô (biểu tượng trên, chữ dưới): bo vừa, cho phép xuống dòng */
+  .btn.flex-col {
+    border-radius: 1rem;
+    white-space: normal;
+  }
+
+  .btn-primary {
+    background-color: var(--color-sand);
+  }
+  .btn-accent {
+    background-color: var(--color-brick);
+    color: #fff;
+  }
+
+  /* Ô nhập liệu */
+  .field {
+    width: 100%;
+    background-color: var(--color-card);
+    border: 2px solid var(--color-ink);
+    border-radius: 1rem;
+    padding: 0.625rem 0.875rem;
+    outline: none;
+    transition: box-shadow 120ms ease;
+  }
+  .field:focus {
+    box-shadow: 0 0 0 4px var(--color-lilac);
+  }
+
+  /* Nhãn nhỏ dạng viên thuốc */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 2px solid var(--color-ink);
+    border-radius: 9999px;
+    background-color: var(--color-card);
+  }
+
+  /* Nhãn dán nghiêng nhẹ, lắc khi rê chuột (dùng cho biểu tượng) */
+  .sticker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-ink);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-block-sm);
+  }
+  .group:hover .sticker {
+    animation: var(--animate-wiggle);
+  }
+}
