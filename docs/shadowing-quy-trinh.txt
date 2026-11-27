@@ -1,0 +1,42 @@
+QUY TRÌNH TẠO BÀI SHADOWING TỪ LINK YOUTUBE
+==========================================
+
+Mục tiêu: người dùng đưa link YouTube → app có ngay bài shadowing (đã chia câu, pinyin, bản dịch),
+tự động hoàn toàn, tốn ít token nhất (máy làm hết, Claude chỉ chạy 1 lệnh và đọc 1 dòng kết quả).
+
+Công cụ (mã nguồn mở, miễn phí, chạy trên máy):
+  - yt-dlp           : lấy thông tin video + phụ đề tiếng Trung (thủ công hoặc tự tạo).   pip install yt-dlp
+  - faster-whisper   : nghe-chép khi video không có phụ đề (tuỳ chọn).                   pip install faster-whisper
+  - opencc-js        : phồn thể → giản thể (đã có trong app).
+  - MyMemory API     : dịch Trung → Việt miễn phí (không cần khoá, giới hạn ~5000 ký tự/ngày).
+  - pinyin-pro       : app tự thêm pinyin theo từng từ khi hiển thị (không lưu trong file).
+
+Các bước (script scripts/shadowing/make-lesson.mjs làm tự động):
+  1. Lấy mã video từ link (bỏ qua &list=, &index=).
+  2. yt-dlp -J: đọc tiêu đề, kênh, thời lượng, danh sách phụ đề.
+  3. Chọn phụ đề: thủ công zh-Hans > zh-CN > zh > zh-Hant/TW/HK > tự tạo gốc tiếng Trung (*-orig).
+     Không lấy bản YouTube tự dịch từ ngôn ngữ khác.
+  4. Không có phụ đề tiếng Trung → tải audio, chạy faster-whisper (model small, language=zh).
+  5. Đọc phụ đề json3 → các dòng có giờ bắt đầu/kết thúc; cắt chồng thời gian.
+  6. Chuyển giản thể; tách dòng dài theo dấu câu (。！？；…), chia thời gian theo số chữ;
+     gộp mẩu ≤ 2 chữ vào câu kề.
+  7. Dịch Việt bằng MyMemory theo lô ≤ 450 ký tự. Hết lượt → ghi câu còn thiếu ra
+     .cache/shadowing/<id>.todo.txt (mỗi dòng "số<TAB>câu tiếng Trung").
+  8. Ghi public/shadowing/<id>.json và cập nhật public/shadowing/index.json.
+     App hiện bài trong "Video có sẵn"; mở lần đầu sẽ nạp các câu.
+  9. In đúng 1 dòng: OK <id> | <số câu> câu | nguồn <youtube|youtube-auto|whisper> | <tiêu đề> [| câu chưa dịch]
+
+Khi còn câu chưa dịch (tuỳ chọn, Claude làm):
+  - Đọc .cache/shadowing/<id>.todo.txt, dịch từng dòng, ghi .cache/shadowing/<id>.vi.txt cùng định dạng
+    "số<TAB>bản dịch", rồi chạy: node scripts/shadowing/make-lesson.mjs --apply <id>
+  - Chỉ đọc/ghi file .txt này, không mở file JSON (tiết kiệm token).
+
+Lỗi thường gặp:
+  - "chưa cài yt-dlp"            → pip install yt-dlp (cần người dùng đồng ý cài).
+  - "chưa cài faster-whisper"    → video không có phụ đề; pip install faster-whisper (model tải lần đầu ~470 MB).
+  - Whisper chạy bằng CPU (model small): khoảng 1/4 thời lượng video (video 23 phút ≈ 5–6 phút). Chạy nền.
+  - Lỗi cublas64_12.dll / metadata_errors: đã xử lý trong transcribe.py (ép CPU, tự giải mã audio bằng PyAV).
+  - yt-dlp báo lỗi tải / 403     → pip install -U yt-dlp rồi chạy lại.
+  - Video tiếng Quảng Đông (粵語) → Whisper/phụ đề sẽ không khớp tiếng Phổ thông: báo người dùng chọn bản 国语/普通话.
+
+Sau khi tạo bài: kiểm tra nhanh bằng `npm run build`; push chỉ khi người dùng bảo push.

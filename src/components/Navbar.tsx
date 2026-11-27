@@ -1,13 +1,5 @@
 import clsx from 'clsx'
-import {
-  BookOpen,
-  ClipboardCheck,
-  Home,
-  Languages,
-  Layers,
-  LogIn,
-  type LucideIcon,
-} from 'lucide-react'
+import { BookOpen, ClipboardCheck, Home, Languages, Layers, LogIn, type LucideIcon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
@@ -58,15 +50,14 @@ export default function Navbar() {
     navigate('/')
   }
 
-
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3">
       <nav className="box mx-auto flex h-16 max-w-6xl items-center gap-3 rounded-full px-3 md:px-4">
         <Link to="/" className="group flex shrink-0 items-center gap-2 font-extrabold">
-          <span className="sticker -rotate-6 rounded-full bg-brick px-2.5 py-1 text-lg leading-none text-white">
-            汉字
+          <span className="sticker -rotate-6 rounded-full bg-brick px-2.5 py-1 text-lg leading-none text-white">汉字</span>
+          <span className="hidden text-ink lg:inline">
+            Học Tiếng Trung <span aria-hidden="true">🐼</span>
           </span>
-          <span className="hidden text-ink lg:inline">Học Tiếng Trung <span aria-hidden="true">🐼</span></span>
         </Link>
 
         <div className="flex-1 md:hidden" />
@@ -91,12 +82,7 @@ export default function Navbar() {
           <ToolsMenu variant="navbar" />
         </div>
 
-        <button
-          type="button"
-          onClick={toggleLang}
-          title={t('common.toggle_lang')}
-          className="btn px-2.5 py-1.5 text-sm"
-        >
+        <button type="button" onClick={toggleLang} title={t('common.toggle_lang')} className="btn px-2.5 py-1.5 text-sm">
           <Languages size={16} />
           {i18n.language === 'vi' ? 'VI' : 'EN'}
         </button>

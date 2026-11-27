@@ -60,7 +60,7 @@ export default function WordTypeSelect({ value, onChange }: { value: string[]; o
                   role="option"
                   aria-selected={on}
                   onClick={() => toggle(type)}
-                  className={clsx('flex w-full items-center gap-2 px-2 py-1.5 text-left text-sm', on ? 'bg-sand font-semibold' : 'hover:bg-paper')}
+                  className={clsx('flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left text-sm', on ? 'bg-sand font-semibold' : 'hover:bg-paper')}
                 >
                   <span className={clsx('flex h-4 w-4 items-center justify-center border-2 border-ink', on && 'bg-ink text-card')}>
                     {on && <Check size={11} strokeWidth={3} />}

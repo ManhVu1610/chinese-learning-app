@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { NotebookFolder } from '../../types'
 import Modal, { ModalActions } from '../Modal'
+import { UNCATEGORIZED } from '../../hooks/useNotebook'
 import FolderPicker, { NEW_FOLDER, resolveFolder } from './FolderPicker'
 
 /** Tạo bộ từ vựng mới: tên + thư mục (tuỳ chọn, có thể tạo thư mục mới ngay tại đây). */
@@ -41,13 +42,7 @@ export function CreateSetDialog({
           maxLength={80}
           className="field"
         />
-        <FolderPicker
-          folders={folders}
-          value={folder}
-          onChange={setFolder}
-          newName={newFolder}
-          onNewNameChange={setNewFolder}
-        />
+        <FolderPicker folders={folders} value={folder} onChange={setFolder} newName={newFolder} onNewNameChange={setNewFolder} />
         <ModalActions onCancel={onClose} confirmLabel={t('notebook.create')} disabled={!valid} />
       </form>
     </Modal>
@@ -110,9 +105,11 @@ export function MoveDialog({
   onClose: () => void
 }) {
   const { t } = useTranslation()
-  const [folder, setFolder] = useState(current ?? '')
+  // "Chưa phân loại" tương ứng lựa chọn mặc định (giá trị rỗng).
+  const currentValue = !current || current === UNCATEGORIZED ? '' : current
+  const [folder, setFolder] = useState(currentValue)
   const [newFolder, setNewFolder] = useState('')
-  const valid = folder === NEW_FOLDER ? newFolder.trim() : folder !== (current ?? '')
+  const valid = folder === NEW_FOLDER ? newFolder.trim() : folder !== currentValue
 
   return (
     <Modal title={t('notebook.move_title')} onClose={onClose}>
@@ -122,13 +119,7 @@ export function MoveDialog({
           if (valid) onMove(resolveFolder(folder, newFolder, createFolder))
         }}
       >
-        <FolderPicker
-          folders={folders}
-          value={folder}
-          onChange={setFolder}
-          newName={newFolder}
-          onNewNameChange={setNewFolder}
-        />
+        <FolderPicker folders={folders} value={folder} onChange={setFolder} newName={newFolder} onNewNameChange={setNewFolder} />
         <ModalActions onCancel={onClose} confirmLabel={t('notebook.move')} disabled={!valid} />
       </form>
     </Modal>

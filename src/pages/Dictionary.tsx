@@ -1,16 +1,19 @@
 import { Search } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import SaveButton from '../components/SaveButton'
 import WordCard from '../components/WordCard'
 import { searchWords } from '../data/dictionary'
 import { useDictionary } from '../hooks/useDictionary'
+import Page from '../components/layout/Page'
 
 export default function Dictionary() {
   const { t } = useTranslation()
   const { words, loading } = useDictionary()
-  const [input, setInput] = useState('')
+  // Mở từ ô tra nhanh ở trang chủ: /dictionary?q=...
+  const [params] = useSearchParams()
+  const [input, setInput] = useState(() => params.get('q') ?? '')
   const [query, setQuery] = useState('')
 
   // Tìm khi gõ, chờ 300ms sau phím cuối.
@@ -22,13 +25,8 @@ export default function Dictionary() {
   const results = useMemo(() => searchWords(words, query), [words, query])
 
   return (
-    <section className="mx-auto max-w-5xl px-4 py-10">
-      <h1 className="text-center text-3xl font-bold">{t('tools.dictionary')}</h1>
-      <p className="mt-2 text-center text-ink-soft">
-        {loading ? t('common.loading') : t('dictionary.intro', { count: words.length })}
-      </p>
-
-      <div className="relative mx-auto mt-6 max-w-2xl">
+    <Page feature="dictionary" description={loading ? t('common.loading') : t('dictionary.intro', { count: words.length })}>
+      <div className="relative">
         <Search size={22} className="absolute top-1/2 left-4 -translate-y-1/2 text-ink-muted" />
         <input
           type="search"
@@ -42,9 +40,7 @@ export default function Dictionary() {
 
       {query.trim() ? (
         <>
-          <p className="mt-6 text-sm font-medium text-ink-soft">
-            {t('dictionary.results', { count: results.length })}
-          </p>
+          <p className="mt-6 text-sm font-medium text-ink-soft">{t('dictionary.results', { count: results.length })}</p>
           {results.length === 0 ? (
             <p className="box mt-4 p-8 text-center text-ink-soft">{t('dictionary.no_results')}</p>
           ) : (
@@ -66,6 +62,6 @@ export default function Dictionary() {
           </p>
         </div>
       )}
-    </section>
+    </Page>
   )
 }

@@ -7,6 +7,7 @@ import WordCard from '../components/WordCard'
 import { normalize } from '../data/dictionary'
 import { useDictionary } from '../hooks/useDictionary'
 import type { HSKLevel } from '../types'
+import Page from '../components/layout/Page'
 
 const levels: HSKLevel[] = [1, 2, 3, 4, 5, 6]
 const PAGE = 60
@@ -42,10 +43,8 @@ export default function Vocabulary() {
   }, [words, query, level])
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="text-3xl font-bold">{t('nav.vocabulary')}</h1>
-
-      <div className="relative mt-6">
+    <Page feature="vocab" size="wide">
+      <div className="relative">
         <Search size={18} className="absolute top-1/2 left-3.5 -translate-y-1/2 text-ink-muted" />
         <input
           type="search"
@@ -99,6 +98,6 @@ export default function Vocabulary() {
           )}
         </>
       )}
-    </section>
+    </Page>
   )
 }

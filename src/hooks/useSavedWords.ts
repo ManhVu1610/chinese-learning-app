@@ -1,56 +1,34 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 import type { Word } from '../types'
+import { useNotebook } from './useNotebook'
 
-const KEY = 'saved_words'
-const CHANGE_EVENT = 'saved_words_change'
-
-function read(): Word[] {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(KEY) ?? '[]')
-    return Array.isArray(parsed) ? parsed : []
-  } catch {
-    return []
-  }
-}
-
-/** Sổ tay từ vựng, lưu trong localStorage 'saved_words' và đồng bộ giữa các tab. */
+/**
+ * Các từ đã lưu = mọi từ nằm trong các bộ của Sổ tay (không còn danh sách "Từ đã lưu" riêng).
+ * Lưu một từ bằng nút ⭐ mà không chọn bộ thì từ vào bộ "Chưa phân loại".
+ */
 export function useSavedWords() {
-  const [saved, setSaved] = useState<Word[]>(read)
+  const nb = useNotebook()
 
-  useEffect(() => {
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === KEY) setSaved(read())
-    }
-    const onLocal = () => setSaved(read())
-    window.addEventListener('storage', onStorage)
-    window.addEventListener(CHANGE_EVENT, onLocal)
-    return () => {
-      window.removeEventListener('storage', onStorage)
-      window.removeEventListener(CHANGE_EVENT, onLocal)
-    }
-  }, [])
+  const saved = useMemo(() => {
+    const seen = new Set<string>()
+    const out: Word[] = []
+    for (const s of nb.sets)
+      for (const w of s.words)
+        if (!seen.has(w.hanzi)) {
+          seen.add(w.hanzi)
+          out.push(w)
+        }
+    return out
+  }, [nb.sets])
 
-  const write = useCallback((next: Word[]) => {
-    localStorage.setItem(KEY, JSON.stringify(next))
-    setSaved(next)
-    // Báo cho các component khác trong cùng tab (sự kiện 'storage' chỉ tới tab khác).
-    window.dispatchEvent(new Event(CHANGE_EVENT))
-  }, [])
+  const savedKeys = useMemo(() => new Set(saved.flatMap((w) => [w.id, w.hanzi])), [saved])
+  const isSaved = useCallback((word: Pick<Word, 'id' | 'hanzi'>) => savedKeys.has(word.id) || savedKeys.has(word.hanzi), [savedKeys])
 
-  const isSaved = useCallback((id: string) => saved.some((w) => w.id === id), [saved])
-
-  const toggle = useCallback(
-    (word: Word) => {
-      const current = read()
-      write(current.some((w) => w.id === word.id) ? current.filter((w) => w.id !== word.id) : [word, ...current])
-    },
-    [write],
+  /** Các bộ đang chứa từ này. */
+  const setsWith = useCallback(
+    (word: Pick<Word, 'id' | 'hanzi'>) => nb.sets.filter((s) => s.words.some((w) => w.id === word.id || w.hanzi === word.hanzi)),
+    [nb.sets],
   )
 
-  const remove = useCallback((id: string) => write(read().filter((w) => w.id !== id)), [write])
-
-  /** Ghi đè toàn bộ danh sách (dùng khi lưu từ bảng sửa bộ). */
-  const replaceAll = useCallback((words: Word[]) => write(words), [write])
-
-  return { saved, isSaved, toggle, remove, replaceAll }
+  return { saved, isSaved, setsWith, saveWord: nb.saveWord, unsaveWord: nb.unsaveWord }
 }

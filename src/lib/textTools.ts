@@ -26,6 +26,8 @@ export interface PinyinToken {
 
 // Cụm từ pinyin-pro hay đọc sai (đa âm trong ngữ cảnh thường gặp).
 const CUSTOM: Record<string, string> = {
+  大城市: 'dà chéng shì',
+  大城: 'dà chéng',
   长得: 'zhǎng de',
   得去: 'děi qù',
   得走: 'děi zǒu',

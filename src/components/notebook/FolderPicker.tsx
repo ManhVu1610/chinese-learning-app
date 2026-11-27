@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next'
+import { UNCATEGORIZED } from '../../hooks/useNotebook'
 import type { NotebookFolder } from '../../types'
 
 export const NEW_FOLDER = '__new__'
 
 /**
- * Chọn thư mục: "Không xếp vào thư mục", một thư mục có sẵn, hoặc "+ Tạo thư mục mới…"
+ * Chọn thư mục: "Chưa phân loại" (mặc định), một thư mục có sẵn, hoặc "+ Tạo thư mục mới…"
  * (khi đó hiện thêm ô nhập tên thư mục).
  */
 export default function FolderPicker({
@@ -26,13 +27,20 @@ export default function FolderPicker({
       <label className="mt-4 block text-sm font-semibold" htmlFor="folder-picker">
         {t('notebook.folder_optional')}
       </label>
-      <select id="folder-picker" value={value} onChange={(e) => onChange(e.target.value)} className="field mt-1.5">
+      <select
+        id="folder-picker"
+        value={value === UNCATEGORIZED ? '' : value}
+        onChange={(e) => onChange(e.target.value)}
+        className="field mt-1.5"
+      >
         <option value="">{t('notebook.no_folder_option')}</option>
-        {folders.map((f) => (
-          <option key={f.id} value={f.id}>
-            {f.name}
-          </option>
-        ))}
+        {folders
+          .filter((f) => f.id !== UNCATEGORIZED)
+          .map((f) => (
+            <option key={f.id} value={f.id}>
+              {f.name}
+            </option>
+          ))}
         <option value={NEW_FOLDER}>{t('notebook.new_folder_option')}</option>
       </select>
       {value === NEW_FOLDER && (

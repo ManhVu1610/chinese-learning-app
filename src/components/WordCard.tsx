@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSpeech } from '../hooks/useSpeech'
 import type { HSKLevel, Word } from '../types'
+import AnalyzeButton from './AnalyzeButton'
 import StrokeButton from './StrokeButton'
 
 export const levelColor: Record<HSKLevel, string> = {
@@ -52,6 +53,7 @@ export default function WordCard({ word, actions }: { word: Word; actions?: Reac
       </div>
       <div className="mt-3 flex justify-end gap-2">
         {actions}
+        <AnalyzeButton text={word.hanzi} />
         <StrokeButton text={word.hanzi} />
         {supported && (
           <button

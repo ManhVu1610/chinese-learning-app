@@ -1,5 +1,20 @@
 import clsx from 'clsx'
-import { Check, Copy, Eye, ExternalLink, FileJson, Layers, Plus, Square, SquareCheck, Upload, X } from 'lucide-react'
+import {
+  Check,
+  ChevronDown,
+  Copy,
+  Eraser,
+  Eye,
+  ExternalLink,
+  FileJson,
+  Layers,
+  Plus,
+  Sparkles,
+  Square,
+  SquareCheck,
+  Upload,
+  X,
+} from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CLAUDE_PROMPT, loadChars, parseJsonWords, type CharInfo } from '../../data/lookup'
@@ -56,7 +71,8 @@ export default function BulkImportDialog({
   useEffect(() => {
     loadChars().then(setChars)
     // Khi đang mở hộp thoại key API phía trên thì Esc chỉ đóng hộp thoại đó.
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && !document.querySelector('[aria-label="' + t('apikeys.title') + '"]') && closeRef.current()
+    const onKey = (e: KeyboardEvent) =>
+      e.key === 'Escape' && !document.querySelector('[aria-label="' + t('apikeys.title') + '"]') && closeRef.current()
     document.addEventListener('keydown', onKey)
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
@@ -109,113 +125,142 @@ export default function BulkImportDialog({
     return () => clearTimeout(h)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jsonText, chars, dictionary])
+  const dupCount = items.filter((i) => i.word && i.duplicate).length
+  const badCount = items.filter((i) => !i.word).length
   const toggleAll = (v: boolean) => setItems((l) => l.map((i) => (i.word && !i.duplicate ? { ...i, checked: v } : i)))
 
   return (
     <div className="fixed inset-0 z-[60] flex items-stretch justify-center bg-ink/30 p-2 sm:p-6">
-      <div role="dialog" aria-modal="true" aria-label={t('bulk.title')} className="box flex w-full max-w-6xl flex-col overflow-hidden shadow-block-lg">
-        {/* Tiêu đề */}
-        <div className="flex items-center gap-3 border-b-2 border-ink px-5 py-4">
-          <span className="inline-flex border-2 border-ink bg-sand p-2">
-            <Plus size={20} />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={t('bulk.title')}
+        className="box flex w-full max-w-6xl flex-col overflow-hidden shadow-block-lg"
+      >
+        {/* Tiêu đề: tên hộp thoại + bộ sẽ lưu vào */}
+        <div className="flex items-center gap-3 border-b-2 border-ink px-5 py-3.5">
+          <span className="sticker bg-sand p-2">
+            <FileJson size={20} />
           </span>
-          <div className="flex-1">
+          <div className="min-w-0 flex-1">
             <h2 className="text-xl font-bold">{t('bulk.title')}</h2>
-            <p className="text-sm text-ink-soft">{t('bulk.subtitle')}</p>
+            <p className="flex flex-wrap items-center gap-1.5 text-sm text-ink-soft">
+              <Layers size={14} />
+              {t('bulk.save_to')} <span className="tag bg-sand">{setName}</span>
+            </p>
           </div>
-          <button type="button" onClick={onClose} aria-label={t('common.close')} className="p-1 text-ink-soft hover:text-ink">
-            <X size={22} />
+          <button type="button" onClick={onClose} aria-label={t('common.close')} className="btn p-1.5">
+            <X size={18} />
           </button>
         </div>
 
-        <div className="grid min-h-0 flex-1 md:grid-cols-[minmax(0,26rem)_1fr]">
-          {/* Cột trái: nguồn nhập */}
-          <div className="min-h-0 space-y-4 overflow-y-auto border-b-2 border-ink bg-paper p-4 md:border-r-2 md:border-b-0">
-            <p className="flex items-center gap-2 border-2 border-ink bg-card px-3 py-2 text-sm font-semibold">
-              <Layers size={16} />
-              {t('bulk.save_to')} <span className="tag">{setName}</span>
-            </p>
+        <div className="grid min-h-0 flex-1 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          {/* Cột trái: dán JSON (chính) + hướng dẫn tạo bằng Claude (thu gọn) */}
+          <div className="flex min-h-0 flex-col gap-3 overflow-y-auto border-b-2 border-ink p-4 md:border-r-2 md:border-b-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="mr-auto text-sm font-bold">{t('bulk.paste_title')}</p>
+              <input
+                ref={fileRef}
+                type="file"
+                accept=".json,application/json,text/plain"
+                className="hidden"
+                onChange={(e) => {
+                  const f = e.target.files?.[0]
+                  if (f) onFile(f)
+                  e.target.value = ''
+                }}
+              />
+              <button type="button" onClick={() => fileRef.current?.click()} className="btn px-3 py-1.5 text-sm">
+                <Upload size={14} />
+                {t('bulk.upload_json')}
+              </button>
+              {jsonText && (
+                <button type="button" onClick={() => setJsonText('')} className="btn px-3 py-1.5 text-sm">
+                  <Eraser size={14} />
+                  {t('text.clear')}
+                </button>
+              )}
+            </div>
+            <textarea
+              value={jsonText}
+              onChange={(e) => setJsonText(e.target.value)}
+              placeholder={SAMPLE_JSON}
+              aria-label={t('bulk.paste_title')}
+              className="field min-h-56 flex-1 resize-none font-mono text-xs"
+            />
+            {error && <p className="rounded-xl border-2 border-ink bg-coral px-3 py-2 text-sm">{error}</p>}
 
-            <p className="flex items-center gap-2 text-sm font-semibold">
-              <FileJson size={16} />
-              {t('bulk.tab_json')}
-            </p>
-
-            {(
-              <>
-                <Step n={1} text={t('bulk.json_step1')}>
-                  <a
-                    href="https://claude.ai/new"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn mt-3 px-4"
-                  >
-                    {t('bulk.open_claude')}
-                    <ExternalLink size={14} />
-                  </a>
-                </Step>
-                <Step n={2} text={t('bulk.json_step2')} />
-                <Step n={3} text={t('bulk.json_step3')}>
-                  <div className="mt-3 flex justify-end">
-                    <button type="button" onClick={copyPrompt} className="btn px-3 py-1.5 text-sm">
-                      {copied ? <Check size={14} /> : <Copy size={14} />}
-                      {copied ? t('bulk.copied') : t('bulk.copy_prompt')}
-                    </button>
-                  </div>
-                  <pre className="mt-2 max-h-40 overflow-auto border-2 border-ink bg-card p-2 text-xs whitespace-pre-wrap">
-                    {CLAUDE_PROMPT}
-                  </pre>
-                </Step>
-                <Step n={4} text={t('bulk.json_step4')}>
-                  <div className="mt-3 flex justify-end">
-                    <input
-                      ref={fileRef}
-                      type="file"
-                      accept=".json,application/json,text/plain"
-                      className="hidden"
-                      onChange={(e) => {
-                        const f = e.target.files?.[0]
-                        if (f) onFile(f)
-                        e.target.value = ''
-                      }}
-                    />
-                    <button type="button" onClick={() => fileRef.current?.click()} className="btn px-3 py-1.5 text-sm">
-                      <Upload size={14} />
-                      {t('bulk.upload_json')}
-                    </button>
-                  </div>
-                  <textarea
-                    value={jsonText}
-                    onChange={(e) => setJsonText(e.target.value)}
-                    rows={9}
-                    placeholder={SAMPLE_JSON}
-                    aria-label={t('bulk.json_step4')}
-                    className="field mt-2 resize-y font-mono text-xs"
-                  />
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      await navigator.clipboard.writeText(SAMPLE_JSON)
-                      setSampleCopied(true)
-                      setTimeout(() => setSampleCopied(false), 2000)
-                    }}
-                    className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-ink-soft hover:text-ink"
-                  >
-                    {sampleCopied ? <Check size={13} /> : <Copy size={13} />}
-                    {sampleCopied ? t('bulk.copied') : t('bulk.copy_sample')}
-                  </button>
-                </Step>
-              </>
-            )}
-            {error && <p className="border-2 border-ink bg-coral px-3 py-2 text-sm">{error}</p>}
+            {/* Chưa có JSON: tạo bằng Claude */}
+            <details className="group rounded-2xl border-2 border-ink bg-paper" open={!jsonText}>
+              <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2.5 text-sm font-bold">
+                <Sparkles size={15} />
+                {t('bulk.claude_title')}
+                <ChevronDown size={15} className="ml-auto transition-transform group-open:rotate-180" />
+              </summary>
+              <ol className="space-y-2.5 border-t-2 border-line px-3 py-3 text-sm">
+                <li className="flex items-start gap-2">
+                  <StepNo n={1} />
+                  <span className="flex-1">
+                    {t('bulk.json_step1')}{' '}
+                    <a
+                      href="https://claude.ai/new"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 font-bold text-brick underline"
+                    >
+                      {t('bulk.open_claude')}
+                      <ExternalLink size={12} />
+                    </a>
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <StepNo n={2} />
+                  <span className="flex-1">{t('bulk.json_step2')}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <StepNo n={3} />
+                  <span className="flex-1">
+                    {t('bulk.json_step3')}
+                    <span className="mt-1.5 flex flex-wrap gap-2">
+                      <button type="button" onClick={copyPrompt} className="btn px-3 py-1 text-xs">
+                        {copied ? <Check size={13} /> : <Copy size={13} />}
+                        {copied ? t('bulk.copied') : t('bulk.copy_prompt')}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          await navigator.clipboard.writeText(SAMPLE_JSON)
+                          setSampleCopied(true)
+                          setTimeout(() => setSampleCopied(false), 2000)
+                        }}
+                        className="btn px-3 py-1 text-xs"
+                      >
+                        {sampleCopied ? <Check size={13} /> : <Copy size={13} />}
+                        {sampleCopied ? t('bulk.copied') : t('bulk.copy_sample')}
+                      </button>
+                    </span>
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <StepNo n={4} />
+                  <span className="flex-1">{t('bulk.json_step4_short')}</span>
+                </li>
+              </ol>
+            </details>
           </div>
 
-          {/* Cột phải: xem trước */}
+          {/* Cột phải: xem trước dạng danh sách gọn */}
           <div className="flex min-h-64 flex-col">
-            <div className="flex items-center gap-2 border-b-2 border-ink bg-sand/60 px-4 py-3 text-sm font-semibold">
+            <div className="flex flex-wrap items-center gap-2 border-b-2 border-ink bg-sand/60 px-4 py-2.5 text-sm font-semibold">
               <Eye size={16} />
               {t('bulk.preview_title')}
-              <span className="tag bg-card">{items.filter((i) => i.word).length}</span>
+              {items.length > 0 && (
+                <span className="flex flex-wrap gap-1.5 text-[11px]">
+                  <span className="tag bg-card">{t('bulk.count_new', { count: selectable.length })}</span>
+                  {dupCount > 0 && <span className="tag bg-sky">{t('bulk.count_dup', { count: dupCount })}</span>}
+                  {badCount > 0 && <span className="tag bg-coral">{t('bulk.count_bad', { count: badCount })}</span>}
+                </span>
+              )}
               {selectable.length > 0 && (
                 <button
                   type="button"
@@ -237,17 +282,16 @@ export default function BulkImportDialog({
                   <p className="mt-1 max-w-sm text-sm text-ink-soft">{t('bulk.empty_hint')}</p>
                 </div>
               ) : (
-                <ul className="grid grid-cols-1 gap-3 p-3 sm:grid-cols-2">
+                <ul className="divide-y-2 divide-line">
                   {items.map((it) => {
                     const disabled = !it.word || it.duplicate
                     return (
                       <li key={it.key}>
                         <label
                           className={clsx(
-                            'flex h-full items-start gap-3 border-2 px-3 py-2.5',
-                            disabled ? 'cursor-default border-line bg-paper' : 'cursor-pointer border-ink bg-card',
-                            it.checked && 'shadow-block-sm',
-                            !it.word && 'bg-coral/40',
+                            'flex items-start gap-3 px-4 py-2.5',
+                            disabled ? 'cursor-default opacity-70' : 'cursor-pointer hover:bg-paper/60',
+                            !it.word && 'bg-coral/30',
                           )}
                         >
                           <input
@@ -260,22 +304,18 @@ export default function BulkImportDialog({
                           />
                           {it.word ? (
                             <div className="min-w-0 flex-1">
-                              <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                              <p className="flex flex-wrap items-baseline gap-x-2">
                                 <span className="text-xl leading-tight font-bold text-brick">{it.word.hanzi}</span>
-                                {it.word.pinyin && <span className="text-xs text-ink-soft">{it.word.pinyin}</span>}
-                                {it.word.han_viet && (
-                                  <span className="border-2 border-ink bg-sand px-1.5 text-[10px] font-bold uppercase">
-                                    {it.word.han_viet}
-                                  </span>
-                                )}
+                                {it.word.pinyin && <span className="text-sm text-ink-soft italic">{it.word.pinyin}</span>}
+                                {it.word.han_viet && <span className="text-xs font-bold uppercase">{it.word.han_viet}</span>}
                                 {it.duplicate && <span className="tag bg-sky py-0 text-[10px]">{t('bulk.duplicate')}</span>}
                               </p>
                               {it.word.meaning_vi ? (
-                                <p className="mt-0.5 text-sm font-semibold">{it.word.meaning_vi}</p>
+                                <p className="text-sm font-semibold">{it.word.meaning_vi}</p>
                               ) : (
                                 <span className="tag mt-1 bg-apricot py-0 text-[10px]">{t('bulk.no_meaning')}</span>
                               )}
-                              {it.word.example && <p className="mt-0.5 truncate text-sm text-ink-soft">{it.word.example}</p>}
+                              {it.word.example && <p className="truncate text-xs text-ink-soft">{it.word.example}</p>}
                             </div>
                           ) : (
                             <p className="flex-1 text-sm">
@@ -315,15 +355,6 @@ export default function BulkImportDialog({
   )
 }
 
-function Step({ n, text, children }: { n: number; text: string; children?: React.ReactNode }) {
-  const { t } = useTranslation()
-  return (
-    <div className="border-2 border-ink bg-card p-3">
-      <p className="flex items-start gap-2 text-sm font-semibold">
-        <span className="shrink-0 bg-ink px-1.5 py-0.5 text-xs text-card">{t('bulk.step', { n })}</span>
-        {text}
-      </p>
-      {children}
-    </div>
-  )
+function StepNo({ n }: { n: number }) {
+  return <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-ink text-[11px] font-bold text-card">{n}</span>
 }

@@ -10,7 +10,8 @@ import Test from './pages/Test'
 import Vocabulary from './pages/Vocabulary'
 
 // Các trang công cụ có dữ liệu lớn: chỉ tải khi mở.
-const Pinyin = lazy(() => import('./pages/Pinyin'))
+// Bảng Pinyin tạm ẩn (sắp có), mã và dữ liệu giữ nguyên: pages/Pinyin.tsx
+// const Pinyin = lazy(() => import('./pages/Pinyin'))
 const Radicals = lazy(() => import('./pages/Radicals'))
 const Dictionary = lazy(() => import('./pages/Dictionary'))
 const Notebook = lazy(() => import('./pages/Notebook'))
@@ -19,6 +20,15 @@ const Worksheet = lazy(() => import('./pages/Worksheet'))
 const Grammar = lazy(() => import('./pages/Grammar'))
 const Analyze = lazy(() => import('./pages/Analyze'))
 const TextTool = lazy(() => import('./pages/TextTool'))
+const Listening = lazy(() => import('./pages/Listening'))
+const Speaking = lazy(() => import('./pages/Speaking'))
+const Typing = lazy(() => import('./pages/Typing'))
+const Mixed = lazy(() => import('./pages/Mixed'))
+const Shadowing = lazy(() => import('./pages/Shadowing'))
+const ShadowingLesson = lazy(() => import('./pages/ShadowingLesson'))
+const Notes = lazy(() => import('./pages/Notes'))
+const StrokeOrder = lazy(() => import('./pages/StrokeOrder'))
+const ComingSoon = lazy(() => import('./components/ComingSoon'))
 
 function PageLoading() {
   const { t } = useTranslation()
@@ -37,7 +47,7 @@ export default function App() {
               <Route path="flashcard" element={<Flashcard />} />
               <Route path="test" element={<Test />} />
               <Route path="login" element={<Login />} />
-              <Route path="pinyin" element={<Pinyin />} />
+              <Route path="pinyin" element={<ComingSoon feature="pinyin" />} />
               <Route path="radicals" element={<Radicals />} />
               <Route path="dictionary" element={<Dictionary />} />
               <Route path="notebook" element={<Notebook />} />
@@ -47,6 +57,16 @@ export default function App() {
               <Route path="grammar" element={<Grammar />} />
               <Route path="analyze" element={<Analyze />} />
               <Route path="text" element={<TextTool />} />
+              <Route path="listening" element={<Listening />} />
+              <Route path="speaking" element={<Speaking />} />
+              <Route path="typing" element={<Typing />} />
+              <Route path="mixed" element={<Mixed />} />
+              <Route path="notes" element={<Notes />} />
+              <Route path="strokes" element={<StrokeOrder />} />
+              <Route path="games" element={<ComingSoon feature="games" />} />
+              <Route path="stories" element={<ComingSoon feature="stories" />} />
+              <Route path="shadowing" element={<Shadowing />} />
+              <Route path="shadowing/:id" element={<ShadowingLesson />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </Routes>

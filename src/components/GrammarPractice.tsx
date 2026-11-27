@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { ArrowRight, Check, Eye, RotateCcw, X } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { playResult } from '../lib/sfx'
 import type { GrammarPoint } from '../types'
 
 /**
@@ -94,9 +95,7 @@ export default function GrammarPractice({
         <p className="flex-1 text-sm font-bold">
           {t('grammar.practice')}
           {!done && (
-            <span className="ml-2 font-normal text-ink-soft">
-              {t('grammar.question_n', { n: index + 1, total: questions.length })}
-            </span>
+            <span className="ml-2 font-normal text-ink-soft">{t('grammar.question_n', { n: index + 1, total: questions.length })}</span>
           )}
         </p>
         <button type="button" onClick={onClose} aria-label={t('common.close')} className="p-1 text-ink-soft hover:text-ink">
@@ -104,7 +103,10 @@ export default function GrammarPractice({
         </button>
       </div>
       <div className="mb-4 h-3 overflow-hidden rounded-full border-2 border-ink">
-        <div className="h-full bg-sage transition-all" style={{ width: `${(Math.min(index, questions.length) / questions.length) * 100}%` }} />
+        <div
+          className="h-full bg-sage transition-all"
+          style={{ width: `${(Math.min(index, questions.length) / questions.length) * 100}%` }}
+        />
       </div>
 
       {done ? (
@@ -136,7 +138,10 @@ export default function GrammarPractice({
                   key={opt}
                   type="button"
                   disabled={picked !== null}
-                  onClick={() => setPicked(opt)}
+                  onClick={() => {
+                    setPicked(opt)
+                    playResult(opt === q.answer)
+                  }}
                   className={clsx('btn py-2 text-lg disabled:text-ink', state === 'right' && '!bg-sage', state === 'wrong' && '!bg-coral')}
                 >
                   {opt}
@@ -185,7 +190,11 @@ export default function GrammarPractice({
             <button
               type="button"
               disabled={!written.trim()}
-              onClick={() => next(q.tokens.every((tk) => written.includes(tk)))}
+              onClick={() => {
+                const ok = q.tokens.every((tk) => written.includes(tk))
+                playResult(ok)
+                next(ok)
+              }}
               className="btn btn-primary px-4 py-1.5 text-sm"
             >
               {t('grammar.finish')}

@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, setDoc, writeBatch } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDocs, setDoc, writeBatch } from 'firebase/firestore'
 import type { CardState } from '../types'
 import { db } from './firebase'
 
@@ -38,6 +38,10 @@ export async function loadCloudCards(uid: string): Promise<CardState[]> {
 
 export async function saveCloudCard(uid: string, card: CardState): Promise<void> {
   await setDoc(doc(cardsCollection(uid), card.wordId), card, { merge: true })
+}
+
+export async function deleteCloudCard(uid: string, wordId: string): Promise<void> {
+  await deleteDoc(doc(cardsCollection(uid), wordId))
 }
 
 /** Ghi nhiều thẻ bằng batch (Firestore giới hạn 500 thao tác mỗi batch). */

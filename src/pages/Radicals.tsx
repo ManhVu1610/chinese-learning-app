@@ -5,8 +5,10 @@ import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 import { sampleChar } from '../data/pinyin'
 import { commonRadicals, radicals } from '../data/radicals'
+import AnalyzeButton from '../components/AnalyzeButton'
 import StrokeButton from '../components/StrokeButton'
 import { useSpeech } from '../hooks/useSpeech'
+import Page from '../components/layout/Page'
 
 type StrokeFilter = 'all' | 1 | 2 | 3 | 4 | '5+'
 const filters: StrokeFilter[] = ['all', 1, 2, 3, 4, '5+']
@@ -20,11 +22,8 @@ export default function Radicals() {
   const setTab = (next: Tab) => setParams(next === 'common50' ? { tab: '50' } : {}, { replace: true })
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="text-3xl font-bold">{t('tools.radicals')}</h1>
-      <p className="mt-2 text-ink-soft">{t('radicals.intro')}</p>
-
-      <div className="mt-5 inline-grid grid-cols-2 gap-1 rounded-full border-2 border-ink bg-card p-1 shadow-block-sm" role="tablist">
+    <Page feature="radicals" size="wide" description={t('radicals.intro')}>
+      <div className="inline-grid grid-cols-2 gap-1 rounded-full border-2 border-ink bg-card p-1 shadow-block-sm" role="tablist">
         {(
           [
             ['all214', t('radicals.tab_214')],
@@ -37,10 +36,7 @@ export default function Radicals() {
             role="tab"
             aria-selected={tab === key}
             onClick={() => setTab(key)}
-            className={clsx(
-              'rounded-full px-4 py-1.5 text-sm font-bold',
-              tab === key ? 'bg-coral' : 'text-ink-soft hover:bg-brick-soft',
-            )}
+            className={clsx('rounded-full px-4 py-1.5 text-sm font-bold', tab === key ? 'bg-coral' : 'text-ink-soft hover:bg-brick-soft')}
           >
             {label}
           </button>
@@ -48,7 +44,7 @@ export default function Radicals() {
       </div>
 
       {tab === 'all214' ? <All214 /> : <Common50 />}
-    </section>
+    </Page>
   )
 }
 
@@ -81,9 +77,7 @@ function All214() {
         ))}
       </div>
 
-      <p className="mt-5 text-sm font-medium text-ink-soft">
-        {t('radicals.showing', { count: list.length, total: radicals.length })}
-      </p>
+      <p className="mt-5 text-sm font-medium text-ink-soft">{t('radicals.showing', { count: list.length, total: radicals.length })}</p>
 
       <div className="mt-4 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
         {list.map((r) => (
@@ -100,6 +94,7 @@ function All214() {
             <span className="mt-1 line-clamp-2 flex-1 font-semibold">{r.meaning_vi}</span>
             <span className="mt-3 flex w-full items-center gap-2 text-xs text-ink-muted">
               <span className="flex-1">{t('radicals.strokes', { count: r.strokes })}</span>
+              <AnalyzeButton text={r.radical} />
               <StrokeButton text={r.radical} />
               <button
                 type="button"
@@ -127,7 +122,7 @@ function Common50() {
       <p className="mt-5 text-sm font-medium text-ink-soft">{t('radicals.common_intro', { count: commonRadicals.length })}</p>
       <div className="mt-4 grid grid-cols-1 gap-5 md:grid-cols-2">
         {commonRadicals.map((r) => (
-          <article key={r.id} className="box flex flex-col">
+          <article key={r.id} className="box flex flex-col overflow-hidden">
             <div className="flex items-start gap-4 p-4">
               <button
                 type="button"
@@ -148,7 +143,10 @@ function Common50() {
                 </div>
                 <p className="mt-2 text-sm font-semibold">{r.meaning_vi}</p>
               </div>
-              <StrokeButton text={r.radical} />
+              <div className="flex shrink-0 flex-col gap-2">
+                <AnalyzeButton text={r.radical} />
+                <StrokeButton text={r.radical} />
+              </div>
             </div>
             {r.examples.length > 0 && (
               <ul className="mt-auto divide-y-2 divide-line border-t-2 border-ink">
@@ -157,6 +155,7 @@ function Common50() {
                     <span className="text-lg font-bold text-brick">{ex.hanzi}</span>
                     <span className="text-xs text-ink-soft italic">{ex.pinyin}</span>
                     <span className="min-w-0 flex-1 truncate text-sm">{ex.meaning_vi}</span>
+                    <AnalyzeButton text={ex.hanzi} className="btn shrink-0 p-1" />
                     <StrokeButton text={ex.hanzi} className="btn shrink-0 p-1" />
                     {supported && (
                       <button

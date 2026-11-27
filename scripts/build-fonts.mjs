@@ -1,7 +1,8 @@
 /**
  * Tạo font web nhỏ gọn từ font gốc trong fonts-src/ (không đưa lên git):
  *  - Playpen Sans (chữ Việt, Anh, pinyin): chỉ giữ ký tự Latin + tiếng Việt + dấu thanh pinyin.
- *  - LXGW WenKai (chữ Hán, giấy phép SIL OFL 1.1): chỉ giữ những chữ Hán app thực sự hiển thị, chia 2 phần theo độ thông dụng.
+ *  - AR PL UKai CN (chữ Hán, giấy phép Arphic Public License; lấy mặt CN trong ukai.ttc của gói fonts-arphic-ukai):
+ *    chỉ giữ những chữ Hán app thực sự hiển thị, chia 3 phần theo cấp HSK.
  * Mỗi phần có unicode-range riêng nên trình duyệt chỉ tải phần cần cho trang đang xem.
  * Chạy lại sau khi thêm dữ liệu: node scripts/build-fonts.mjs
  */
@@ -94,7 +95,7 @@ async function build(srcFile, outFile, text, opts = {}) {
 const lean = { noLayoutClosure: true, noHinting: true }
 await build('PlaypenSans-Variable.ttf', 'playpen-sans.woff2', latin, { ...lean, variationAxes: { wght: { min: 400, max: 800 } } })
 const texts = parts.map((p, i) => [...p].join('') + (i === 0 ? cjkPunct : ''))
-for (const [i, text] of texts.entries()) await build('LXGWWenKai-Regular.ttf', `kai-${i + 1}.woff2`, text, lean)
+for (const [i, text] of texts.entries()) await build('ARPLUKaiCN.ttf', `kai-${i + 1}.woff2`, text, lean)
 
 // CSS @font-face với unicode-range để trình duyệt chỉ tải phần cần.
 const css = `/* Sinh tự động bởi scripts/build-fonts.mjs — không sửa tay. */

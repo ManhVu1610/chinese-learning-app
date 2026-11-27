@@ -1,19 +1,19 @@
 import clsx from 'clsx'
-import { ChevronRight, FileDown, Folder, FolderOpen, Pencil, Play, Plus, Search } from 'lucide-react'
+import { ArrowDownWideNarrow, FileDown, Folder, FolderOpen, FolderPlus, Library, Pencil, Plus, Search } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 import { ConfirmDialog, CreateSetDialog, MoveDialog, RenameDialog } from '../components/notebook/Dialogs'
 import SetCard, { setActionIcons } from '../components/notebook/SetCard'
 import { normalize } from '../data/dictionary'
 import { useFlashcard } from '../hooks/useFlashcard'
-import { useNotebook } from '../hooks/useNotebook'
+import { UNCATEGORIZED, useNotebook } from '../hooks/useNotebook'
 import { downloadJson, wordToJson } from '../lib/exportJson'
-import { useSavedWords } from '../hooks/useSavedWords'
 import type { NotebookFolder, VocabSet, Word } from '../types'
+import Page from '../components/layout/Page'
 
 type DialogState =
   | { kind: 'create'; folderId?: string | null }
+  | { kind: 'create-folder' }
   | { kind: 'rename-set'; set: VocabSet }
   | { kind: 'move-set'; set: VocabSet }
   | { kind: 'delete-set'; set: VocabSet }
@@ -21,17 +21,23 @@ type DialogState =
   | { kind: 'delete-folder'; folder: NotebookFolder }
   | null
 
+type SortKey = 'newest' | 'name' | 'words' | 'progress'
+const SORT_KEYS: SortKey[] = ['newest', 'name', 'words', 'progress']
+
 const wordMatches = (w: Word, q: string) =>
   w.hanzi.includes(q) || [w.pinyin, w.meaning_vi, w.meaning_en, w.han_viet ?? ''].some((s) => normalize(s).includes(normalize(q)))
 
 export default function Notebook() {
   const { t } = useTranslation()
-  const navigate = useNavigate()
   const nb = useNotebook()
-  const { saved } = useSavedWords()
   const { cards } = useFlashcard()
   const [query, setQuery] = useState('')
-  const [open, setOpen] = useState<Set<string>>(new Set())
+  const [selected, setSelected] = useState<string>('all')
+  const [sort, setSort] = useState<SortKey>(() => (localStorage.getItem('notebook_sort') as SortKey) || 'newest')
+  const changeSort = (v: SortKey) => {
+    setSort(v)
+    localStorage.setItem('notebook_sort', v)
+  }
   const [dialog, setDialog] = useState<DialogState>(null)
   const close = () => setDialog(null)
 
@@ -41,181 +47,218 @@ export default function Notebook() {
 
   const q = query.trim()
   const searching = q.length > 0
-  const folderName = (id: string | null) => nb.folders.find((f) => f.id === id)?.name ?? ''
+  // Thư mục "Chưa phân loại" hiển thị theo ngôn ngữ đang chọn.
+  const nameOf = (f: { id: string; name: string }) => (f.id === UNCATEGORIZED ? t('notebook.uncategorized') : f.name)
+  const folderName = (id: string | null) => {
+    const f = nb.folders.find((x) => x.id === id)
+    return f ? nameOf(f) : ''
+  }
+  // "Chưa phân loại" luôn đứng đầu.
+  const folders = [...nb.folders].sort((a, b) => Number(b.id === UNCATEGORIZED) - Number(a.id === UNCATEGORIZED))
   const setMatches = (s: VocabSet) =>
     !searching ||
     normalize(s.name).includes(normalize(q)) ||
     (s.folderId !== null && normalize(folderName(s.folderId)).includes(normalize(q))) ||
     s.words.some((w) => wordMatches(w, q))
 
-  const visibleSets = nb.sets.filter(setMatches)
-  const looseSets = visibleSets.filter((s) => s.folderId === null)
-  const savedVisible = !searching || normalize(t('notebook.saved_set')).includes(normalize(q)) || saved.some((w) => wordMatches(w, q))
-  const totalSets = nb.sets.length + 1
+  const totalSets = nb.sets.length
 
-  const toggle = (id: string) =>
-    setOpen((prev) => {
-      const next = new Set(prev)
-      if (next.has(id)) next.delete(id)
-      else next.add(id)
-      return next
-    })
-
+  // Bộ "Chưa phân loại" là nơi lưu mặc định: không đổi tên, không chuyển thư mục.
   const setActions = (s: VocabSet) => [
-    { key: 'rename', label: t('notebook.rename'), icon: setActionIcons.rename, onClick: () => setDialog({ kind: 'rename-set', set: s }) },
-    { key: 'move', label: t('notebook.folder'), icon: setActionIcons.move, onClick: () => setDialog({ kind: 'move-set', set: s }) },
-    { key: 'delete', label: t('notebook.delete'), icon: setActionIcons.delete, danger: true, onClick: () => setDialog({ kind: 'delete-set', set: s }) },
+    ...(s.id === UNCATEGORIZED
+      ? []
+      : [
+          {
+            key: 'rename',
+            label: t('notebook.rename'),
+            icon: setActionIcons.rename,
+            onClick: () => setDialog({ kind: 'rename-set', set: s }),
+          },
+          { key: 'move', label: t('notebook.folder'), icon: setActionIcons.move, onClick: () => setDialog({ kind: 'move-set', set: s }) },
+        ]),
+    {
+      key: 'delete',
+      label: t('notebook.delete'),
+      icon: setActionIcons.delete,
+      danger: true,
+      onClick: () => setDialog({ kind: 'delete-set', set: s }),
+    },
   ]
 
-  const renderSets = (list: VocabSet[]) => (
-    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-      {list.map((s) => (
-        <SetCard
-          key={s.id}
-          to={`/notebook/${s.id}`}
-          name={s.name}
-          wordCount={s.words.length}
-          learned={learnedIn(s.words)}
-          actions={setActions(s)}
-        />
-      ))}
-    </div>
-  )
+  // Thư mục đang xem: 'all' = tất cả bộ, chia nhóm theo thư mục.
+  const current = selected === 'all' ? null : (folders.find((f) => f.id === selected) ?? null)
+  const inFolder = (id: string) => nb.sets.filter((s) => s.folderId === id)
+  const wordsIn = (sets: VocabSet[]) => sets.reduce((n, s) => n + s.words.length, 0)
+  // "Chưa phân loại" luôn ở đầu thư mục của nó; các bộ còn lại theo cách sắp xếp đang chọn.
+  const sortSets = (list: VocabSet[]) =>
+    [...list].sort((a, b) => {
+      const pin = Number(b.id === UNCATEGORIZED) - Number(a.id === UNCATEGORIZED)
+      if (pin) return pin
+      if (sort === 'name') return a.name.localeCompare(b.name, 'vi')
+      if (sort === 'words') return b.words.length - a.words.length
+      if (sort === 'progress') {
+        const p = (x: VocabSet) => (x.words.length ? learnedIn(x.words) / x.words.length : -1)
+        return p(b) - p(a)
+      }
+      return b.createdAt - a.createdAt
+    })
+  const groups = (current ? [current] : folders)
+    .map((f) => ({ folder: f, sets: sortSets(inFolder(f.id).filter(setMatches)) }))
+    .filter((g) => g.sets.length || (!searching && current))
 
   return (
-    <section className="mx-auto max-w-5xl px-4 py-8">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold">{t('tools.notebook')}</h1>
-          <p className="mt-1 text-ink-soft">{t('notebook.subtitle')}</p>
-        </div>
-        <button type="button" onClick={() => setDialog({ kind: 'create' })} className="btn btn-accent px-5 py-3">
+    <Page
+      feature="notebook"
+      size="wide"
+      description={t('notebook.subtitle')}
+      actions={
+        <button type="button" onClick={() => setDialog({ kind: 'create', folderId: current?.id })} className="btn btn-accent px-5 py-3">
           <Plus size={18} />
           {t('notebook.create_set')}
         </button>
-      </div>
-
-      <div className="relative mt-6">
-        <Search size={18} className="absolute top-1/2 left-3.5 -translate-y-1/2 text-ink-muted" />
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={t('notebook.search_placeholder', { count: totalSets })}
-          className="field pl-10"
-        />
-      </div>
-
-      <div className="mt-6 space-y-5">
-        {/* Bộ mặc định: các từ đã bấm ⭐ */}
-        {savedVisible && (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <SetCard
-              to="/notebook/saved"
-              starred
-              name={t('notebook.saved_set')}
-              wordCount={saved.length}
-              learned={learnedIn(saved)}
-              actions={[
-                {
-                  key: 'review',
-                  label: t('notebook.review'),
-                  icon: Play,
-                  onClick: () => saved.length && navigate('/flashcard', { state: { practiceWords: saved } }),
-                },
-              ]}
-            />
+      }
+    >
+      <div className="grid gap-6 md:grid-cols-[15rem_1fr]">
+        {/* Cột trái: thư mục */}
+        <aside className="md:self-start">
+          <div className="box p-2 md:sticky md:top-24">
+            <p className="px-2 pt-1 pb-2 text-xs font-extrabold text-ink-soft uppercase">{t('notebook.folders')}</p>
+            <ul className="flex gap-1 overflow-x-auto pb-1 md:flex-col md:overflow-visible md:pb-0">
+              {[
+                { id: 'all', label: t('notebook.all_sets'), count: nb.sets.length, icon: Library },
+                ...folders.map((f) => ({
+                  id: f.id,
+                  label: nameOf(f),
+                  count: inFolder(f.id).length,
+                  icon: selected === f.id ? FolderOpen : Folder,
+                })),
+              ].map(({ id, label, count, icon: Icon }) => (
+                <li key={id} className="shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setSelected(id)}
+                    aria-current={selected === id}
+                    className={clsx(
+                      'flex w-full items-center gap-2 rounded-2xl px-3 py-2 text-left text-sm font-bold whitespace-nowrap',
+                      selected === id ? 'bg-sand' : 'hover:bg-paper',
+                    )}
+                  >
+                    <Icon size={16} className="shrink-0" />
+                    <span className="min-w-0 flex-1 truncate">{label}</span>
+                    <span className="text-xs font-semibold text-ink-muted tabular-nums">{count}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <button
+              type="button"
+              onClick={() => setDialog({ kind: 'create-folder' })}
+              className="mt-1 flex w-full items-center gap-2 rounded-2xl border-2 border-dashed border-line px-3 py-2 text-sm font-semibold text-ink-soft hover:border-ink hover:text-ink"
+            >
+              <FolderPlus size={16} />
+              {t('notebook.new_folder')}
+            </button>
           </div>
-        )}
+        </aside>
 
-        {/* Thư mục */}
-        {nb.folders.map((f) => {
-          const inFolder = nb.sets.filter((s) => s.folderId === f.id)
-          const shown = inFolder.filter(setMatches)
-          const nameHit = searching && normalize(f.name).includes(normalize(q))
-          if (searching && !shown.length && !nameHit) return null
-          const isOpen = searching ? true : open.has(f.id)
-          const words = inFolder.reduce((n, s) => n + s.words.length, 0)
-          return (
-            <div key={f.id}>
-              <div className="box flex items-stretch">
-                <button
-                  type="button"
-                  onClick={() => toggle(f.id)}
-                  aria-expanded={isOpen}
-                  className="flex min-w-0 flex-1 items-center gap-3 px-4 py-3.5 text-left hover:bg-paper/60"
-                >
-                  <ChevronRight size={18} className={clsx('shrink-0 transition-transform', isOpen && 'rotate-90')} />
-                  {isOpen ? <FolderOpen size={20} className="shrink-0" /> : <Folder size={20} className="shrink-0" />}
-                  <span className="min-w-0 flex-1 truncate font-bold">{f.name}</span>
-                  <span className="shrink-0 text-xs text-ink-soft">
-                    {t('notebook.folder_stats', { sets: inFolder.length, words })}
-                  </span>
-                </button>
-                <button
-                  type="button"
-                  disabled={words === 0}
-                  onClick={() =>
-                    downloadJson(
-                      f.name,
-                      inFolder.flatMap((s) => s.words.map((w) => wordToJson(w, s.name))),
-                    )
-                  }
-                  title={t('notebook.export_folder')}
-                  aria-label={`${t('notebook.export_folder')} ${f.name}`}
-                  className="border-l-2 border-ink px-4 hover:bg-sand disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
-                >
-                  <FileDown size={16} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDialog({ kind: 'edit-folder', folder: f })}
-                  title={t('notebook.edit_folder')}
-                  aria-label={`${t('notebook.edit_folder')} ${f.name}`}
-                  className="border-l-2 border-ink px-4 hover:bg-sand"
-                >
-                  <Pencil size={16} />
-                </button>
-              </div>
-              {isOpen && (
-                <div className="mt-4 ml-3 border-l-2 border-dashed border-line pl-4 sm:ml-6">
-                  {shown.length ? (
-                    renderSets(searching ? shown : inFolder)
-                  ) : (
-                    <div className="flex flex-wrap items-center gap-3 py-2 text-sm text-ink-soft">
-                      {t('notebook.folder_empty')}
+        {/* Cột phải: các bộ */}
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="relative min-w-0 flex-1">
+              <Search size={18} className="absolute top-1/2 left-3.5 -translate-y-1/2 text-ink-muted" />
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t('notebook.search_placeholder', { count: totalSets })}
+                aria-label={t('notebook.search_placeholder', { count: totalSets })}
+                className="field pl-10"
+              />
+            </div>
+            <label className="flex items-center gap-2 text-sm font-semibold">
+              <ArrowDownWideNarrow size={16} className="shrink-0" />
+              <span className="sr-only sm:not-sr-only">{t('notebook.sort_by')}</span>
+              <select value={sort} onChange={(e) => changeSort(e.target.value as SortKey)} className="field w-auto py-2 pr-8 text-sm">
+                {SORT_KEYS.map((k) => (
+                  <option key={k} value={k}>
+                    {t(`notebook.sort_${k}`)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          {groups.map(({ folder: f, sets }) => {
+            const all = inFolder(f.id)
+            return (
+              <section key={f.id} className="mt-6 first:mt-5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h2 className="flex min-w-0 flex-1 items-center gap-2 text-lg font-extrabold">
+                    <Folder size={18} className="shrink-0" />
+                    <span className="truncate">{nameOf(f)}</span>
+                    <span className="text-xs font-semibold text-ink-muted">
+                      {t('notebook.folder_stats', { sets: all.length, words: wordsIn(all) })}
+                    </span>
+                  </h2>
+                  <button
+                    type="button"
+                    disabled={!wordsIn(all)}
+                    onClick={() =>
+                      downloadJson(
+                        nameOf(f),
+                        all.flatMap((s) => s.words.map((w) => wordToJson(w, s.name))),
+                      )
+                    }
+                    title={t('notebook.export_folder')}
+                    aria-label={`${t('notebook.export_folder')} ${nameOf(f)}`}
+                    className="btn p-2"
+                  >
+                    <FileDown size={15} />
+                  </button>
+                  {f.id !== UNCATEGORIZED && (
+                    <button
+                      type="button"
+                      onClick={() => setDialog({ kind: 'edit-folder', folder: f })}
+                      title={t('notebook.edit_folder')}
+                      aria-label={`${t('notebook.edit_folder')} ${nameOf(f)}`}
+                      className="btn p-2"
+                    >
+                      <Pencil size={15} />
+                    </button>
+                  )}
+                </div>
+                <ul className="box mt-3 divide-y-2 divide-line overflow-hidden">
+                  {sets.map((s) => (
+                    <SetCard
+                      key={s.id}
+                      to={`/notebook/${s.id}`}
+                      name={s.id === UNCATEGORIZED ? t('notebook.uncategorized') : s.name}
+                      wordCount={s.words.length}
+                      learned={learnedIn(s.words)}
+                      actions={setActions(s)}
+                    />
+                  ))}
+                  {!sets.length && <li className="px-4 py-5 text-center text-sm text-ink-soft">{t('notebook.folder_empty')}</li>}
+                  {!searching && (
+                    <li>
                       <button
                         type="button"
                         onClick={() => setDialog({ kind: 'create', folderId: f.id })}
-                        className="btn px-3 py-1 text-sm"
+                        className="flex w-full items-center gap-2 px-4 py-2.5 text-sm font-bold text-ink-soft hover:bg-paper hover:text-ink"
                       >
-                        <Plus size={14} />
+                        <Plus size={16} />
                         {t('notebook.create_in_folder')}
                       </button>
-                    </div>
+                    </li>
                   )}
-                </div>
-              )}
-            </div>
-          )
-        })}
+                </ul>
+              </section>
+            )
+          })}
 
-        {/* Bộ chưa xếp thư mục */}
-        {looseSets.length > 0 && (
-          <div>
-            {nb.folders.length > 0 && (
-              <h2 className="mb-3 text-sm font-semibold text-ink-soft uppercase">{t('notebook.loose_sets')}</h2>
-            )}
-            {renderSets(looseSets)}
-          </div>
-        )}
-
-        {searching && !savedVisible && visibleSets.length === 0 && !nb.folders.some((f) => normalize(f.name).includes(normalize(q))) && (
-          <p className="box p-8 text-center text-ink-soft">{t('notebook.no_results')}</p>
-        )}
-        {!searching && nb.sets.length === 0 && nb.folders.length === 0 && (
-          <p className="text-center text-sm text-ink-soft">{t('notebook.first_set_hint')}</p>
-        )}
+          {searching && !groups.length && <p className="box mt-5 p-8 text-center text-ink-soft">{t('notebook.no_results')}</p>}
+          {!searching && !nb.sets.length && <p className="mt-5 text-center text-sm text-ink-soft">{t('notebook.first_set_hint')}</p>}
+        </div>
       </div>
 
       {/* Hộp thoại */}
@@ -226,9 +269,21 @@ export default function Notebook() {
           createFolder={nb.createFolder}
           onClose={close}
           onCreate={(name, folderId) => {
-            const id = nb.createSet(name, folderId)
+            nb.createSet(name, folderId)
             close()
-            navigate(`/notebook/${id}`)
+            // Ở lại danh sách, chuyển sang thư mục chứa bộ vừa tạo.
+            setSelected(folderId ?? UNCATEGORIZED)
+          }}
+        />
+      )}
+      {dialog?.kind === 'create-folder' && (
+        <RenameDialog
+          title={t('notebook.new_folder')}
+          initial=""
+          onClose={close}
+          onSave={(name) => {
+            setSelected(nb.createFolder(name))
+            close()
           }}
         />
       )}
@@ -251,7 +306,6 @@ export default function Notebook() {
           onClose={close}
           onMove={(folderId) => {
             nb.patchSet(dialog.set.id, { folderId })
-            if (folderId) setOpen((p) => new Set(p).add(folderId))
             close()
           }}
         />
@@ -296,10 +350,11 @@ export default function Notebook() {
           onClose={close}
           onConfirm={() => {
             nb.deleteFolder(dialog.folder.id)
+            setSelected('all')
             close()
           }}
         />
       )}
-    </section>
+    </Page>
   )
 }

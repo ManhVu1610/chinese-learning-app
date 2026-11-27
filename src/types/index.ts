@@ -104,6 +104,10 @@ export interface CardState {
   easeFactor: number
   /** số lần đã ôn */
   reps: number
+  /** số lần quên (đánh giá Quên rồi khi thẻ đã thuộc) */
+  lapses?: number
+  /** thời điểm thêm vào bộ thẻ */
+  addedAt?: number
 }
 
 export type Rating = 'again' | 'hard' | 'good' | 'easy'

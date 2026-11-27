@@ -1,19 +1,23 @@
 import clsx from 'clsx'
-import { Volume2 } from 'lucide-react'
-import { useState } from 'react'
+import { ListMusic } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
-  finalGroups,
+  gridFinalGroups,
+  gridInitials,
   initials,
+  neutralSample,
   sampleChar,
+  spell,
   standaloneFinal,
   syllableCount,
-  syllableRows,
   withTone,
 } from '../data/pinyin'
 import { useSpeech } from '../hooks/useSpeech'
+import Page from '../components/layout/Page'
 
 const tones = [1, 2, 3, 4] as const
+const readingOf = Object.fromEntries(initials.map((i) => [i.initial, i.reading]))
 
 /** Âm được chọn: label là chữ hiển thị (vd "iu"), syllable là âm tiết dùng để đọc (vd "you"). */
 interface Selected {
@@ -21,10 +25,22 @@ interface Selected {
   syllable: string
 }
 
+// Màu nền nhẹ cho từng nhóm vần, để dò cột dễ hơn.
+const groupTint: Record<string, string> = { open: '', i: 'bg-sky/25', u: 'bg-sage/25', ü: 'bg-lilac/25' }
+
 export default function Pinyin() {
   const { t } = useTranslation()
   const { speak, supported } = useSpeech()
   const [selected, setSelected] = useState<Selected>({ label: 'ma', syllable: 'ma' })
+  const timers = useRef<number[]>([])
+  const [playing, setPlaying] = useState(0) // thanh đang phát khi "Đọc cả 4 thanh" (0 = không)
+
+  const stopAll = () => {
+    timers.current.forEach(clearTimeout)
+    timers.current = []
+    setPlaying(0)
+  }
+  useEffect(() => stopAll, [])
 
   /**
    * Đọc bằng chữ Hán mẫu (chữ chỉ có một cách đọc), để giọng tiếng Trung phát âm đúng âm và thanh.
@@ -36,128 +52,193 @@ export default function Pinyin() {
   }
 
   const pick = (label: string, syllable = label) => {
+    stopAll()
     setSelected({ label, syllable })
     // Đọc thanh đầu tiên có chữ mẫu.
     const first = tones.map((tn) => withTone(syllable, tn)).find((s) => sampleChar(s))
     if (first) say(first)
   }
 
-  return (
-    <section className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="text-3xl font-bold">{t('tools.pinyin')}</h1>
-      <p className="mt-2 text-ink-soft">{t('pinyin.intro', { count: syllableCount })}</p>
-      {!supported && <p className="mt-3 border-2 border-ink bg-apricot px-3 py-2 text-sm">{t('pinyin.no_speech')}</p>}
+  // Đọc lần lượt các thanh có chữ mẫu: mā → má → mǎ → mà.
+  const playAll = () => {
+    stopAll()
+    const list = tones.filter((tn) => sampleChar(withTone(selected.syllable, tn)))
+    list.forEach((tn, i) => {
+      timers.current.push(
+        window.setTimeout(() => {
+          setPlaying(tn)
+          say(withTone(selected.syllable, tn))
+        }, i * 1100),
+      )
+    })
+    timers.current.push(window.setTimeout(() => setPlaying(0), list.length * 1100))
+  }
 
-      {/* Bảng 4 thanh điệu của âm đang chọn: dính ở trên khi cuộn */}
-      <div className="box sticky top-20 z-10 mt-6 p-4">
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="min-w-24">
-            <p className="text-xs font-semibold text-ink-muted uppercase">{t('pinyin.selected')}</p>
-            <p className="text-3xl font-bold">{selected.label}</p>
-            {selected.label !== selected.syllable && (
-              <p className="text-xs text-ink-soft">{t('pinyin.written_as', { syllable: selected.syllable })}</p>
-            )}
+  const neutral = neutralSample(selected.syllable)
+
+  return (
+    <Page feature="pinyin" size="full" description={t('pinyin.intro', { count: syllableCount })}>
+      {!supported && <p className="mb-4 rounded-xl border-2 border-ink bg-apricot px-3 py-2 text-sm">{t('pinyin.no_speech')}</p>}
+
+      <div>
+        {/* Thanh điệu của âm đang chọn */}
+        <div className="box p-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="min-w-24">
+              <p className="text-xs font-semibold text-ink-muted uppercase">{t('pinyin.selected')}</p>
+              <p className="text-3xl font-bold">{selected.label}</p>
+              {selected.label !== selected.syllable && (
+                <p className="text-xs text-ink-soft">{t('pinyin.written_as', { syllable: selected.syllable })}</p>
+              )}
+            </div>
+            <div className="grid flex-1 grid-cols-2 gap-2.5 sm:grid-cols-5">
+              {tones.map((tone) => {
+                const toned = withTone(selected.syllable, tone)
+                const ch = sampleChar(toned)
+                return (
+                  <button
+                    key={tone}
+                    type="button"
+                    onClick={() => say(toned)}
+                    disabled={!ch}
+                    className={clsx('btn flex-col gap-0.5 py-2', playing === tone && 'bg-sand')}
+                    title={ch ? t('pinyin.tone', { tone }) : t('pinyin.no_sample')}
+                  >
+                    <span className="text-[11px] font-semibold text-ink-soft">{t('pinyin.tone', { tone })}</span>
+                    <span className="text-xl leading-tight font-bold">{toned}</span>
+                    <span className="font-kai text-base leading-tight font-normal text-ink-soft">{ch ?? '—'}</span>
+                  </button>
+                )
+              })}
+              {/* Thanh nhẹ: đọc trong một từ, vì đứng riêng không có thanh nhẹ */}
+              <button
+                type="button"
+                onClick={() => neutral && speak(neutral.w)}
+                disabled={!neutral}
+                className="btn col-span-2 flex-col gap-0.5 py-2 sm:col-span-1"
+                title={neutral ? t('pinyin.neutral_hint', { word: neutral.w }) : t('pinyin.no_neutral')}
+              >
+                <span className="text-[11px] font-semibold text-ink-soft">{t('pinyin.neutral')}</span>
+                <span className="text-xl leading-tight font-bold">{selected.syllable}</span>
+                <span className="text-base leading-tight font-normal text-ink-soft">
+                  {neutral ? (
+                    <>
+                      <span className="font-kai">{neutral.w}</span> <span className="text-xs">{neutral.p}</span>
+                    </>
+                  ) : (
+                    '—'
+                  )}
+                </span>
+              </button>
+            </div>
+            <button type="button" onClick={playAll} className="btn px-4 py-2 text-sm">
+              <ListMusic size={16} />
+              {t('pinyin.play_all')}
+            </button>
           </div>
-          <div className="grid flex-1 grid-cols-4 gap-3">
-            {tones.map((tone) => {
-              const toned = withTone(selected.syllable, tone)
-              const ch = sampleChar(toned)
-              return (
-                <button
-                  key={tone}
-                  type="button"
-                  onClick={() => say(toned)}
-                  disabled={!ch}
-                  className="btn flex-col gap-0.5 py-2"
-                  title={ch ? t('pinyin.tone', { tone }) : t('pinyin.no_sample')}
-                >
-                  <span className="text-xl font-bold">{toned}</span>
-                  <span className="text-xs font-normal text-ink-soft">
-                    {ch ? `${ch} · ${t('pinyin.tone', { tone })}` : t('pinyin.no_sample_short')}
-                  </span>
-                </button>
-              )
-            })}
-          </div>
-          <Volume2 className="hidden text-ink-muted sm:block" size={20} aria-hidden />
         </div>
       </div>
 
-      {/* Phụ âm đầu */}
-      <h2 className="mt-10 text-xl font-bold">{t('pinyin.initials')} 声母</h2>
-      <div className="mt-3 grid grid-cols-4 gap-3 sm:grid-cols-6 lg:grid-cols-12">
-        {initials.map(({ initial, reading }) => (
-          <button
-            key={initial}
-            type="button"
-            onClick={() => pick(initial, reading)}
-            className={clsx('btn py-2 text-lg', selected.label === initial && 'bg-sand')}
-          >
-            {initial}
-          </button>
-        ))}
+      {/* Bảng âm tiết: hàng = phụ âm đầu, cột = vần */}
+      <div className="mt-5 flex flex-wrap items-baseline justify-between gap-2">
+        <h2 className="text-xl font-bold">{t('pinyin.table')}</h2>
+        <p className="text-sm text-ink-soft">{t('pinyin.table_hint')}</p>
       </div>
-
-      {/* Vần */}
-      <h2 className="mt-10 text-xl font-bold">{t('pinyin.finals')} 韵母</h2>
-      <div className="mt-3 space-y-4">
-        {finalGroups.map(({ key, finals }) => (
-          <div key={key}>
-            <p className="mb-2 text-sm font-semibold text-ink-soft">{t(`pinyin.group_${key}`)}</p>
-            <div className="flex flex-wrap gap-2.5">
-              {finals.map((f) => (
-                <button
-                  key={f}
-                  type="button"
-                  onClick={() => pick(f, standaloneFinal[f] ?? f)}
-                  className={clsx('btn min-w-14 px-3 py-1.5', selected.label === f && 'bg-sand')}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Bảng âm tiết đầy đủ */}
-      <h2 className="mt-10 text-xl font-bold">{t('pinyin.table')}</h2>
-      <p className="mt-1 text-sm text-ink-soft">{t('pinyin.table_hint')}</p>
-      <div className="box mt-3 overflow-x-auto">
-        <table className="w-full border-collapse text-sm">
-          <tbody>
-            {syllableRows.map(({ initial, syllables }) => (
-              <tr key={initial || 'zero'} className="border-b-2 border-line last:border-b-0">
+      <div className="box mt-3 max-h-[75vh] overflow-auto">
+        <table className="border-separate border-spacing-0 text-sm">
+          <thead className="sticky top-0 z-20">
+            <tr>
+              <th
+                rowSpan={2}
+                className="sticky left-0 z-30 min-w-14 border-r-2 border-b-2 border-ink bg-brick px-2 py-1.5 whitespace-nowrap text-white"
+              >
+                <span className="font-kai">声母</span>
+                <span className="block font-kai text-[11px] font-normal">韵母 →</span>
+              </th>
+              {gridFinalGroups.map((g) => (
                 <th
-                  scope="row"
-                  className="sticky left-0 w-16 border-r-2 border-ink bg-sand px-3 py-2 text-left text-base font-bold"
+                  key={g.key}
+                  colSpan={g.finals.length}
+                  className={clsx(
+                    'border-b-2 border-l-2 border-line bg-card px-2 py-1 text-left text-xs font-bold text-ink-soft',
+                    groupTint[g.key],
+                  )}
                 >
-                  {initial || '∅'}
+                  {t(`pinyin.grp_${g.key}`)}
                 </th>
-                <td className="px-3 py-2">
-                  <div className="flex flex-wrap gap-1.5">
-                    {syllables.map((s) => (
-                      <button
-                        key={s}
-                        type="button"
-                        onClick={() => pick(s)}
+              ))}
+            </tr>
+            <tr>
+              {gridFinalGroups.map((g) =>
+                g.finals.map((f, i) => (
+                  <th key={f} className={clsx('border-b-2 border-ink bg-sand p-0', i === 0 && 'border-l-2 border-l-line')}>
+                    <button
+                      type="button"
+                      onClick={() => pick(f, f === '-i' ? 'zhi' : (standaloneFinal[f] ?? f))}
+                      className={clsx('w-full px-2 py-1.5 font-bold whitespace-nowrap hover:bg-coral', selected.label === f && 'bg-coral')}
+                    >
+                      {f}
+                    </button>
+                  </th>
+                )),
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {gridInitials.map((ini) => (
+              <tr key={ini || 'zero'} className="group">
+                <th scope="row" className="sticky left-0 z-10 border-r-2 border-ink bg-sand p-0">
+                  {ini ? (
+                    <button
+                      type="button"
+                      onClick={() => pick(ini, readingOf[ini])}
+                      className={clsx('w-full px-3 py-1.5 text-left font-bold hover:bg-coral', selected.label === ini && 'bg-coral')}
+                    >
+                      {ini}
+                    </button>
+                  ) : (
+                    <span className="block px-3 py-1.5 text-left font-bold" title={t('pinyin.zero_initial')}>
+                      ∅
+                    </span>
+                  )}
+                </th>
+                {gridFinalGroups.map((g) =>
+                  g.finals.map((f, i) => {
+                    const s = spell(ini, f)
+                    return (
+                      <td
+                        key={f}
                         className={clsx(
-                          'border-2 px-2 py-0.5 font-medium transition-colors',
-                          selected.label === s
-                            ? 'border-ink bg-sand'
-                            : 'border-transparent hover:border-ink hover:bg-paper',
+                          'border-b border-line p-0 text-center group-hover:bg-paper/70',
+                          groupTint[g.key],
+                          i === 0 && 'border-l-2 border-l-line',
                         )}
                       >
-                        {s}
-                      </button>
-                    ))}
-                  </div>
-                </td>
+                        {s ? (
+                          <button
+                            type="button"
+                            onClick={() => pick(s)}
+                            className={clsx(
+                              'w-full px-1.5 py-1.5 font-semibold whitespace-nowrap hover:bg-coral',
+                              selected.label === s && 'bg-coral ring-2 ring-ink ring-inset',
+                            )}
+                          >
+                            {s}
+                          </button>
+                        ) : (
+                          <span className="block px-1.5 py-1.5 text-ink-muted/60" aria-hidden>
+                            ·
+                          </span>
+                        )}
+                      </td>
+                    )
+                  }),
+                )}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </section>
+    </Page>
   )
 }

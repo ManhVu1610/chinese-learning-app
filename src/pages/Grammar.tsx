@@ -1,16 +1,22 @@
 import clsx from 'clsx'
-import { CheckCircle2, ChevronDown, Circle, Lightbulb, PencilLine, Search, TriangleAlert, Volume2 } from 'lucide-react'
+import { CheckCircle2, ChevronDown, Circle, Layers, Lightbulb, PencilLine, Search, Star, TriangleAlert, Volume2 } from 'lucide-react'
 import { useMemo, useState } from 'react'
+import Pagination from '../components/Pagination'
 import { useTranslation } from 'react-i18next'
 import GrammarPractice from '../components/GrammarPractice'
 import { levelColor } from '../components/WordCard'
 import { normalize } from '../data/dictionary'
 import { grammarPoints } from '../data/grammar'
+import { GRAMMAR_PREFIX, useFlashcard } from '../hooks/useFlashcard'
 import { useGrammarProgress } from '../hooks/useGrammarProgress'
+import { Link } from 'react-router-dom'
 import { useSpeech } from '../hooks/useSpeech'
 import type { HSKLevel } from '../types'
+import Page from '../components/layout/Page'
 
 const levels: HSKLevel[] = [1, 2, 3, 4, 5, 6]
+
+const PAGE_SIZE = 10
 
 export default function Grammar() {
   const { t } = useTranslation()
@@ -19,7 +25,14 @@ export default function Grammar() {
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState<string | null>(null)
   const [practicing, setPracticing] = useState<string | null>(null)
+  // Chia trang danh sách bài, mỗi trang 10 bài.
+  const [page, setPage] = useState(0)
   const { learned, setLearnedFor } = useGrammarProgress()
+  // Flashcard ngữ pháp: thẻ có id "g:" + id bài.
+  const fc = useFlashcard()
+  const inDeck = (id: string) => fc.hasCard(GRAMMAR_PREFIX + id)
+  const deckCount = fc.cards.filter((c) => c.wordId.startsWith(GRAMMAR_PREFIX)).length
+  const toggleCard = (id: string) => (inDeck(id) ? fc.removeCard(GRAMMAR_PREFIX + id) : fc.addIds([GRAMMAR_PREFIX + id]))
 
   const counts = useMemo(() => {
     const c: Record<number, number> = {}
@@ -42,17 +55,30 @@ export default function Grammar() {
     )
   }, [level, query])
 
-  return (
-    <section className="mx-auto max-w-3xl px-4 py-8">
-      <h1 className="text-3xl font-bold">{t('tools.grammar')}</h1>
-      <p className="mt-2 text-ink-soft">{t('grammar.intro', { count: grammarPoints.length })}</p>
+  const pageCount = Math.max(1, Math.ceil(list.length / PAGE_SIZE))
+  const safePage = Math.min(page, pageCount - 1)
 
+  return (
+    <Page
+      feature="grammar"
+      size="narrow"
+      description={t('grammar.intro', { count: grammarPoints.length })}
+      actions={
+        <Link to="/flashcard?tab=grammar" className="btn btn-primary px-4 py-2 text-sm">
+          <Layers size={16} />
+          {t('grammar.open_flashcard', { count: deckCount })}
+        </Link>
+      }
+    >
       <div className="relative mt-5">
         <Search size={18} className="absolute top-1/2 left-3.5 -translate-y-1/2 text-ink-muted" />
         <input
           type="search"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value)
+            setPage(0)
+          }}
           placeholder={t('grammar.search_placeholder')}
           className="field pl-10"
         />
@@ -63,7 +89,10 @@ export default function Grammar() {
           <button
             key={f}
             type="button"
-            onClick={() => setLevel(f)}
+            onClick={() => {
+              setLevel(f)
+              setPage(0)
+            }}
             aria-pressed={level === f}
             className={clsx('btn px-4 py-1.5 text-sm', level === f ? 'bg-sand' : 'text-ink-soft')}
           >
@@ -82,26 +111,44 @@ export default function Grammar() {
       {list.length === 0 && <p className="box mt-4 p-8 text-center text-ink-soft">{t('grammar.no_results')}</p>}
 
       <div className="mt-4 space-y-4">
-        {list.map((g, i) => {
+        {list.slice(safePage * PAGE_SIZE, safePage * PAGE_SIZE + PAGE_SIZE).map((g, idx) => {
+          const i = safePage * PAGE_SIZE + idx
           const isOpen = open === g.id
           return (
-            <div key={g.id} className="box">
-              <button
-                type="button"
-                onClick={() => setOpen(isOpen ? null : g.id)}
-                aria-expanded={isOpen}
-                className={clsx('flex w-full items-center gap-3 px-4 py-3.5 text-left', isOpen && 'border-b-2 border-ink bg-sand')}
-              >
-                <span className="w-7 shrink-0 text-center text-sm font-bold text-ink-muted">
-                  {learned.has(g.id) ? <CheckCircle2 size={20} className="mx-auto text-green-700" aria-label={t('grammar.learned')} /> : i + 1}
-                </span>
-                <span className={clsx('tag shrink-0', levelColor[g.level])}>HSK {g.level}</span>
-                <span className="min-w-0 flex-1">
-                  <span className="block font-bold">{g.title}</span>
-                  {g.structure !== g.title && <span className="block truncate text-sm text-ink-soft">{g.structure}</span>}
-                </span>
-                <ChevronDown size={20} className={clsx('shrink-0 transition-transform', isOpen && 'rotate-180')} />
-              </button>
+            <div key={g.id} className="box overflow-hidden">
+              <div className={clsx('flex items-stretch', isOpen && 'border-b-2 border-ink bg-sand')}>
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : g.id)}
+                  aria-expanded={isOpen}
+                  className="flex min-w-0 flex-1 items-center gap-3 py-3.5 pl-4 text-left"
+                >
+                  <span className="w-7 shrink-0 text-center text-sm font-bold text-ink-muted">
+                    {learned.has(g.id) ? (
+                      <CheckCircle2 size={20} className="mx-auto text-green-700" aria-label={t('grammar.learned')} />
+                    ) : (
+                      i + 1
+                    )}
+                  </span>
+                  <span className={clsx('tag shrink-0', levelColor[g.level])}>HSK {g.level}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-bold">{g.title}</span>
+                    {g.structure !== g.title && <span className="block truncate text-sm text-ink-soft">{g.structure}</span>}
+                  </span>
+                  <ChevronDown size={20} className={clsx('shrink-0 transition-transform', isOpen && 'rotate-180')} />
+                </button>
+                {/* Sao: thêm / bỏ bài này khỏi Flashcard ngữ pháp */}
+                <button
+                  type="button"
+                  onClick={() => toggleCard(g.id)}
+                  aria-pressed={inDeck(g.id)}
+                  title={inDeck(g.id) ? t('grammar.remove_flashcard') : t('grammar.add_flashcard')}
+                  aria-label={`${inDeck(g.id) ? t('grammar.remove_flashcard') : t('grammar.add_flashcard')}: ${g.title}`}
+                  className="shrink-0 px-4 text-ink-soft hover:text-ink"
+                >
+                  <Star size={20} className={clsx(inDeck(g.id) && 'fill-sand text-ink')} />
+                </button>
+              </div>
               {isOpen && (
                 <div className="space-y-4 p-4">
                   <div className="flex flex-wrap gap-2">
@@ -184,6 +231,15 @@ export default function Grammar() {
           )
         })}
       </div>
-    </section>
+      <Pagination
+        page={safePage}
+        pageCount={pageCount}
+        onChange={(p) => {
+          setPage(p)
+          setOpen(null)
+          window.scrollTo({ top: 0 })
+        }}
+      />
+    </Page>
   )
 }

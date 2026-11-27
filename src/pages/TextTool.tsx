@@ -15,6 +15,7 @@ import {
   type Lang,
   type PinyinToken,
 } from '../lib/textTools'
+import Page from '../components/layout/Page'
 
 type Mode = 'pinyin' | 'convert' | 'translate'
 type Dir = 's2t' | 't2s'
@@ -135,12 +136,9 @@ export default function TextTool() {
   const langName = (l: Lang) => t(`text.lang_${l}`)
 
   return (
-    <section className="mx-auto max-w-5xl px-4 py-8">
-      <h1 className="text-3xl font-bold">{t('tools.text')}</h1>
-      <p className="mt-1 text-ink-soft">{t('text.subtitle')}</p>
-
+    <Page feature="text" description={t('text.subtitle')}>
       {/* Chọn chức năng */}
-      <div className="mt-6 inline-flex flex-wrap gap-1 rounded-full border-2 border-ink bg-card p-1 shadow-block-sm" role="tablist">
+      <div className="inline-flex flex-wrap gap-1 rounded-full border-2 border-ink bg-card p-1 shadow-block-sm" role="tablist">
         {(['pinyin', 'convert', 'translate'] as const).map((m) => (
           <button
             key={m}
@@ -200,9 +198,7 @@ export default function TextTool() {
         {/* Ô nhập */}
         <div className="box flex flex-col p-4">
           <div className="mb-2 flex items-center justify-between gap-2">
-            <p className="text-sm font-bold text-ink-soft">
-              {mode === 'translate' ? langName(pair[0]) : t('text.input')}
-            </p>
+            <p className="text-sm font-bold text-ink-soft">{mode === 'translate' ? langName(pair[0]) : t('text.input')}</p>
             <span className="text-xs text-ink-muted tabular-nums">{t('text.chars', { count: [...input].length })}</span>
           </div>
           <textarea
@@ -246,9 +242,7 @@ export default function TextTool() {
         {/* Kết quả */}
         <div className="box flex flex-col p-4">
           <div className="mb-2 flex items-center justify-between gap-2">
-            <p className="text-sm font-bold text-ink-soft">
-              {mode === 'translate' ? langName(pair[1]) : t('text.result')}
-            </p>
+            <p className="text-sm font-bold text-ink-soft">{mode === 'translate' ? langName(pair[1]) : t('text.result')}</p>
             {mode !== 'pinyin' && outTokens.length > 0 && (
               <label className="flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-ink-soft">
                 <input type="checkbox" checked={showPinyin} onChange={(e) => setShowPinyin(e.target.checked)} className="accent-brick" />
@@ -333,6 +327,6 @@ export default function TextTool() {
       </div>
 
       {mode === 'translate' && <p className="mt-4 text-xs text-ink-muted">{t('text.translate_note')}</p>}
-    </section>
+    </Page>
   )
 }

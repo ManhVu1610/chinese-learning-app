@@ -26,7 +26,7 @@
   --shadow-block-sm: 0 3px 0 0 var(--color-ink);
   --shadow-block-lg: 0 8px 0 0 var(--color-ink);
 
-  /* Playpen Sans cho chữ Việt/Anh/pinyin; chữ Hán tự rơi sang App Kai (LXGW WenKai đã cắt gọn) nhờ unicode-range. */
+  /* Playpen Sans cho chữ Việt/Anh/pinyin; chữ Hán tự rơi sang App Kai (AR PL UKai đã cắt gọn) nhờ unicode-range. */
   --font-sans: "Playpen Sans", "App Kai", "KaiTi", "STKaiti", system-ui, sans-serif;
   --font-kai: "App Kai", "KaiTi", "STKaiti", "Kaiti SC", serif;
 

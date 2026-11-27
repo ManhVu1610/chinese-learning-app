@@ -7,10 +7,13 @@ export default function Modal({
   title,
   onClose,
   children,
+  wide,
 }: {
   title: string
   onClose: () => void
   children: ReactNode
+  /** Hộp thoại rộng (nội dung nhiều) */
+  wide?: boolean
 }) {
   const { t } = useTranslation()
   const ref = useRef<HTMLDivElement>(null)
@@ -37,7 +40,7 @@ export default function Modal({
       className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/30 p-4"
       onPointerDown={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div ref={ref} role="dialog" aria-modal="true" aria-label={title} className="box w-full max-w-md p-5 shadow-block-lg">
+      <div ref={ref} role="dialog" aria-modal="true" aria-label={title} className={`box max-h-[90vh] w-full overflow-y-auto p-5 shadow-block-lg ${wide ? 'max-w-2xl' : 'max-w-md'}`}>
         <div className="mb-4 flex items-start justify-between gap-3">
           <h2 className="text-xl font-bold">{title}</h2>
           <button type="button" onClick={onClose} aria-label={t('common.close')} className="p-1 text-ink-soft hover:text-ink">

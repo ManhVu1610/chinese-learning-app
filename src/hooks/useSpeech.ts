@@ -8,8 +8,10 @@ const supported = typeof window !== 'undefined' && 'speechSynthesis' in window
 function pickVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null {
   const mandarin = voices.filter((v) => {
     const lang = v.lang.toLowerCase().replace('_', '-')
-    return (lang === 'zh-cn' || lang === 'cmn-cn' || lang === 'cmn-hans-cn' || lang === 'zh-hans-cn' || lang.startsWith('zh-cn')) &&
+    return (
+      (lang === 'zh-cn' || lang === 'cmn-cn' || lang === 'cmn-hans-cn' || lang === 'zh-hans-cn' || lang.startsWith('zh-cn')) &&
       !/cantonese|粤|yue|hong kong|taiwan/i.test(v.name)
+    )
   })
   if (!mandarin.length) {
     // Không có giọng Trung Quốc đại lục: thử giọng Đài Loan (vẫn là tiếng phổ thông), không dùng tiếng Quảng Đông.
@@ -44,7 +46,7 @@ if (supported) {
 export const currentVoiceName = () => getVoice()?.name ?? null
 
 export function useSpeech() {
-  const speak = (text: string, lang = 'zh-CN') => {
+  const speak = (text: string, lang = 'zh-CN', rate = 0.8) => {
     if (!supported || !text.trim()) return
     const utterance = new SpeechSynthesisUtterance(text)
     const voice = lang === 'zh-CN' ? getVoice() : null
@@ -54,7 +56,7 @@ export function useSpeech() {
     } else {
       utterance.lang = lang
     }
-    utterance.rate = 0.8
+    utterance.rate = rate
     speechSynthesis.cancel()
     speechSynthesis.speak(utterance)
   }

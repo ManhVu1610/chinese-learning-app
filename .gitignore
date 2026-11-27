@@ -31,3 +31,6 @@ dist-ssr/
 
 # Font gốc (không deploy; chỉ dùng để tạo public/fonts bằng scripts/build-fonts.mjs)
 fonts-src/
+
+# Cache tạo bài shadowing (phụ đề, audio tạm)
+.cache/
