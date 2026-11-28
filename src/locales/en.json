@@ -403,7 +403,7 @@
       "vocab": "4,993 HSK 1–6 words with pinyin, meaning, examples and stroke order.",
       "flashcard": "Spaced-repetition review so words stick.",
       "grammar": "341 HSK grammar lessons with learned marks and practice.",
-      "test": "Tests to check your level.",
+      "test": "HSK 4 papers taken on screen like the real test, scored out of 300.",
       "dictionary": "Search by character, pinyin or meaning.",
       "analyze": "Pinyin, meaning, strokes, radicals and compounds of a character.",
       "radicals": "214 radicals plus the 50 most common with examples.",
@@ -789,6 +789,9 @@
     "auto_pause": "Auto-pause",
     "seek": "Seek",
     "volume": "Mute / unmute",
-    "keys_hint": "Shortcuts: Space play/pause · ← → previous/next sentence · Esc exit zoom. Click a sentence to hear it from the start."
+    "keys_hint": "Shortcuts: Space play/pause · ← → previous/next sentence · Esc exit zoom. Click a sentence to hear it from the start.",
+    "yt_blocked": "The video won't play. YouTube may be asking you to “confirm you're not a bot” (often after many downloads from this network). Sign in to YouTube in this browser, or wait a while and reload, or open the video on YouTube.",
+    "yt_no_embed": "The owner doesn't allow this video to be embedded elsewhere. Open it on YouTube.",
+    "yt_open": "Open on YouTube ↗"
   }
 }

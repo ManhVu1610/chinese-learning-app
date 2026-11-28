@@ -403,7 +403,7 @@
       "vocab": "4.993 từ HSK 1–6 kèm pinyin, nghĩa, ví dụ và nét bút.",
       "flashcard": "Ôn thẻ theo lịch lặp lại ngắt quãng để nhớ lâu.",
       "grammar": "341 bài ngữ pháp HSK, đánh dấu đã học và luyện tập.",
-      "test": "Bài kiểm tra đánh giá trình độ.",
+      "test": "Đề thi HSK 4 làm trên máy như thi thật, chấm điểm theo thang 300.",
       "dictionary": "Tìm từ theo chữ Hán, pinyin hoặc nghĩa.",
       "analyze": "Pinyin, nghĩa, số nét, bộ thủ và từ ghép của một chữ.",
       "radicals": "214 bộ thủ và 50 bộ thường dùng kèm ví dụ.",
@@ -789,6 +789,9 @@
     "auto_pause": "Tự ngắt câu",
     "seek": "Tua video",
     "volume": "Bật/tắt tiếng",
-    "keys_hint": "Phím tắt: Space phát/dừng · ← → câu trước/sau · Esc thoát phóng to. Bấm vào một câu để nghe từ đầu câu."
+    "keys_hint": "Phím tắt: Space phát/dừng · ← → câu trước/sau · Esc thoát phóng to. Bấm vào một câu để nghe từ đầu câu.",
+    "yt_blocked": "Video không phát được. YouTube có thể đang bắt “xác nhận bạn không phải robot” (thường do mạng này vừa tải nhiều video). Hãy đăng nhập YouTube trong trình duyệt này, hoặc đợi một lúc rồi tải lại trang, hoặc mở video trên YouTube.",
+    "yt_no_embed": "Chủ video không cho phát nhúng ở trang khác. Hãy mở video trên YouTube.",
+    "yt_open": "Mở trên YouTube ↗"
   }
 }

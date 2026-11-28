@@ -3,7 +3,7 @@ import { BookMarked, BookOpen, ChevronDown, Folder, Layers, Play } from 'lucide-
 import { useMemo, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDictionary } from '../../hooks/useDictionary'
-import Page from '../layout/Page'
+import Page, { type Crumb } from '../layout/Page'
 import SfxToggle from './SfxToggle'
 import { UNCATEGORIZED, useNotebook } from '../../hooks/useNotebook'
 import type { HSKLevel, Word } from '../../types'
@@ -61,6 +61,8 @@ export default function PracticeSetup({
   intro,
   children,
   filter = () => true,
+  crumbs,
+  showCount = true,
   onStart,
 }: {
   /** Khoá tính năng (listening / speaking / typing) để dựng khung trang chung */
@@ -70,6 +72,10 @@ export default function PracticeSetup({
   children?: ReactNode
   /** Chỉ lấy những từ dùng được cho bài này (vd có câu ví dụ) */
   filter?: (w: Word) => boolean
+  /** Trang con sau tên tính năng (vd tên trò chơi) */
+  crumbs?: Crumb[]
+  /** Ẩn mục "Số câu" (trò chơi tự quyết số từ cần dùng) */
+  showCount?: boolean
   onStart: (words: Word[], pool: Word[]) => void
 }) {
   const { t } = useTranslation()
@@ -139,11 +145,11 @@ export default function PracticeSetup({
 
   const start = () => {
     const picked = shuffle(pool)
-    onStart(count ? picked.slice(0, count) : picked, pool)
+    onStart(count && showCount ? picked.slice(0, count) : picked, pool)
   }
 
   return (
-    <Page feature={feature} size="narrow" title={title} description={intro}>
+    <Page feature={feature} size="narrow" title={title} description={intro} crumbs={crumbs}>
       <div className="box space-y-5 p-5">
         <section>
           <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -278,21 +284,23 @@ export default function PracticeSetup({
           </div>
         </section>
 
-        <div>
-          <span className="text-sm font-bold">{t('practice.count')}</span>
-          <div className="mt-1.5 flex flex-wrap gap-2">
-            {COUNTS.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => update({ count: c })}
-                className={clsx('btn px-4 py-1.5 text-sm', count === c && 'bg-sand')}
-              >
-                {c ? c : t('practice.all')}
-              </button>
-            ))}
+        {showCount && (
+          <div>
+            <span className="text-sm font-bold">{t('practice.count')}</span>
+            <div className="mt-1.5 flex flex-wrap gap-2">
+              {COUNTS.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => update({ count: c })}
+                  className={clsx('btn px-4 py-1.5 text-sm', count === c && 'bg-sand')}
+                >
+                  {c ? c : t('practice.all')}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {children}
 

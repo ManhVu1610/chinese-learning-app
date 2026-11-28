@@ -48,10 +48,25 @@ export function useYouTubePlayer(videoId: string) {
   const [ready, setReady] = useState(false)
   const [title, setTitle] = useState('')
   const [duration, setDuration] = useState(0)
+  /** Mã lỗi YouTube (2, 5, 100, 101, 150...) hoặc 'stuck' khi trình phát không chạy được (vd. YouTube bắt "xác nhận không phải robot"). */
+  const [problem, setProblem] = useState<number | 'stuck' | null>(null)
+  const playTimer = useRef<number | undefined>(undefined)
+
+  /** Gọi sau mỗi lần ra lệnh phát: nếu 8 giây sau vẫn không chạy thì báo 'stuck'. */
+  const expectPlay = () => {
+    window.clearTimeout(playTimer.current)
+    playTimer.current = window.setTimeout(() => {
+      const st = playerRef.current?.getPlayerState?.()
+      if (st !== 1 && st !== 2 && st !== 0) setProblem((p) => p ?? 'stuck')
+    }, 8000)
+  }
 
   useEffect(() => {
     let cancelled = false
     setReady(false)
+    setProblem(null)
+    // Trình phát không sẵn sàng sau 15 giây: nhiều khả năng bị YouTube chặn.
+    const readyTimer = window.setTimeout(() => !cancelled && setProblem((p) => p ?? 'stuck'), 15000)
     loadApi().then(() => {
       if (cancelled || !hostRef.current || !window.YT) return
       const mount = document.createElement('div')
@@ -65,19 +80,31 @@ export function useYouTubePlayer(videoId: string) {
         events: {
           onReady: () => {
             if (cancelled) return
+            window.clearTimeout(readyTimer)
             setReady(true)
             setDuration(playerRef.current?.getDuration() ?? 0)
             setTitle(playerRef.current?.getVideoData?.()?.title ?? '')
+          },
+          onStateChange: (e: { data: number }) => {
+            if (e.data === 1) {
+              window.clearTimeout(playTimer.current)
+              setProblem(null)
+            }
+          },
+          onError: (e: { data: number }) => {
+            if (!cancelled) setProblem(e.data)
           },
         },
       })
     })
     return () => {
       cancelled = true
+      window.clearTimeout(readyTimer)
+      window.clearTimeout(playTimer.current)
       playerRef.current?.destroy()
       playerRef.current = null
     }
   }, [videoId])
 
-  return { hostRef, player: playerRef, ready, title, duration }
+  return { hostRef, player: playerRef, ready, title, duration, problem, expectPlay }
 }

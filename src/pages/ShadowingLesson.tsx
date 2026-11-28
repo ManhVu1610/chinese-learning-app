@@ -87,14 +87,15 @@ export default function ShadowingLesson() {
   const live = useRef({ segments, active, loopIdx, autoPause: view.autoPause })
   live.current = { segments, active, loopIdx, autoPause: view.autoPause }
 
-  // Video đã có file bài (do script tạo): lần đầu mở thì tải các câu.
+  // Video đã có file bài (do script tạo): nạp các câu khi chưa có, hoặc khi file bài đã được làm lại (rev đổi).
   useEffect(() => {
-    // Cả bài tự dán link trùng video đã có file bài cũng nạp được (trước đây chỉ bài nhúng sẵn).
-    if (!lesson || lesson.segments.length) return
+    if (!lesson) return
     const info = presetInfo(lesson.videoId)
     if (!info?.count) return
+    if (lesson.segments.length && (lesson.rev ?? 0) === (info.rev ?? 0)) return
     fetchPresetSegments(lesson.videoId).then((d) => {
-      if (d?.segments.length) patch(lesson.id, { segments: d.segments, title: d.title ?? lesson.title, channel: d.channel })
+      if (d?.segments.length)
+        patch(lesson.id, { segments: d.segments, title: d.title ?? lesson.title, channel: d.channel, rev: info.rev ?? 0 })
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lesson?.id, presetsLoaded])
@@ -169,9 +170,16 @@ export default function ShadowingLesson() {
     p()?.seekTo(s, true)
     lastT.current = s
     setTime(s)
-    if (play) p()?.playVideo()
+    if (play) {
+      p()?.playVideo()
+      yt.expectPlay()
+    }
   }
-  const togglePlay = () => (playing ? p()?.pauseVideo() : p()?.playVideo())
+  const togglePlay = () => {
+    if (playing) return p()?.pauseVideo()
+    p()?.playVideo()
+    yt.expectPlay()
+  }
   const goSeg = (i: number) => {
     const s = segments[Math.max(0, Math.min(segments.length - 1, i))]
     if (!s) return
@@ -380,6 +388,23 @@ export default function ShadowingLesson() {
                 </div>
               )}
             </div>
+            {yt.problem !== null && lesson.videoId && (
+              <div className="box border-l-4 border-brick px-3 py-2 text-sm">
+                <p className="font-semibold">
+                  {yt.problem === 101 || yt.problem === 150 || yt.problem === 152
+                    ? t('shadowing.yt_no_embed')
+                    : t('shadowing.yt_blocked')}
+                </p>
+                <a
+                  href={`https://www.youtube.com/watch?v=${lesson.videoId}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-1 inline-block font-semibold text-brick underline"
+                >
+                  {t('shadowing.yt_open')}
+                </a>
+              </div>
+            )}
             {progress}
             {controls}
             {!zoom && <p className="text-xs text-ink-muted">{t('shadowing.keys_hint')}</p>}

@@ -1,0 +1,833 @@
+# Nghĩa tiếng Anh cho trò Xếp từ: "#số" = tên chủ đề, còn lại = chữ Hán<TAB>nghĩa. Từ có sẵn meaning_en trong vocabulary.json không cần ghi.
+#1	Greetings & forms of address
+#2	Pronouns & demonstratives
+#3	Basic numbers
+#4	Family & relatives
+#5	Time & dates
+#6	Parts of the day
+#7	Food & drinks
+#8	School & study
+#9	Everyday objects
+#10	Transport & getting around
+#11	Directions & position
+#12	Everyday verbs
+#13	Interaction & shopping
+#14	Basic adjectives
+#15	Weather & nature
+#16	Common adverbs & particles
+#17	Measure words & useful words
+#18	Extended family
+#19	Colours
+#20	Body & health
+#21	Sports & exercise
+#22	Travel & hotels
+#23	Food & tableware
+#24	Time & frequency
+#25	Direction & distance
+#26	School & exams
+#27	Opposite adjectives
+#28	Feelings & states
+#29	Weather & nature 2
+#30	Daily activities
+#31	Work & office basics
+#32	Social etiquette
+#33	Result & direction verbs
+#34	Conjunctions & degree adverbs
+#35	Home & furniture
+#36	Shopping & payment
+#37	Appearance & personality
+#38	Hobbies & entertainment
+#39	Jobs & careers
+#40	Health & hospital
+#41	Flavours & food
+#42	Travel & geography
+#43	Study & language
+#44	Emotions & mind
+#45	Time & schedules
+#46	Nature & environment
+#47	Social relations & family
+#48	Technology & communication
+#49	Everyday actions
+#50	Qualities & evaluation
+#51	Complex-sentence conjunctions
+#52	Business & trade
+#53	Recruitment & career
+#54	Love & marriage
+#55	Education & research
+#56	Law & rules
+#57	Environment & ecology
+#58	Traffic & city
+#59	Personality & character
+#60	Art & literature
+#61	Health & lifestyle
+#62	Thinking & decisions
+#63	Communication & manners
+#64	Daily life & items
+#65	Post & personal finance
+#66	States & degrees
+#67	Abstract verbs
+#68	Advanced conjunctions & adverbs
+#69	Economy & finance
+#70	Business management
+#71	Modern science & technology
+#72	Society & livelihood
+#73	Politics & diplomacy
+#74	Psychology & deep emotions
+#75	Culture & customs
+#76	Medicine & health care
+#77	Architecture & real estate
+#78	Geography & resources
+#79	Media & journalism
+#80	Law & crime
+#81	Agriculture & food
+#82	Logic & argument
+#83	Subtle qualities & states
+#84	Formal & academic verbs
+#85	Macroeconomics & advanced finance
+#86	Politics, power & institutions
+#87	Philosophy & thought
+#88	In-depth psychology
+#89	Justice & litigation
+#90	Space science & physics
+#91	Biology & medical science
+#92	Literature & aesthetics
+#93	Environment & climate crisis
+#94	Military & security
+#95	Industry & manufacturing
+#96	Subtle social relations
+#97	Common four-character idioms
+#98	Advanced four-character idioms
+#99	Advanced descriptive adjectives
+#100	Advanced literary verbs
+#101	Tens & bigger numbers
+#102	Days of the week
+#103	Months of the year
+#104	Specific times & dates
+#105	Daily meals
+#106	Drinks & snacks
+#107	Fruit & common food
+#108	Classroom activities
+#109	Basic stationery
+#110	At home & rooms
+#111	Basic clothes & accessories
+#112	Places in the city
+#113	Basic transport
+#114	Detailed directions
+#115	People & social terms
+#116	Countries & languages
+#117	Simple jobs
+#118	Everyday leisure
+#119	Buying, selling & money
+#120	Seeing a doctor
+#121	Simple weather
+#122	Familiar animals
+#123	Trees & flowers
+#124	Daily verb phrases
+#125	Describing things
+#126	Basic degree & frequency words
+#127	Basic question words
+#128	Common measure words 1
+#129	Common measure words 2
+#130	Everyday polite phrases
+#131	Phone calls
+#132	Basic particle structures
+#133	Short yes & no
+#134	Making appointments
+#135	Asking for directions
+#136	Trains & planes
+#137	Booking a hotel
+#138	Ordering at a restaurant
+#139	Taste & texture
+#140	Buying clothes & shoes
+你好	hello
+您好	hello (polite)
+这	this
+那	that
+五	five
+年	year
+下午	afternoon
+饭馆	restaurant
+汉字	Chinese character
+电话	telephone
+车	car, vehicle
+这儿	here
+那儿	there
+叫	to call; to be called
+听见	to hear
+狗	dog
+没	not have; did not
+请问	excuse me, may I ask
+黄	yellow
+灰	grey
+咖啡色	coffee brown
+粉色	pink
+头	head
+每天	every day
+有时候	sometimes
+外面	outside
+下雪	to snow
+风	wind
+春天	spring
+夏天	summer
+秋天	autumn
+冬天	winter
+帮	to help
+下班	to finish work
+书包	school bag
+门卫	gatekeeper, guard
+祝	to wish
+因为	because
+所以	so, therefore
+但是	but
+虽然	although
+房子	house
+卧室	bedroom
+商场	shopping mall
+画画	to draw, to paint
+照相	to take photos
+相机	camera
+牙	tooth
+暑假	summer vacation
+星星	star
+河	river
+湖	lake
+海	sea
+动物	animal
+不但	not only
+而且	but also
+面试	job interview
+简历	résumé, CV
+效率	efficiency
+吵架	to quarrel
+遵守	to obey, to comply
+法院	court of law
+垃圾	rubbish, garbage
+能源	energy
+十字路口	crossroads
+细心	careful
+传统	tradition
+营养	nutrition
+熬夜	to stay up late
+思考	to think deeply
+沟通	to communicate
+袋子	bag
+存款	savings deposit
+取款	to withdraw money
+发票	invoice
+收据	receipt
+明显	obvious
+彻底	thorough
+失去	to lose
+包括	to include
+属于	to belong to
+难怪	no wonder
+投资	to invest
+股票	stock, share
+市场	market
+消费	consumption
+利润	profit
+成本	cost
+贸易	trade
+进口	to import
+出口	to export; exit
+破产	bankruptcy
+企业	enterprise
+总裁	CEO, president
+部门	department
+员工	employee
+合同	contract
+谈判	negotiation
+合作	cooperation
+领导	leader
+制度	system, regulations
+辞职	to resign
+科技	science and technology
+发明	invention
+创造	to create
+软件	software
+硬件	hardware
+数据	data
+网络	network
+人工智能	artificial intelligence
+电池	battery
+信号	signal
+人口	population
+现象	phenomenon
+趋势	trend
+矛盾	contradiction
+公平	fair
+福利	welfare
+退休	to retire
+失业	unemployment
+慈善	charity
+政府	government
+政策	policy
+总统	president
+外交	diplomacy
+和平	peace
+战争	war
+改革	reform
+独立	independence
+统一	unification
+心理	psychology
+情绪	mood, emotion
+焦虑	anxious
+抑郁	depressed
+寂寞	lonely
+委屈	feeling wronged
+满足	satisfied
+珍惜	to cherish
+风俗	custom
+春节	Spring Festival
+礼仪	etiquette
+祖先	ancestors
+遗产	heritage
+宗教	religion
+哲学	philosophy
+道德	morality
+价值观	values
+治疗	treatment
+手术	surgery
+症状	symptom
+传染	to infect
+病毒	virus
+预防	to prevent
+恢复	to recover
+心理咨询	counselling
+失眠	insomnia
+过敏	allergy
+建筑	architecture
+房产	real estate
+装修	to renovate, interior decoration
+面积	area
+位置	location
+设施	facilities
+小区	residential area
+物业	property management
+租金	rent
+贷款	loan
+地理	geography
+资源	resources
+沙漠	desert
+草原	grassland
+岛屿	island
+地震	earthquake
+洪水	flood
+灾害	disaster
+回收	to recycle
+媒体	media
+采访	to interview (press)
+报道	to report (news)
+出版	to publish
+编辑	editor; to edit
+评论	comment, review
+传播	to spread
+隐私	privacy
+舆论	public opinion
+犯罪	crime
+证据	evidence
+赔偿	compensation
+罚款	fine
+欺骗	to deceive
+偷	to steal
+抢	to rob
+权利	rights
+义务	duty
+农业	agriculture
+农民	farmer
+土地	land
+收获	harvest
+粮食	grain, food
+蔬菜	vegetables
+加工	processing
+口味	taste
+烹饪	cooking
+逻辑	logic
+分析	analysis
+推理	reasoning
+结论	conclusion
+观点	viewpoint
+立场	standpoint
+说服	to persuade
+深刻	profound
+微妙	subtle
+辉煌	glorious
+朴素	simple, plain
+奢华	luxurious
+敏锐	sharp, keen
+犹豫	hesitant
+坚定	firm
+客观	objective
+主观	subjective
+促进	to promote
+改善	to improve
+维持	to maintain
+面临	to face
+承担	to bear, to undertake
+忽视	to neglect
+发挥	to bring into play
+体现	to embody
+克服	to overcome
+通货膨胀	inflation
+汇率	exchange rate
+垄断	monopoly
+财政	public finance
+税收	tax revenue
+债务	debt
+抵押	mortgage
+补贴	subsidy
+泡沫	bubble (economic)
+萧条	recession
+政权	regime
+主权	sovereignty
+宪法	constitution
+民主	democracy
+腐败	corruption
+官僚	bureaucrat
+制裁	sanctions
+妥协	compromise
+颠覆	to overthrow
+庇护	asylum, shelter
+唯物主义	materialism
+唯心主义	idealism
+辩证	dialectical
+伦理	ethics
+信仰	faith, belief
+境界	state, realm
+顿悟	sudden enlightenment
+宿命	fate
+虚无	nothingness
+永恒	eternal
+潜意识	subconscious
+偏见	prejudice
+歧视	discrimination
+嫉妒	jealous
+虚荣	vanity
+自卑	low self-esteem
+排斥	to reject
+压抑	repressed
+崩溃	breakdown
+宽容	tolerant
+诉讼	lawsuit
+辩护	to defend (in court)
+判决	verdict
+嫌疑	suspicion
+拘留	to detain
+监狱	prison
+贿赂	bribery
+走私	smuggling
+侵犯	to violate
+合法	legal
+宇宙	universe
+星球	planet
+引力	gravity
+辐射	radiation
+磁场	magnetic field
+粒子	particle
+分子	molecule
+轨道	orbit
+探测	to probe, to explore
+浩瀚	vast
+基因	gene
+细胞	cell
+进化	evolution
+繁殖	to reproduce
+免疫	immunity
+激素	hormone
+癌症	cancer
+麻醉	anaesthesia
+解剖	anatomy, dissection
+遗传	heredity
+题材	subject matter
+隐喻	metaphor
+讽刺	satire
+抒情	lyrical
+意境	artistic conception
+韵味	lingering charm
+雕塑	sculpture
+书法	calligraphy
+鉴赏	appreciation (of art)
+璀璨	resplendent
+温室效应	greenhouse effect
+冰川	glacier
+干旱	drought
+荒漠化	desertification
+濒危	endangered
+灭绝	extinct
+生态平衡	ecological balance
+排放	emissions
+耗尽	to exhaust, to use up
+可持续	sustainable
+军事	military
+武器	weapon
+战略	strategy
+战术	tactics
+防御	defence
+侵略	invasion
+武装	armed forces
+演习	military exercise
+情报	intelligence
+恐怖主义	terrorism
+机械	machinery
+自动化	automation
+精密	precise
+零件	part, component
+模具	mould
+维修	maintenance, repair
+故障	breakdown, fault
+专利	patent
+革新	innovation
+淘汰	to eliminate
+敷衍	perfunctory
+挑剔	picky
+迁就	to accommodate, to give in
+逢迎	to flatter
+默契	tacit understanding
+隔阂	estrangement
+恩怨	grievances
+提携	to mentor
+揣摩	to try to fathom
+豁达	open-minded
+一举两得	kill two birds with one stone
+画蛇添足	gild the lily
+守株待兔	wait for gains without effort
+自相矛盾	self-contradictory
+井底之蛙	frog in a well (narrow view)
+对牛弹琴	cast pearls before swine
+亡羊补牢	better late than never
+胸有成竹	have a well-thought-out plan
+拔苗助长	haste makes waste
+狐假虎威	borrow another's power to bully
+潜移默化	subtle, gradual influence
+循序渐进	step by step
+锲而不舍	persevere
+精益求精	strive for perfection
+实事求是	seek truth from facts
+迫不及待	can't wait
+莫名其妙	baffling
+肆无忌惮	unscrupulous
+根深蒂固	deep-rooted
+焕然一新	brand new look
+荒谬	absurd
+恶劣	bad, harsh
+崎岖	rugged
+匮乏	scarce
+臃肿	bloated
+沧桑	vicissitudes
+蓬勃	vigorous
+晦涩	obscure
+阐述	to expound
+探讨	to explore, to discuss
+蕴含	to contain, to imply
+孕育	to breed, to nurture
+遏制	to curb
+肆虐	to wreak havoc
+凋零	to wither
+弥漫	to pervade
+蜕变	to transform
+凝聚	to unite, to condense
+十一	eleven
+十二	twelve
+二十	twenty
+三十	thirty
+五十	fifty
+一百	one hundred
+第二	second
+星期一	Monday
+星期二	Tuesday
+星期三	Wednesday
+星期四	Thursday
+星期五	Friday
+星期六	Saturday
+星期日	Sunday
+星期天	Sunday (spoken)
+上个星期	last week
+下个星期	next week
+一月	January
+二月	February
+三月	March
+四月	April
+五月	May
+六月	June
+七月	July
+八月	August
+九月	September
+十月	October
+十一月	November
+十二月	December
+今年	this year
+明年	next year
+这个月	this month
+上个月	last month
+下个月	next month
+前天	the day before yesterday
+后天	the day after tomorrow
+中午饭	lunch
+早饭	breakfast
+午饭	lunch
+晚饭	dinner
+吃饭	to eat a meal
+喝水	to drink water
+喝茶	to drink tea
+做饭	to cook
+吃菜	to eat dishes
+买菜	to buy groceries
+苹果汁	apple juice
+开水	boiled water
+冷水	cold water
+热水	hot water
+白开水	plain boiled water
+绿茶	green tea
+红茶	black tea
+奶茶	milk tea
+橘子	tangerine
+梨	pear
+草莓	strawberry
+土豆	potato
+白菜	Chinese cabbage
+鸡肉	chicken (meat)
+牛肉	beef
+上课	to start class
+下课	class is over
+看书	to read a book
+写字	to write characters
+听写	dictation
+问问题	to ask a question
+学汉语	to study Chinese
+说汉语	to speak Chinese
+读课文	to read the text
+课本	textbook
+汉语书	Chinese book
+本子	notebook
+笔	pen
+钢笔	fountain pen
+圆珠笔	ballpoint pen
+纸	paper
+尺子	ruler
+回家	to go home
+在家	at home
+床	bed
+开门	to open the door
+关门	to close the door
+开灯	to turn on the light
+关灯	to turn off the light
+买衣服	to buy clothes
+穿衣服	to put on clothes
+鞋子	shoes
+大衣	overcoat
+毛衣	sweater
+书店	bookshop
+车站	station, bus stop
+飞机场	airport
+电影院	cinema
+坐车	to take a car or bus
+坐飞机	to fly by plane
+坐火车	to take the train
+坐出租车	to take a taxi
+开车	to drive
+走路	to walk
+回来	to come back
+回去	to go back
+进来	to come in
+出去	to go out
+上面	above, on top
+下面	below
+里面	inside
+左面	left side
+右面	right side
+东边	east side
+南边	south side
+西边	west side
+北边	north side
+男人	man
+女人	woman
+男孩	boy
+女孩	girl
+好朋友	good friend
+中国人	Chinese person
+越南人	Vietnamese person
+美国人	American
+英国人	British person
+外国人	foreigner
+越南	Vietnam
+美国	USA
+英国	UK
+法国	France
+日本	Japan
+韩国	South Korea
+英语	English (language)
+越南语	Vietnamese (language)
+外语	foreign language
+工人	worker
+画家	painter
+看电视	to watch TV
+看电影	to watch a film
+听音乐	to listen to music
+玩电脑	to play on the computer
+喝咖啡	to drink coffee
+去商店	to go to the shop
+去公园	to go to the park
+多少钱	how much money
+一块钱	one yuan
+买东西	to go shopping
+卖东西	to sell things
+找钱	to give change
+看医生	to see a doctor
+去医院	to go to hospital
+吃药	to take medicine
+喝热水	to drink hot water
+头疼	headache
+肚子疼	stomachache
+牙疼	toothache
+不舒服	unwell
+天气好	nice weather
+天气冷	cold weather
+天气热	hot weather
+晴天	sunny day
+阴天	cloudy day
+雨天	rainy day
+下大雨	to rain heavily
+下小雨	to drizzle
+刮大风	strong wind blows
+小猫	kitten
+小狗	puppy
+小鸟	little bird
+金鱼	goldfish
+兔子	rabbit
+猴子	monkey
+大象	elephant
+大树	big tree
+小草	young grass
+红花	red flower
+白花	white flower
+桃花	peach blossom
+菊花	chrysanthemum
+玫瑰花	rose
+山	mountain
+洗手	to wash hands
+洗脸	to wash face
+洗衣服	to wash clothes
+喝汤	to have soup
+写信	to write a letter
+看报	to read the newspaper
+听歌	to listen to songs
+学写字	to learn to write
+爱学习	to love learning
+很大	very big
+很小	very small
+很多	very many
+很少	very few
+很好	very good
+很坏	very bad
+很长	very long
+很短	very short
+很高	very tall, very high
+很低	very low
+有点儿	a bit
+天天	every day
+年年	every year
+有时	sometimes
+常常	often
+哪个	which one
+哪里	where
+几岁	how old
+一个人	one person
+一本书	a book
+一杯水	a glass of water
+一碗米饭	a bowl of rice
+一件衣服	a piece of clothing
+一条裤子	a pair of trousers
+一双鞋	a pair of shoes
+一张桌子	a table
+一把椅子	a chair
+一辆车	a car
+一只猫	a cat
+一条狗	a dog
+一朵花	a flower
+一棵树	a tree
+一家商店	a shop
+一所学校	a school
+一位老师	a teacher (polite)
+一封信	a letter
+一部电影	a film
+一首曲子	a piece of music
+请进	please come in
+请坐	please sit down
+请喝茶	please have some tea
+谢谢你	thank you
+非常感谢	thank you very much
+不好意思	sorry, excuse me
+慢走	take care (seeing a guest off)
+欢迎光临	welcome
+请问谁在说话	may I ask who is speaking
+我找王老师	I'm looking for Teacher Wang
+他不在	he is not here
+等一下	wait a moment
+挂电话	to hang up
+接电话	to answer the phone
+电话号码	phone number
+手机号码	mobile number
+我的书	my book
+爸爸的车	Dad's car
+漂亮的衣服	pretty clothes
+好吃的菜	tasty dishes
+去了	went
+吃了	ate
+看了	watched, saw
+买了	bought
+来了	came; here it comes
+好了	done, OK
+是的	yes, that's right
+不是	no, it isn't
+不对	not right
+不行	not OK
+不可以	not allowed
+有的	some
+有空	to be free
+没空	to be busy
+门口	doorway, entrance
+早到	to arrive early
+等一会儿	wait a while
+怎么走	how to get there
+一直走	go straight
+往左拐	turn left
+往右拐	turn right
+过马路	to cross the road
+红绿灯	traffic lights
+路口	intersection
+买票	to buy a ticket
+退票	to return a ticket
+火车票	train ticket
+飞机票	plane ticket
+站台	platform
+登机口	boarding gate
+行李	luggage
+预订	to book
+单人间	single room
+双人间	double room
+房卡	room key card
+前台	front desk
+退房	to check out
+登记	to register, to check in
+身份证	ID card
+热水器	water heater
+点菜	to order food
+特色菜	speciality dish
+炒饭	fried rice
+买单	to pay the bill
+打包	to take away
+臭	smelly
+油腻	greasy
+清淡	light (food)
+淡	bland
+熟	cooked, ripe
+生	raw
+试衣间	fitting room
+试穿	to try on
+尺码	size
+大号	large (L)
+中号	medium (M)
+小号	small (S)
+长短	length
+样式	style
+退换	to return or exchange

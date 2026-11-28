@@ -28,6 +28,7 @@ const Shadowing = lazy(() => import('./pages/Shadowing'))
 const ShadowingLesson = lazy(() => import('./pages/ShadowingLesson'))
 const Notes = lazy(() => import('./pages/Notes'))
 const StrokeOrder = lazy(() => import('./pages/StrokeOrder'))
+const Games = lazy(() => import('./pages/Games'))
 const ComingSoon = lazy(() => import('./components/ComingSoon'))
 
 function PageLoading() {
@@ -45,7 +46,7 @@ export default function App() {
               <Route index element={<Home />} />
               <Route path="vocabulary" element={<Vocabulary />} />
               <Route path="flashcard" element={<Flashcard />} />
-              <Route path="test" element={<Test />} />
+              <Route path="test/*" element={<Test />} />
               <Route path="login" element={<Login />} />
               <Route path="pinyin" element={<ComingSoon feature="pinyin" />} />
               <Route path="radicals" element={<Radicals />} />
@@ -63,7 +64,8 @@ export default function App() {
               <Route path="mixed" element={<Mixed />} />
               <Route path="notes" element={<Notes />} />
               <Route path="strokes" element={<StrokeOrder />} />
-              <Route path="games" element={<ComingSoon feature="games" />} />
+              <Route path="games" element={<Games />} />
+              <Route path="games/:game" element={<Games />} />
               <Route path="stories" element={<ComingSoon feature="stories" />} />
               <Route path="shadowing" element={<Shadowing />} />
               <Route path="shadowing/:id" element={<ShadowingLesson />} />

@@ -42,6 +42,9 @@ if (supported) {
   getVoice()
 }
 
+/** Giọng tiếng Trung phổ thông tốt nhất trên máy (dùng cho đọc lời thoại đề thi). */
+export const getMandarinVoice = () => getVoice()
+
 /** Tên giọng đang dùng (để hiển thị / kiểm tra). */
 export const currentVoiceName = () => getVoice()?.name ?? null
 

@@ -1,0 +1,268 @@
+[
+ {
+  "id": "hsk4-01",
+  "level": 4,
+  "number": 1,
+  "title": "HSK 4 SAMPLE QUIZ",
+  "official": false,
+  "partial": false,
+  "source": "Mandarin Zone (mandarinzone.com)",
+  "audio": "file",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-01.json"
+ },
+ {
+  "id": "hsk4-02",
+  "level": 4,
+  "number": 2,
+  "title": "HSK 4 Online Mock Test Series 2",
+  "official": false,
+  "partial": false,
+  "source": "Mandarin Zone (mandarinzone.com)",
+  "audio": "file",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-02.json"
+ },
+ {
+  "id": "hsk4-03",
+  "level": 4,
+  "number": 3,
+  "title": "HSK 4 Online Mock Exam H41002",
+  "code": "H41002",
+  "official": false,
+  "partial": false,
+  "source": "Mandarin Zone (mandarinzone.com)",
+  "audio": "file",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-03.json"
+ },
+ {
+  "id": "hsk4-04",
+  "level": 4,
+  "number": 4,
+  "title": "HSK 4 Online Mock Exam Series 4",
+  "official": false,
+  "partial": true,
+  "source": "Mandarin Zone (mandarinzone.com)",
+  "audio": "file",
+  "counts": {
+   "listening": 44,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-04.json"
+ },
+ {
+  "id": "hsk4-08",
+  "level": 4,
+  "number": 8,
+  "title": "HSK 4 Online Mock Test Series 8 Based HSK41008",
+  "official": false,
+  "partial": false,
+  "source": "Mandarin Zone (mandarinzone.com)",
+  "audio": "file",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-08.json"
+ },
+ {
+  "id": "hsk4-09",
+  "level": 4,
+  "number": 9,
+  "title": "HSK 4 Online Mock Test Series 9 Based HSK41009",
+  "official": false,
+  "partial": false,
+  "source": "Mandarin Zone (mandarinzone.com)",
+  "audio": "file",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-09.json"
+ },
+ {
+  "id": "hsk4-10",
+  "level": 4,
+  "number": 10,
+  "title": "HSK 4 Online Mock Test Series 10(H41010)",
+  "code": "H41010",
+  "official": false,
+  "partial": false,
+  "source": "Mandarin Zone (mandarinzone.com)",
+  "audio": "file",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-10.json"
+ },
+ {
+  "id": "hsk4-11",
+  "level": 4,
+  "number": 11,
+  "title": "Free HSK 4 Online Mock Test Series 11(H41111)",
+  "code": "H41111",
+  "official": false,
+  "partial": false,
+  "source": "Mandarin Zone (mandarinzone.com)",
+  "audio": "file",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-11.json"
+ },
+ {
+  "id": "hsk4-12",
+  "level": 4,
+  "number": 12,
+  "title": "Free HSK 4 Online Mock Test Series 12",
+  "official": false,
+  "partial": false,
+  "source": "Mandarin Zone (mandarinzone.com)",
+  "audio": "file",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-12.json"
+ },
+ {
+  "id": "hsk4-13",
+  "level": 4,
+  "number": 13,
+  "title": "HSK 4 Official Exam H41220",
+  "code": "H41220",
+  "official": true,
+  "partial": false,
+  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41220 (国家汉办/孔子学院总部)",
+  "audio": "tts",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-13.json"
+ },
+ {
+  "id": "hsk4-14",
+  "level": 4,
+  "number": 14,
+  "title": "HSK 4 Official Exam H41221",
+  "code": "H41221",
+  "official": true,
+  "partial": false,
+  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41221 (国家汉办/孔子学院总部)",
+  "audio": "tts",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-14.json"
+ },
+ {
+  "id": "hsk4-15",
+  "level": 4,
+  "number": 15,
+  "title": "HSK 4 Official Exam H41327",
+  "code": "H41327",
+  "official": true,
+  "partial": false,
+  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41327 (国家汉办/孔子学院总部)",
+  "audio": "tts",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-15.json"
+ },
+ {
+  "id": "hsk4-16",
+  "level": 4,
+  "number": 16,
+  "title": "HSK 4 Official Exam H41328",
+  "code": "H41328",
+  "official": true,
+  "partial": false,
+  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41328 (国家汉办/孔子学院总部)",
+  "audio": "tts",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-16.json"
+ },
+ {
+  "id": "hsk4-17",
+  "level": 4,
+  "number": 17,
+  "title": "HSK 4 Official Exam H41329",
+  "code": "H41329",
+  "official": true,
+  "partial": false,
+  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41329 (国家汉办/孔子学院总部)",
+  "audio": "tts",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-17.json"
+ },
+ {
+  "id": "hsk4-18",
+  "level": 4,
+  "number": 18,
+  "title": "HSK 4 Official Exam H41001",
+  "code": "H41001",
+  "official": true,
+  "partial": false,
+  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41001 (国家汉办/孔子学院总部)",
+  "audio": "tts",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-18.json"
+ },
+ {
+  "id": "hsk4-19",
+  "level": 4,
+  "number": 19,
+  "title": "HSK 4 Official Exam H41330",
+  "code": "H41330",
+  "official": true,
+  "partial": false,
+  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41330 (国家汉办/孔子学院总部)",
+  "audio": "tts",
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "file": "/hsk-exams/hsk4/test-19.json"
+ }
+]

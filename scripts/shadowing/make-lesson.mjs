@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // Tạo bài Shadowing từ một link YouTube, tự động hết:
-//   phụ đề tiếng Trung (yt-dlp) → nếu không có: nghe-chép bằng faster-whisper → tách câu → giản thể → dịch Việt → file bài.
+//   phụ đề tiếng Trung dạng chữ (yt-dlp) → tách câu → giản thể → dịch Việt → file bài. Không có phụ đề chữ → báo CẦN OCR (phụ đề in trên hình).
 // Kết quả: public/shadowing/<videoId>.json + cập nhật public/shadowing/index.json (app tự hiện ở "Video có sẵn").
 //
 // Dùng:
-//   node scripts/shadowing/make-lesson.mjs <link-youtube> [--no-translate] [--whisper] [--model small]
+//   node scripts/shadowing/make-lesson.mjs <link-youtube> [--no-translate] [--title "…"] [--playlist "…"]
 //   node scripts/shadowing/make-lesson.mjs --apply <videoId>      (ghép bản dịch từ .cache/shadowing/<id>.vi.txt)
 // In ra đúng MỘT dòng kết quả (để tốn ít token khi Claude chạy).
 import { execFileSync, spawnSync } from 'node:child_process'
@@ -69,15 +69,9 @@ function readJson3(file) {
   return cues
 }
 
-// ---------- 2. Nghe-chép khi không có phụ đề ----------
-function whisper(cmd, url, id) {
-  if (!has('python', ['-c', 'import faster_whisper'])) die('video không có phụ đề tiếng Trung và chưa cài faster-whisper (pip install faster-whisper).')
-  const audio = join(CACHE, `${id}.audio`)
-  if (!readdirSync(CACHE).some((f) => f.startsWith(`${id}.audio`))) run(cmd, ['-f', 'bestaudio', '-o', `${audio}.%(ext)s`, '--no-playlist', url])
-  const file = join(CACHE, readdirSync(CACHE).find((f) => f.startsWith(`${id}.audio`)))
-  const out = run(['python'], [join(ROOT, 'scripts', 'shadowing', 'transcribe.py'), file, opt('--model', 'small')])
-  return JSON.parse(out)
-}
+// ---------- 2. Không có phụ đề dạng chữ ----------
+// Người dùng chỉ muốn lời lấy từ phụ đề (không dùng Whisper). Video có phụ đề in sẵn trên hình → dùng quy trình OCR
+// (scripts/shadowing/ocr-subs.py + ocr-to-lesson.mjs, xem docs/shadowing-quy-trinh.txt).
 
 // ---------- 3. Tách câu ----------
 function toSentences(cues) {
@@ -142,12 +136,12 @@ async function translateAll(lines) {
 
 // ---------- 5. Ghi file bài + danh sách ----------
 function writeLesson(lesson) {
-  // Dấu câu nhỏ (﹐﹒) do Whisper/OpenCC sinh ra → dấu chuẩn; bỏ ký tự hỏng.
+  // Dấu câu nhỏ (﹐﹒) do OCR/OpenCC sinh ra → dấu chuẩn; bỏ ký tự hỏng.
   for (const seg of lesson.segments) seg.text = seg.text.replace(/﹐/g, '，').replace(/﹒/g, '。').replace(/�/g, '').trim()
   writeFileSync(join(OUT, `${lesson.videoId}.json`), JSON.stringify(lesson))
   const idxFile = join(OUT, 'index.json')
   const idx = existsSync(idxFile) ? JSON.parse(readFileSync(idxFile, 'utf8')) : []
-  const entry = { videoId: lesson.videoId, title: lesson.title, channel: lesson.channel, playlist: lesson.playlist || undefined, count: lesson.segments.length }
+  const entry = { videoId: lesson.videoId, title: lesson.title, channel: lesson.channel, playlist: lesson.playlist || undefined, count: lesson.segments.length, rev: Date.now() }
   const at = idx.findIndex((x) => x.videoId === lesson.videoId)
   if (at >= 0) idx[at] = entry
   else idx.push(entry)
@@ -207,8 +201,14 @@ if (!cmd) die('chưa cài yt-dlp (pip install yt-dlp).')
 const info = JSON.parse(run(cmd, ['-J', '--skip-download', '--no-playlist', `https://www.youtube.com/watch?v=${id}`]))
 let cues
 let source
-const track = flag('--whisper') ? null : pickTrack(info)
-if (track) {
+const track = pickTrack(info)
+if (!track) {
+  // Vẫn tạo bài (chưa có câu) để chạy OCR phụ đề trên hình rồi ghép vào.
+  writeLesson({ videoId: id, title: opt('--title', info.title), playlist: opt('--playlist', ''), channel: info.channel || info.uploader || '', duration: info.duration || 0, source: 'pending-ocr', segments: [] })
+  console.log(`CẦN OCR ${id} | video không có phụ đề dạng chữ → chạy OCR phụ đề trên hình (docs/shadowing-quy-trinh.txt) | ${info.title}`)
+  process.exit(0)
+}
+{
   run(cmd, [
     '--skip-download',
     '--no-playlist',
@@ -225,9 +225,6 @@ if (track) {
   if (!f) die('tải phụ đề thất bại.')
   cues = readJson3(join(CACHE, f))
   source = track.auto ? 'youtube-auto' : 'youtube'
-} else {
-  cues = whisper(cmd, `https://www.youtube.com/watch?v=${id}`, id)
-  source = 'whisper'
 }
 if (!cues.length) die('không lấy được câu nào.')
 

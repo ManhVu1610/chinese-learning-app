@@ -26,6 +26,8 @@ export interface ShadowLesson {
   channel?: string
   /** Tên playlist (nhóm bài nhúng sẵn) */
   playlist?: string
+  /** Phiên bản file bài đã nạp (so với index.json để biết khi nào cần nạp lại) */
+  rev?: number
 }
 
 const KEY = 'shadowing_v1'
@@ -42,6 +44,8 @@ export interface PresetInfo {
   /** Số câu có sẵn trong file bài (0 = chưa có phụ đề) */
   count: number
   playlist?: string
+  /** Đổi mỗi khi file bài được tạo lại → app tự nạp bản mới */
+  rev?: number
 }
 let presetIndex: PresetInfo[] = []
 let presetPromise: Promise<void> | null = null

@@ -134,7 +134,6 @@ export const features: Feature[] = [
     group: 'fun',
     label: 'tools.games',
     desc: 'home.desc.games',
-    soon: true,
   },
   {
     key: 'stories',
@@ -154,7 +153,6 @@ export const features: Feature[] = [
     group: 'challenge',
     label: 'nav.test',
     desc: 'home.desc.test',
-    soon: true,
   },
   // Tra cứu
   {
