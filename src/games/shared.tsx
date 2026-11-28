@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import PracticeSetup from '../components/practice/PracticeSetup'
+import SettingsSection from '../components/ui/SettingsSection'
 import { useSpeech } from '../hooks/useSpeech'
 import type { Word } from '../types'
 import type { GameKey } from './registry'
@@ -78,8 +79,8 @@ export function GameSetup({
       showCount={false}
       filter={filter}
       onStart={(_, pool) => onStart(pool)}
+      before={<HowTo game={game} />}
     >
-      <HowTo game={game} />
       {children}
     </PracticeSetup>
   )
@@ -90,10 +91,9 @@ function HowTo({ game }: { game: GameKey }) {
   const { t } = useTranslation()
   const rules = t(`game.${game}.rules`, { returnObjects: true }) as string[]
   return (
-    <details className="rounded-2xl border-2 border-line px-3 py-2 text-sm" open>
-      <summary className="cursor-pointer font-bold">{t('game.how_to')}</summary>
-      <ul className="mt-1.5 list-disc space-y-1 pl-5 text-ink-soft">{Array.isArray(rules) && rules.map((r, i) => <li key={i}>{r}</li>)}</ul>
-    </details>
+    <SettingsSection title={t('game.how_to')} defaultOpen storageKey={`howto_${game}`}>
+      <ul className="list-disc space-y-1 pl-5 text-sm text-ink-soft">{Array.isArray(rules) && rules.map((r, i) => <li key={i}>{r}</li>)}</ul>
+    </SettingsSection>
   )
 }
 

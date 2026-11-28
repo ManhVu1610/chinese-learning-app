@@ -138,16 +138,16 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Hàng dưới: mỗi nhóm một ô cao cố định; nhóm nhiều mục thì cuộn bên trong ô */}
+      {/* Hàng dưới: mỗi nhóm một ô, cao vừa đủ để hiện hết các mục */}
       <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {groups.map(({ group, items }) => (
-          <section key={group} id={group} className="box flex h-[22rem] scroll-mt-24 flex-col p-4 sm:h-[24rem]" aria-labelledby={`home-${group}`}>
+          <section key={group} id={group} className="box flex scroll-mt-24 flex-col p-4" aria-labelledby={`home-${group}`}>
             <h2 id={`home-${group}`} className="flex items-baseline justify-between gap-2 text-lg font-extrabold">
               {t(`home.group.${group}`)}
               <span className="text-xs font-semibold text-ink-muted">{items.length}</span>
             </h2>
             <p className="text-xs text-ink-soft">{t(`home.group.${group}_hint`)}</p>
-            <ul className="mt-3 min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-contain pr-1 [scrollbar-width:thin]">
+            <ul className="mt-3 flex-1 space-y-1">
               {items.map((f) => (
                 <li key={f.key}>
                   <FeatureRow feature={f} />

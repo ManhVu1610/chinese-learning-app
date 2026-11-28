@@ -29,6 +29,8 @@ const ShadowingLesson = lazy(() => import('./pages/ShadowingLesson'))
 const Notes = lazy(() => import('./pages/Notes'))
 const StrokeOrder = lazy(() => import('./pages/StrokeOrder'))
 const Games = lazy(() => import('./pages/Games'))
+const Stories = lazy(() => import('./pages/Stories'))
+const StoryReader = lazy(() => import('./pages/StoryReader'))
 const ComingSoon = lazy(() => import('./components/ComingSoon'))
 
 function PageLoading() {
@@ -66,7 +68,8 @@ export default function App() {
               <Route path="strokes" element={<StrokeOrder />} />
               <Route path="games" element={<Games />} />
               <Route path="games/:game" element={<Games />} />
-              <Route path="stories" element={<ComingSoon feature="stories" />} />
+              <Route path="stories" element={<Stories />} />
+              <Route path="stories/:id" element={<StoryReader />} />
               <Route path="shadowing" element={<Shadowing />} />
               <Route path="shadowing/:id" element={<ShadowingLesson />} />
               <Route path="*" element={<Navigate to="/" replace />} />

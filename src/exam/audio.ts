@@ -1,100 +1,78 @@
-import { getMandarinVoice } from '../hooks/useSpeech'
-import type { ExamQuestion } from './types'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-export interface Playback {
-  stop: () => void
-  /** Xong khi phát hết (hoặc bị dừng); false nếu không phát được */
-  done: Promise<boolean>
+export interface ListenAudio {
+  playing: boolean
+  time: number
+  duration: number
+  ended: boolean
+  failed: boolean
+  /** Phát từ vị trí hiện tại; false nếu trình duyệt chặn hoặc tệp lỗi */
+  play: () => Promise<boolean>
+  pause: () => void
+  seek: (sec: number) => void
 }
 
-const ttsSupported = typeof window !== 'undefined' && 'speechSynthesis' in window
+/** Tệp nghe của cả đề (một tệp cho toàn bộ phần Nghe, như băng thi thật). */
+export function useListenAudio(src: string | null, startAt = 0): ListenAudio {
+  const el = useRef<HTMLAudioElement | null>(null)
+  const [playing, setPlaying] = useState(false)
+  const [time, setTime] = useState(startAt)
+  const [duration, setDuration] = useState(0)
+  const [ended, setEnded] = useState(false)
+  const [failed, setFailed] = useState(!src)
 
-/** Có gì để nghe cho câu này không (tệp âm thanh hoặc lời thoại để đọc bằng giọng máy). */
-export const hasListening = (q: ExamQuestion) => !!q.audio || (!!q.transcript && ttsSupported)
-
-/** Lời đọc của một câu: lời thoại, kèm câu hỏi "问：…" ở phần 2, 3 như đề thật. */
-function script(q: ExamQuestion) {
-  const lines: { text: string; who?: 'm' | 'f' }[] = []
-  for (const raw of (q.transcript ?? '').split('\n')) {
-    const m = raw.trim().match(/^(男|女)\s*[:：]\s*(.*)$/)
-    if (m) lines.push({ text: m[2], who: m[1] === '男' ? 'm' : 'f' })
-    else if (raw.trim()) lines.push({ text: raw.trim() })
-  }
-  if (q.type === 'listening_choice' && q.question) lines.push({ text: `问：${q.question}` })
-  // Chrome cắt câu đọc quá dài: chia nhỏ theo dấu câu.
-  return lines.flatMap((l) => (l.text.match(/[^。！？!?；]+[。！？!?；]?/g) ?? [l.text]).map((text) => ({ ...l, text })))
-}
-
-function speakAll(q: ExamQuestion, rate: number): Playback {
-  let stopped = false
-  const parts = script(q)
-  const done = new Promise<boolean>((resolve) => {
-    if (!ttsSupported || !parts.length) return resolve(false)
-    speechSynthesis.cancel()
-    const voice = getMandarinVoice()
-    let i = 0
-    const next = () => {
-      if (stopped) return resolve(true)
-      if (i >= parts.length) return resolve(true)
-      const p = parts[i++]
-      const u = new SpeechSynthesisUtterance(p.text)
-      if (voice) {
-        u.voice = voice
-        u.lang = voice.lang
-      } else u.lang = 'zh-CN'
-      u.rate = rate
-      // Chỉ có một giọng: đổi cao độ để phân biệt người nói nam / nữ.
-      u.pitch = p.who === 'm' ? 0.7 : p.who === 'f' ? 1.3 : 1
-      // Một số máy không báo xong (không có giọng, trình duyệt treo): tự qua câu sau khi quá lâu.
-      let moved = false
-      const go = (delay: number) => {
-        if (moved) return
-        moved = true
-        clearTimeout(guard)
-        setTimeout(next, delay)
-      }
-      const guard = setTimeout(() => go(0), 4000 + (p.text.length * 450) / rate)
-      u.onend = () => go(p.who ? 350 : 150)
-      u.onerror = () => go(50)
-      speechSynthesis.speak(u)
+  useEffect(() => {
+    if (!src) return
+    const a = new Audio(src)
+    a.preload = 'auto'
+    el.current = a
+    const onMeta = () => {
+      setDuration(a.duration || 0)
+      if (startAt > 0 && startAt < a.duration) a.currentTime = startAt
     }
-    next()
-  })
-  return {
-    stop: () => {
-      stopped = true
-      if (ttsSupported) speechSynthesis.cancel()
-    },
-    done,
-  }
-}
-
-/** Phát phần nghe của một câu: tệp âm thanh nếu có, không thì đọc lời thoại bằng giọng máy. */
-export function playQuestion(q: ExamQuestion, rate = 0.9): Playback {
-  if (!q.audio) return speakAll(q, rate)
-  const el = new Audio(q.audio)
-  el.preload = 'auto'
-  let fallback: Playback | null = null
-  let stopped = false
-  const done = new Promise<boolean>((resolve) => {
-    const fail = () => {
-      if (stopped) return resolve(true)
-      // Tệp lỗi: đọc lời thoại nếu có.
-      if (q.transcript) {
-        fallback = speakAll(q, rate)
-        fallback.done.then(resolve)
-      } else resolve(false)
+    const onTime = () => setTime(a.currentTime)
+    const onPlay = () => setPlaying(true)
+    const onPause = () => setPlaying(false)
+    const onEnded = () => {
+      setPlaying(false)
+      setEnded(true)
     }
-    el.onended = () => resolve(true)
-    el.onerror = fail
-    el.play().catch(fail)
-  })
-  return {
-    stop: () => {
-      stopped = true
-      el.pause()
-      fallback?.stop()
-    },
-    done,
-  }
+    const onError = () => setFailed(true)
+    a.addEventListener('loadedmetadata', onMeta)
+    a.addEventListener('timeupdate', onTime)
+    a.addEventListener('play', onPlay)
+    a.addEventListener('pause', onPause)
+    a.addEventListener('ended', onEnded)
+    a.addEventListener('error', onError)
+    return () => {
+      a.pause()
+      a.removeAttribute('src')
+      a.load()
+      el.current = null
+    }
+    // Vị trí bắt đầu chỉ dùng lúc mở tệp.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src])
+
+  const play = useCallback(async () => {
+    const a = el.current
+    if (!a) return false
+    try {
+      setEnded(false)
+      await a.play()
+      return true
+    } catch {
+      return false
+    }
+  }, [])
+  const pause = useCallback(() => el.current?.pause(), [])
+  const seek = useCallback((sec: number) => {
+    const a = el.current
+    if (!a) return
+    a.currentTime = Math.max(0, Math.min(sec, a.duration || sec))
+    setTime(a.currentTime)
+    setEnded(false)
+  }, [])
+
+  return { playing, time, duration, ended, failed, play, pause, seek }
 }

@@ -37,12 +37,28 @@ const CUSTOM: Record<string, string> = {
   教中文: 'jiāo zhōng wén',
   教英语: 'jiāo yīng yǔ',
   一会儿: 'yí huìr',
+  // Gặp trong mục Truyện
+  塞翁: 'sài wēng',
+  长高: 'zhǎng gāo',
+  种了: 'zhòng le',
+  商量: 'shāng liang',
+  只剩下: 'zhǐ shèng xià',
+  背走: 'bēi zǒu',
+  糊涂: 'hú tu',
+  睡不着: 'shuì bù zháo',
+  豁然: 'huò rán',
+  一点儿: 'yī diǎn er',
+  这儿: 'zhè er',
+  吓得: 'xià de',
+  修得: 'xiū de',
+  愁得: 'chóu de',
+  跑得: 'pǎo de',
 }
 // 得 làm bổ ngữ (跑得很快) đọc nhẹ "de" khi đứng giữa động từ và từ chỉ mức độ/kết quả.
 const DE_NEXT = new Set([...'很太真非好快慢不多少高早晚清对漂干累像最越更特挺满一十有那这么怎都'])
 const DE_KEEP_PREV = new Set([...'获取值懂难免不使晓舍赢心'])
 // 地 trạng ngữ (慢慢地, 认真地) đọc "de".
-const DI_ADVERB = /^(认真|高兴|努力|仔细|安静|大声|小声|小心|耐心|热情|不停|开心|快乐|愉快|轻松|紧张|生气|慢慢|快快|好好|轻轻|悄悄|静静|渐渐|远远|默默|偷偷|简单|清楚|积极|主动|热烈|激动|礼貌|友好|奇怪|大概|自然|突然)$/
+const DI_ADVERB = /^(认真|高兴|努力|仔细|安静|大声|小声|小心|耐心|热情|不停|开心|快乐|愉快|轻松|紧张|生气|慢慢|快快|好好|轻轻|悄悄|静静|渐渐|远远|默默|偷偷|简单|清楚|积极|主动|热烈|激动|礼貌|友好|奇怪|大概|自然|突然|平静|担心|得意|不忙)$/
 
 let pinyinLib: Promise<typeof import('pinyin-pro')> | null = null
 const loadPinyin = () =>

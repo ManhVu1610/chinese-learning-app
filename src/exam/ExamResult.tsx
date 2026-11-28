@@ -1,9 +1,8 @@
 import clsx from 'clsx'
-import { ListChecks, Play, RotateCcw, Square } from 'lucide-react'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { ListChecks, RotateCcw } from 'lucide-react'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { hasListening, playQuestion, type Playback } from './audio'
 import { fmtClock, SECTION_ZH } from './ExamRunner'
 import QuestionView from './QuestionView'
 import { isAnswered, isCorrect, needsReview, scoreRecord, sectionsOf, withSummary } from './scoring'
@@ -20,9 +19,6 @@ export default function ExamResult({ paper, record, onRetry }: { paper: ExamPape
   const sections = sectionsOf(rec.scope, paper)
   const [tab, setTab] = useState<SectionKey>(sections[0])
   const [filter, setFilter] = useState<Filter>('all')
-  const [playing, setPlaying] = useState<number | null>(null)
-  const pb = useRef<Playback | null>(null)
-  useEffect(() => () => pb.current?.stop(), [])
 
   const toCheck = paper.questions.filter((q) => sections.includes(q.section) && rec.overrides[q.n] === undefined && needsReview(q, rec.answers[q.n]))
   const shown = paper.questions.filter((q) => {
@@ -39,19 +35,6 @@ export default function ExamResult({ paper, record, onRetry }: { paper: ExamPape
     const next = { ...rec, overrides }
     setRec(next)
     updateRecord(withSummary(paper, next))
-  }
-
-  const play = (n: number) => {
-    pb.current?.stop()
-    if (playing === n) {
-      setPlaying(null)
-      return
-    }
-    const q = paper.questions.find((x) => x.n === n)!
-    const p = playQuestion(q)
-    pb.current = p
-    setPlaying(n)
-    p.done.then(() => pb.current === p && setPlaying(null))
   }
 
   const pct = score.total !== undefined ? score.total / score.max : (score.sections[0]?.score ?? 0) / 100
@@ -74,7 +57,7 @@ export default function ExamResult({ paper, record, onRetry }: { paper: ExamPape
                 <p className={clsx('mt-2 inline-flex rounded-full border-2 border-ink px-3 py-0.5 font-extrabold', score.passed ? 'bg-sage' : 'bg-coral')}>
                   {score.passed ? t('exam.passed') : t('exam.failed')}
                 </p>
-                <p className="mt-2 text-sm text-ink-soft">{t('exam.pass_rule', { pass: score.max * 0.6, max: score.max })}</p>
+                <p className="mt-2 text-sm text-ink-soft">{t('exam.pass_rule', { level: paper.level, pass: score.max * 0.6, max: score.max })}</p>
               </>
             ) : (
               <p className="mt-2 text-5xl font-extrabold tabular-nums">
@@ -145,6 +128,12 @@ export default function ExamResult({ paper, record, onRetry }: { paper: ExamPape
             </button>
           ))}
         </div>
+        {tab === 'listening' && paper.audio && (
+          <div className="box mt-4 flex flex-wrap items-center gap-3 bg-lilac/60 px-4 py-3">
+            <p className="text-sm font-bold">{t('exam.tape_review')}</p>
+            <audio src={paper.audio} controls preload="none" className="h-9 min-w-0 flex-1" />
+          </div>
+        )}
         {shown.length === 0 ? (
           <p className="mt-4 text-ink-soft">{t('exam.nothing_here')}</p>
         ) : (
@@ -160,13 +149,7 @@ export default function ExamResult({ paper, record, onRetry }: { paper: ExamPape
                   >
                     {q.n}
                   </span>
-                  <span className="flex-1" />
-                  {q.section === 'listening' && hasListening(q) && (
-                    <button type="button" onClick={() => play(q.n)} className="btn px-3 py-1 text-xs">
-                      {playing === q.n ? <Square size={13} /> : <Play size={13} />}
-                      {playing === q.n ? t('exam.stop') : t('exam.listen')}
-                    </button>
-                  )}
+                  <span className="text-sm font-bold text-ink-soft">{t(`exam.kind.${q.kind}`)}</span>
                 </div>
                 <div className="mt-3">
                   <QuestionView

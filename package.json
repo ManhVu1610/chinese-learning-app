@@ -10,8 +10,7 @@
     "preview": "vite preview",
     "shadowing": "node scripts/shadowing/make-lesson.mjs",
     "find-char": "node scripts/build-find-char.mjs",
-    "topics": "node scripts/build-topics.mjs",
-    "exams": "node scripts/build-hsk-exams.mjs"
+    "topics": "node scripts/build-topics.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

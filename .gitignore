@@ -10,6 +10,8 @@ lerna-debug.log*
 # Dependencies & build output
 node_modules/
 dist/
+# Bộ đề HSK (ảnh + tệp nghe, vài trăm MB) để ở nơi lưu riêng, xem src/exam/storage.ts
+public/hsk-exams
 dist-ssr/
 *.local
 

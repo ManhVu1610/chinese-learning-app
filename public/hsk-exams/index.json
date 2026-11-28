@@ -1,268 +1,2108 @@
 [
  {
-  "id": "hsk4-01",
+  "id": "h10000",
+  "code": "H10000",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h10000/paper.json"
+ },
+ {
+  "id": "h10901",
+  "code": "H10901",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h10901/paper.json"
+ },
+ {
+  "id": "h10902",
+  "code": "H10902",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h10902/paper.json"
+ },
+ {
+  "id": "h11003",
+  "code": "H11003",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h11003/paper.json"
+ },
+ {
+  "id": "h11004",
+  "code": "H11004",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h11004/paper.json"
+ },
+ {
+  "id": "h11005",
+  "code": "H11005",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h11005/paper.json"
+ },
+ {
+  "id": "h11006",
+  "code": "H11006",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h11006/paper.json"
+ },
+ {
+  "id": "h11007",
+  "code": "H11007",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h11007/paper.json"
+ },
+ {
+  "id": "h11008",
+  "code": "H11008",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h11008/paper.json"
+ },
+ {
+  "id": "h11009",
+  "code": "H11009",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h11009/paper.json"
+ },
+ {
+  "id": "h11112",
+  "code": "H11112",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h11112/paper.json"
+ },
+ {
+  "id": "h11113",
+  "code": "H11113",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h11113/paper.json"
+ },
+ {
+  "id": "h11220",
+  "code": "H11220",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h11220/paper.json"
+ },
+ {
+  "id": "h11221",
+  "code": "H11221",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h11221/paper.json"
+ },
+ {
+  "id": "h11222",
+  "code": "H11222",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h11222/paper.json"
+ },
+ {
+  "id": "h11223",
+  "code": "H11223",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h11223/paper.json"
+ },
+ {
+  "id": "h11329",
+  "code": "H11329",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h11329/paper.json"
+ },
+ {
+  "id": "h11330",
+  "code": "H11330",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h11330/paper.json"
+ },
+ {
+  "id": "h11331",
+  "code": "H11331",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h11331/paper.json"
+ },
+ {
+  "id": "h11332",
+  "code": "H11332",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h11332/paper.json"
+ },
+ {
+  "id": "h1334",
+  "code": "H1334",
+  "level": 1,
+  "counts": {
+   "listening": 20,
+   "reading": 20,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 15,
+   "reading": 17,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h1334/paper.json"
+ },
+ {
+  "id": "h20000",
+  "code": "H20000",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h20000/paper.json"
+ },
+ {
+  "id": "h20901",
+  "code": "H20901",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h20901/paper.json"
+ },
+ {
+  "id": "h20902",
+  "code": "H20902",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h20902/paper.json"
+ },
+ {
+  "id": "h21003",
+  "code": "H21003",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21003/paper.json"
+ },
+ {
+  "id": "h21004",
+  "code": "H21004",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21004/paper.json"
+ },
+ {
+  "id": "h21005",
+  "code": "H21005",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21005/paper.json"
+ },
+ {
+  "id": "h21006",
+  "code": "H21006",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21006/paper.json"
+ },
+ {
+  "id": "h21007",
+  "code": "H21007",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21007/paper.json"
+ },
+ {
+  "id": "h21009",
+  "code": "H21009",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21009/paper.json"
+ },
+ {
+  "id": "h21112",
+  "code": "H21112",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21112/paper.json"
+ },
+ {
+  "id": "h21113",
+  "code": "H21113",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21113/paper.json"
+ },
+ {
+  "id": "h21220",
+  "code": "H21220",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21220/paper.json"
+ },
+ {
+  "id": "h21221",
+  "code": "H21221",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21221/paper.json"
+ },
+ {
+  "id": "h21222",
+  "code": "H21222",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21222/paper.json"
+ },
+ {
+  "id": "h21223",
+  "code": "H21223",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h21223/paper.json"
+ },
+ {
+  "id": "h21329",
+  "code": "H21329",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h21329/paper.json"
+ },
+ {
+  "id": "h21330",
+  "code": "H21330",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h21330/paper.json"
+ },
+ {
+  "id": "h21331",
+  "code": "H21331",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h21331/paper.json"
+ },
+ {
+  "id": "h21334",
+  "code": "H21334",
+  "level": 2,
+  "counts": {
+   "listening": 35,
+   "reading": 25,
+   "writing": 0
+  },
+  "minutes": {
+   "listening": 25,
+   "reading": 22,
+   "writing": 0
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h21334/paper.json"
+ },
+ {
+  "id": "h30000",
+  "code": "H30000",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h30000/paper.json"
+ },
+ {
+  "id": "h31001",
+  "code": "H31001",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h31001/paper.json"
+ },
+ {
+  "id": "h31002",
+  "code": "H31002",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h31002/paper.json"
+ },
+ {
+  "id": "h31004",
+  "code": "H31004",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31004/paper.json"
+ },
+ {
+  "id": "h31005",
+  "code": "H31005",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31005/paper.json"
+ },
+ {
+  "id": "h31006",
+  "code": "H31006",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31006/paper.json"
+ },
+ {
+  "id": "h31007",
+  "code": "H31007",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31007/paper.json"
+ },
+ {
+  "id": "h31008",
+  "code": "H31008",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31008/paper.json"
+ },
+ {
+  "id": "h31009",
+  "code": "H31009",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31009/paper.json"
+ },
+ {
+  "id": "h31110",
+  "code": "H31110",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31110/paper.json"
+ },
+ {
+  "id": "h31111",
+  "code": "H31111",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31111/paper.json"
+ },
+ {
+  "id": "h31218",
+  "code": "H31218",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31218/paper.json"
+ },
+ {
+  "id": "h31219",
+  "code": "H31219",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31219/paper.json"
+ },
+ {
+  "id": "h31220",
+  "code": "H31220",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31220/paper.json"
+ },
+ {
+  "id": "h31221",
+  "code": "H31221",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h31221/paper.json"
+ },
+ {
+  "id": "h31327",
+  "code": "H31327",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h31327/paper.json"
+ },
+ {
+  "id": "h31332",
+  "code": "H31332",
+  "level": 3,
+  "counts": {
+   "listening": 40,
+   "reading": 30,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 30,
+   "writing": 15
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h31332/paper.json"
+ },
+ {
+  "id": "h40000",
+  "code": "H40000",
   "level": 4,
-  "number": 1,
-  "title": "HSK 4 SAMPLE QUIZ",
-  "official": false,
-  "partial": false,
-  "source": "Mandarin Zone (mandarinzone.com)",
-  "audio": "file",
   "counts": {
    "listening": 45,
    "reading": 40,
    "writing": 15
   },
-  "file": "/hsk-exams/hsk4/test-01.json"
- },
- {
-  "id": "hsk4-02",
-  "level": 4,
-  "number": 2,
-  "title": "HSK 4 Online Mock Test Series 2",
-  "official": false,
-  "partial": false,
-  "source": "Mandarin Zone (mandarinzone.com)",
-  "audio": "file",
-  "counts": {
-   "listening": 45,
+  "minutes": {
+   "listening": 30,
    "reading": 40,
-   "writing": 15
+   "writing": 25
   },
-  "file": "/hsk-exams/hsk4/test-02.json"
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h40000/paper.json"
  },
  {
-  "id": "hsk4-03",
-  "level": 4,
-  "number": 3,
-  "title": "HSK 4 Online Mock Exam H41002",
-  "code": "H41002",
-  "official": false,
-  "partial": false,
-  "source": "Mandarin Zone (mandarinzone.com)",
-  "audio": "file",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-03.json"
- },
- {
-  "id": "hsk4-04",
-  "level": 4,
-  "number": 4,
-  "title": "HSK 4 Online Mock Exam Series 4",
-  "official": false,
-  "partial": true,
-  "source": "Mandarin Zone (mandarinzone.com)",
-  "audio": "file",
-  "counts": {
-   "listening": 44,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-04.json"
- },
- {
-  "id": "hsk4-08",
-  "level": 4,
-  "number": 8,
-  "title": "HSK 4 Online Mock Test Series 8 Based HSK41008",
-  "official": false,
-  "partial": false,
-  "source": "Mandarin Zone (mandarinzone.com)",
-  "audio": "file",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-08.json"
- },
- {
-  "id": "hsk4-09",
-  "level": 4,
-  "number": 9,
-  "title": "HSK 4 Online Mock Test Series 9 Based HSK41009",
-  "official": false,
-  "partial": false,
-  "source": "Mandarin Zone (mandarinzone.com)",
-  "audio": "file",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-09.json"
- },
- {
-  "id": "hsk4-10",
-  "level": 4,
-  "number": 10,
-  "title": "HSK 4 Online Mock Test Series 10(H41010)",
-  "code": "H41010",
-  "official": false,
-  "partial": false,
-  "source": "Mandarin Zone (mandarinzone.com)",
-  "audio": "file",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-10.json"
- },
- {
-  "id": "hsk4-11",
-  "level": 4,
-  "number": 11,
-  "title": "Free HSK 4 Online Mock Test Series 11(H41111)",
-  "code": "H41111",
-  "official": false,
-  "partial": false,
-  "source": "Mandarin Zone (mandarinzone.com)",
-  "audio": "file",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-11.json"
- },
- {
-  "id": "hsk4-12",
-  "level": 4,
-  "number": 12,
-  "title": "Free HSK 4 Online Mock Test Series 12",
-  "official": false,
-  "partial": false,
-  "source": "Mandarin Zone (mandarinzone.com)",
-  "audio": "file",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-12.json"
- },
- {
-  "id": "hsk4-13",
-  "level": 4,
-  "number": 13,
-  "title": "HSK 4 Official Exam H41220",
-  "code": "H41220",
-  "official": true,
-  "partial": false,
-  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41220 (国家汉办/孔子学院总部)",
-  "audio": "tts",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-13.json"
- },
- {
-  "id": "hsk4-14",
-  "level": 4,
-  "number": 14,
-  "title": "HSK 4 Official Exam H41221",
-  "code": "H41221",
-  "official": true,
-  "partial": false,
-  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41221 (国家汉办/孔子学院总部)",
-  "audio": "tts",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-14.json"
- },
- {
-  "id": "hsk4-15",
-  "level": 4,
-  "number": 15,
-  "title": "HSK 4 Official Exam H41327",
-  "code": "H41327",
-  "official": true,
-  "partial": false,
-  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41327 (国家汉办/孔子学院总部)",
-  "audio": "tts",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-15.json"
- },
- {
-  "id": "hsk4-16",
-  "level": 4,
-  "number": 16,
-  "title": "HSK 4 Official Exam H41328",
-  "code": "H41328",
-  "official": true,
-  "partial": false,
-  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41328 (国家汉办/孔子学院总部)",
-  "audio": "tts",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-16.json"
- },
- {
-  "id": "hsk4-17",
-  "level": 4,
-  "number": 17,
-  "title": "HSK 4 Official Exam H41329",
-  "code": "H41329",
-  "official": true,
-  "partial": false,
-  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41329 (国家汉办/孔子学院总部)",
-  "audio": "tts",
-  "counts": {
-   "listening": 45,
-   "reading": 40,
-   "writing": 15
-  },
-  "file": "/hsk-exams/hsk4/test-17.json"
- },
- {
-  "id": "hsk4-18",
-  "level": 4,
-  "number": 18,
-  "title": "HSK 4 Official Exam H41001",
+  "id": "h41001",
   "code": "H41001",
-  "official": true,
-  "partial": false,
-  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41001 (国家汉办/孔子学院总部)",
-  "audio": "tts",
+  "level": 4,
   "counts": {
    "listening": 45,
    "reading": 40,
    "writing": 15
   },
-  "file": "/hsk-exams/hsk4/test-18.json"
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41001/paper.json"
  },
  {
-  "id": "hsk4-19",
+  "id": "h41002",
+  "code": "H41002",
   "level": 4,
-  "number": 19,
-  "title": "HSK 4 Official Exam H41330",
-  "code": "H41330",
-  "official": true,
-  "partial": false,
-  "source": "Hanban / Confucius Institute Headquarters — official HSK 4 paper H41330 (国家汉办/孔子学院总部)",
-  "audio": "tts",
   "counts": {
    "listening": 45,
    "reading": 40,
    "writing": 15
   },
-  "file": "/hsk-exams/hsk4/test-19.json"
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41002/paper.json"
+ },
+ {
+  "id": "h41003",
+  "code": "H41003",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41003/paper.json"
+ },
+ {
+  "id": "h41004",
+  "code": "H41004",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41004/paper.json"
+ },
+ {
+  "id": "h41005",
+  "code": "H41005",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41005/paper.json"
+ },
+ {
+  "id": "h41006",
+  "code": "H41006",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41006/paper.json"
+ },
+ {
+  "id": "h41007",
+  "code": "H41007",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41007/paper.json"
+ },
+ {
+  "id": "h41008",
+  "code": "H41008",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41008/paper.json"
+ },
+ {
+  "id": "h41009",
+  "code": "H41009",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41009/paper.json"
+ },
+ {
+  "id": "h41110",
+  "code": "H41110",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41110/paper.json"
+ },
+ {
+  "id": "h41111",
+  "code": "H41111",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41111/paper.json"
+ },
+ {
+  "id": "h41218",
+  "code": "H41218",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41218/paper.json"
+ },
+ {
+  "id": "h41219",
+  "code": "H41219",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41219/paper.json"
+ },
+ {
+  "id": "h41220",
+  "code": "H41220",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41220/paper.json"
+ },
+ {
+  "id": "h41221",
+  "code": "H41221",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h41221/paper.json"
+ },
+ {
+  "id": "h41327",
+  "code": "H41327",
+  "level": 4,
+  "counts": {
+   "listening": 45,
+   "reading": 40,
+   "writing": 15
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 40,
+   "writing": 25
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h41327/paper.json"
+ },
+ {
+  "id": "h51001",
+  "code": "H51001",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51001/paper.json"
+ },
+ {
+  "id": "h51002",
+  "code": "H51002",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51002/paper.json"
+ },
+ {
+  "id": "h51003",
+  "code": "H51003",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51003/paper.json"
+ },
+ {
+  "id": "h51004",
+  "code": "H51004",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51004/paper.json"
+ },
+ {
+  "id": "h51005",
+  "code": "H51005",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51005/paper.json"
+ },
+ {
+  "id": "h51007",
+  "code": "H51007",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51007/paper.json"
+ },
+ {
+  "id": "h51008",
+  "code": "H51008",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51008/paper.json"
+ },
+ {
+  "id": "h51009",
+  "code": "H51009",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51009/paper.json"
+ },
+ {
+  "id": "h51110",
+  "code": "H51110",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51110/paper.json"
+ },
+ {
+  "id": "h51111",
+  "code": "H51111",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51111/paper.json"
+ },
+ {
+  "id": "h51218",
+  "code": "H51218",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51218/paper.json"
+ },
+ {
+  "id": "h51219",
+  "code": "H51219",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51219/paper.json"
+ },
+ {
+  "id": "h51220",
+  "code": "H51220",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51220/paper.json"
+ },
+ {
+  "id": "h51221",
+  "code": "H51221",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51221/paper.json"
+ },
+ {
+  "id": "h51327",
+  "code": "H51327",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51327/paper.json"
+ },
+ {
+  "id": "h51328",
+  "code": "H51328",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51328/paper.json"
+ },
+ {
+  "id": "h51329",
+  "code": "H51329",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": false,
+  "transcript": true,
+  "file": "/hsk-exams/h51329/paper.json"
+ },
+ {
+  "id": "h51330",
+  "code": "H51330",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51330/paper.json"
+ },
+ {
+  "id": "h51331",
+  "code": "H51331",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51331/paper.json"
+ },
+ {
+  "id": "h51332",
+  "code": "H51332",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h51332/paper.json"
+ },
+ {
+  "id": "h51333",
+  "code": "H51333",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51333/paper.json"
+ },
+ {
+  "id": "h51553b",
+  "code": "H51553B",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51553b/paper.json"
+ },
+ {
+  "id": "h51553c",
+  "code": "H51553C",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51553c/paper.json"
+ },
+ {
+  "id": "h51553d",
+  "code": "H51553D",
+  "level": 5,
+  "counts": {
+   "listening": 45,
+   "reading": 45,
+   "writing": 10
+  },
+  "minutes": {
+   "listening": 30,
+   "reading": 45,
+   "writing": 40
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h51553d/paper.json"
+ },
+ {
+  "id": "h60000",
+  "code": "H60000",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h60000/paper.json"
+ },
+ {
+  "id": "h61001",
+  "code": "H61001",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h61001/paper.json"
+ },
+ {
+  "id": "h61002",
+  "code": "H61002",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h61002/paper.json"
+ },
+ {
+  "id": "h61004",
+  "code": "H61004",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61004/paper.json"
+ },
+ {
+  "id": "h61005",
+  "code": "H61005",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61005/paper.json"
+ },
+ {
+  "id": "h61006",
+  "code": "H61006",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61006/paper.json"
+ },
+ {
+  "id": "h61007",
+  "code": "H61007",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61007/paper.json"
+ },
+ {
+  "id": "h61008",
+  "code": "H61008",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61008/paper.json"
+ },
+ {
+  "id": "h61009",
+  "code": "H61009",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61009/paper.json"
+ },
+ {
+  "id": "h61110",
+  "code": "H61110",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61110/paper.json"
+ },
+ {
+  "id": "h61111",
+  "code": "H61111",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61111/paper.json"
+ },
+ {
+  "id": "h61218",
+  "code": "H61218",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61218/paper.json"
+ },
+ {
+  "id": "h61219",
+  "code": "H61219",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61219/paper.json"
+ },
+ {
+  "id": "h61220",
+  "code": "H61220",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61220/paper.json"
+ },
+ {
+  "id": "h61221",
+  "code": "H61221",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": true,
+  "file": "/hsk-exams/h61221/paper.json"
+ },
+ {
+  "id": "h61328",
+  "code": "H61328",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h61328/paper.json"
+ },
+ {
+  "id": "h61329",
+  "code": "H61329",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h61329/paper.json"
+ },
+ {
+  "id": "h61330",
+  "code": "H61330",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h61330/paper.json"
+ },
+ {
+  "id": "h61332",
+  "code": "H61332",
+  "level": 6,
+  "counts": {
+   "listening": 50,
+   "reading": 50,
+   "writing": 1
+  },
+  "minutes": {
+   "listening": 35,
+   "reading": 50,
+   "writing": 45
+  },
+  "audio": true,
+  "transcript": false,
+  "file": "/hsk-exams/h61332/paper.json"
  }
 ]

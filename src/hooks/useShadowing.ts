@@ -44,9 +44,30 @@ export interface PresetInfo {
   /** Số câu có sẵn trong file bài (0 = chưa có phụ đề) */
   count: number
   playlist?: string
+  /** Thời lượng video (giây) */
+  duration?: number
   /** Đổi mỗi khi file bài được tạo lại → app tự nạp bản mới */
   rev?: number
 }
+
+/** Thông tin kênh YouTube (public/shadowing/channels.json) để trang Shadowing hiện giống trang kênh. */
+export interface ChannelInfo {
+  /** Trùng với trường channel trong index.json */
+  name: string
+  title?: string
+  handle?: string
+  url?: string
+  avatar?: string
+  banner?: string
+  subscribers?: number
+  description?: string
+}
+let channelPromise: Promise<ChannelInfo[]> | null = null
+export const loadChannels = () =>
+  (channelPromise ??= fetch('/shadowing/channels.json')
+    .then((r) => (r.ok ? r.json() : []))
+    .then((list) => (Array.isArray(list) ? list : []))
+    .catch(() => []))
 let presetIndex: PresetInfo[] = []
 let presetPromise: Promise<void> | null = null
 const loadPresets = () =>

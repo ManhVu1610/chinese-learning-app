@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useDictionary } from '../../hooks/useDictionary'
 import Page, { type Crumb } from '../layout/Page'
 import SfxToggle from './SfxToggle'
+import SettingsSection from '../ui/SettingsSection'
 import { UNCATEGORIZED, useNotebook } from '../../hooks/useNotebook'
 import type { HSKLevel, Word } from '../../types'
 
@@ -63,8 +64,11 @@ export default function PracticeSetup({
   filter = () => true,
   crumbs,
   showCount = true,
+  before,
   onStart,
 }: {
+  /** Nội dung đặt trên cùng, trước các mục cài đặt (vd "Cách chơi" của trò chơi) */
+  before?: ReactNode
   /** Khoá tính năng (listening / speaking / typing) để dựng khung trang chung */
   feature: string
   title: string
@@ -150,11 +154,16 @@ export default function PracticeSetup({
 
   return (
     <Page feature={feature} size="narrow" title={title} description={intro} crumbs={crumbs}>
-      <div className="box space-y-5 p-5">
-        <section>
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="text-sm font-bold">{t('practice.source')}</h2>
-            {!nothing && (
+      <div className="space-y-3">
+        {before}
+        <SettingsSection
+          title={t('practice.source')}
+          summary={nothing ? t('practice.pick_source') : t('practice.pool', { count: pool.length })}
+          defaultOpen
+          storageKey="practice_source"
+        >
+          {!nothing && (
+            <div className="-mt-1 mb-2 flex justify-end">
               <button
                 type="button"
                 onClick={() => setSources(() => ({ levels: [], sets: [], folders: [] }))}
@@ -162,10 +171,10 @@ export default function PracticeSetup({
               >
                 {t('practice.clear_sources')}
               </button>
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="mt-2 overflow-hidden rounded-2xl border-2 border-ink">
+          <div className="overflow-hidden rounded-2xl border-2 border-ink">
             {/* HSK: chọn nhiều cấp */}
             <div className="border-b-2 border-ink bg-paper/60 p-3">
               <p className="flex items-center gap-1.5 text-xs font-extrabold text-ink-soft uppercase">
@@ -282,12 +291,11 @@ export default function PracticeSetup({
                   : t('practice.pool', { count: pool.length })}
             </div>
           </div>
-        </section>
+        </SettingsSection>
 
         {showCount && (
-          <div>
-            <span className="text-sm font-bold">{t('practice.count')}</span>
-            <div className="mt-1.5 flex flex-wrap gap-2">
+          <SettingsSection title={t('practice.count')} summary={count ? count : t('practice.all')} storageKey="practice_count">
+            <div className="flex flex-wrap gap-2">
               {COUNTS.map((c) => (
                 <button
                   key={c}
@@ -299,12 +307,15 @@ export default function PracticeSetup({
                 </button>
               ))}
             </div>
-          </div>
+          </SettingsSection>
         )}
 
-        {children}
-
-        <SfxToggle className="rounded-2xl border-2 border-line px-3 py-2" />
+        <SettingsSection title={t('practice.options')} storageKey={`practice_options_${feature}`}>
+          <div className="space-y-5">
+            {children}
+            <SfxToggle className="rounded-2xl border-2 border-line px-3 py-2" />
+          </div>
+        </SettingsSection>
 
         <button type="button" onClick={start} disabled={!pool.length} className="btn btn-accent w-full py-3">
           <Play size={18} />
@@ -330,8 +341,8 @@ export function Choice<T extends string>({
 }) {
   return (
     <div>
-      <span className="text-sm font-bold">{label}</span>
-      <div className="mt-1.5 flex flex-wrap gap-2">
+      {label && <span className="text-sm font-bold">{label}</span>}
+      <div className={clsx('flex flex-wrap gap-2', label && 'mt-1.5')}>
         {options.map((o) => (
           <button
             key={o.value}

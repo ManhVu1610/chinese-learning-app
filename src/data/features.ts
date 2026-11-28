@@ -143,7 +143,6 @@ export const features: Feature[] = [
     group: 'fun',
     label: 'tools.stories',
     desc: 'home.desc.stories',
-    soon: true,
   },
   {
     key: 'test',

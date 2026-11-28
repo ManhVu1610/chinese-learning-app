@@ -1,13 +1,13 @@
 import clsx from 'clsx'
-import { ChevronLeft, ChevronRight, Clock, Flag, Headphones, LogOut, Play, RotateCcw, Send, Square, Volume2 } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Clock, Flag, Headphones, LogOut, Pause, Play, RotateCcw, RotateCw, Send, Volume2 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ConfirmDialog } from '../components/notebook/Dialogs'
-import { hasListening, playQuestion, type Playback } from './audio'
+import { useListenAudio, type ListenAudio } from './audio'
 import QuestionView from './QuestionView'
 import { isAnswered, sectionsOf } from './scoring'
 import { saveSession } from './storage'
-import { LISTEN_GAP, SECTION_MINUTES, type Answer, type ExamPaper, type ExamSession, type SectionKey } from './types'
+import { answerWindow, type Answer, type ExamPaper, type ExamSession, type SectionKey } from './types'
 
 export const SECTION_ZH: Record<SectionKey, string> = { listening: '听力', reading: '阅读', writing: '书写' }
 
@@ -19,17 +19,15 @@ export const fmtClock = (sec: number) => {
   return h ? `${h}:${String(m).padStart(2, '0')}:${ss}` : `${m}:${ss}`
 }
 
-export const sectionSeconds = (paper: ExamPaper, s: SectionKey) => (SECTION_MINUTES[paper.level] ?? SECTION_MINUTES[4])[s] * 60
-
-type ListenPhase = 'idle' | 'playing' | 'gap'
+export const sectionSeconds = (paper: Pick<ExamPaper, 'minutes'>, s: SectionKey) => paper.minutes[s] * 60
 
 /**
  * Giao diện thi trên máy:
- *  - Thanh trên: tên đề, kỹ năng đang làm (听力 / 阅读 / 书写), đồng hồ, nút nộp bài.
- *  - Giữa: câu hỏi; bên phải: bảng số câu (đã làm / đánh dấu / đang xem).
- *  - Thi thật: phần Nghe tự phát từng câu một lần rồi tự chuyển câu, không quay lại;
- *    phần Đọc, Viết tính giờ riêng, hết giờ tự sang phần sau; đã qua phần nào thì không quay lại.
- *  - Luyện tập: đi lại tự do giữa các câu, nghe lại bao nhiêu lần cũng được, đồng hồ đếm lên.
+ *  - Thanh trên: mã đề, kỹ năng đang làm (听力 / 阅读 / 书写), đồng hồ, nút nộp bài.
+ *  - Giữa: câu hỏi cắt từ đề gốc và ô trả lời; bên phải: bảng số câu.
+ *  - Thi thật: phần Nghe phát tệp ghi âm của cả đề một lượt (không dừng, không tua), nghe xong có 3–5 phút
+ *    điền đáp án rồi tự sang phần sau; Đọc, Viết tính giờ riêng; đã qua phần nào thì không quay lại.
+ *  - Luyện tập: đi lại tự do, tạm dừng và tua tệp nghe, đồng hồ đếm lên.
  */
 export default function ExamRunner({
   paper,
@@ -54,10 +52,9 @@ export default function ExamRunner({
   const [navOpen, setNavOpen] = useState(false)
   // Thi thật, phần nghe: cần một lần bấm để trình duyệt cho phát âm thanh (cả khi tải lại trang giữa chừng).
   const [armed, setArmed] = useState(false)
-  const [phase, setPhase] = useState<ListenPhase>('idle')
-  const [gap, setGap] = useState(LISTEN_GAP)
-  const [audioFailed, setAudioFailed] = useState(false)
-  const playback = useRef<Playback | null>(null)
+  const [blocked, setBlocked] = useState(false)
+  const hasListening = sections.includes('listening')
+  const audio = useListenAudio(hasListening ? paper.audio : null, strict ? (initial.audioPos ?? 0) : 0)
 
   const update = useCallback((patch: Partial<ExamSession> | ((p: ExamSession) => Partial<ExamSession>)) => {
     setS((prev) => ({ ...prev, ...(typeof patch === 'function' ? patch(prev) : patch) }))
@@ -65,20 +62,14 @@ export default function ExamRunner({
 
   useEffect(() => saveSession(s), [s])
 
-  const stopAudio = useCallback(() => {
-    playback.current?.stop()
-    playback.current = null
-  }, [])
-  useEffect(() => stopAudio, [stopAudio])
-
-  // Trạng thái mới nhất cho các hàm gọi từ hẹn giờ (không đặt việc phụ trong hàm cập nhật state).
+  // Trạng thái mới nhất cho các hàm gọi từ hẹn giờ.
   const sRef = useRef(s)
   sRef.current = s
   const finishing = useRef(false)
 
+  const pauseAudio = audio.pause
   const finishSection = useCallback(() => {
-    stopAudio()
-    setPhase('idle')
+    pauseAudio()
     setArmed(false)
     setConfirm(null)
     const prev = sRef.current
@@ -101,10 +92,42 @@ export default function ExamRunner({
     }
     sRef.current = next
     setS(next)
-  }, [sections, paper, strict, onSubmit, stopAudio])
+  }, [sections, paper, strict, onSubmit, pauseAudio])
 
-  // Đồng hồ: thi thật đếm ngược (Đọc, Viết), luyện tập đếm lên.
-  const timed = strict ? secKey !== 'listening' && s.started : true
+  // ---- Thi thật, phần Nghe ----
+  const listenStrict = strict && secKey === 'listening'
+  const noAudio = !paper.audio || audio.failed
+  // Đang phát băng: đồng hồ là thời gian còn lại của băng; nghe xong (hoặc không có băng) thì đếm ngược thời gian điền đáp án.
+  const tapeRunning = listenStrict && s.started && armed && !s.audioDone && !noAudio
+
+  useEffect(() => {
+    if (!tapeRunning) return
+    audio.play().then((ok) => setBlocked(!ok))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tapeRunning])
+  // Lưu vị trí băng để tải lại trang thì nghe tiếp từ đó.
+  const timeRef = useRef(audio.time)
+  timeRef.current = audio.time
+  useEffect(() => {
+    if (!tapeRunning) return
+    const id = setInterval(() => update({ audioPos: Math.floor(timeRef.current) }), 3000)
+    return () => clearInterval(id)
+  }, [tapeRunning, update])
+  useEffect(() => {
+    if (listenStrict && audio.ended && !s.audioDone) update({ audioDone: true, clock: answerWindow(paper.level) })
+  }, [listenStrict, audio.ended, s.audioDone, paper.level, update])
+  useEffect(() => {
+    // Không phát được băng: dùng thời gian chuẩn của phần Nghe.
+    if (listenStrict && s.started && noAudio && !s.audioDone) update({ audioDone: true, clock: sectionSeconds(paper, 'listening') })
+  }, [listenStrict, s.started, noAudio, s.audioDone, paper, update])
+
+  // Luyện tập: rời phần Nghe thì dừng băng.
+  useEffect(() => {
+    if (!strict && secKey !== 'listening') pauseAudio()
+  }, [strict, secKey, pauseAudio])
+
+  // Đồng hồ: thi thật đếm ngược, luyện tập đếm lên.
+  const timed = strict ? s.started && (secKey !== 'listening' || !!s.audioDone) : true
   useEffect(() => {
     if (!timed) return
     const id = setInterval(() => update((p) => ({ clock: strict ? p.clock - 1 : p.clock + 1 })), 1000)
@@ -115,9 +138,6 @@ export default function ExamRunner({
   }, [strict, timed, s.clock, finishSection])
 
   const go = (n: number) => {
-    stopAudio()
-    setPhase('idle')
-    setAudioFailed(false)
     const target = paper.questions.find((x) => x.n === n)
     if (!target) return
     // Luyện tập: bấm sang câu ở kỹ năng khác thì đổi luôn phần đang làm.
@@ -129,81 +149,6 @@ export default function ExamRunner({
   const pos = list.findIndex((x) => x.n === q.n)
   const prev = list[pos - 1]
   const next = list[pos + 1]
-
-  // ---- Thi thật: phần nghe tự chạy ----
-  const listenStrict = strict && secKey === 'listening' && s.started && armed
-  const advanceListening = useCallback(() => {
-    stopAudio()
-    setPhase('idle')
-    setAudioFailed(false)
-    const p = sRef.current
-    const heard = p.heard.includes(p.current) ? p.heard : [...p.heard, p.current]
-    const i = secQs.findIndex((x) => x.n === p.current)
-    const nx = secQs[i + 1]
-    sRef.current = { ...p, heard, current: nx ? nx.n : p.current }
-    setS(sRef.current)
-    if (!nx) finishSection()
-  }, [secQs, stopAudio, finishSection])
-
-  useEffect(() => {
-    if (!listenStrict) return
-    if (s.heard.includes(s.current)) {
-      advanceListening()
-      return
-    }
-    const cur = paper.questions.find((x) => x.n === s.current)
-    if (!cur) return
-    if (!hasListening(cur)) {
-      setAudioFailed(true)
-      setGap(LISTEN_GAP)
-      setPhase('gap')
-      return
-    }
-    setPhase('playing')
-    const pb = playQuestion(cur)
-    playback.current = pb
-    let alive = true
-    pb.done.then((ok) => {
-      if (!alive) return
-      if (!ok) setAudioFailed(true)
-      setGap(LISTEN_GAP)
-      setPhase('gap')
-    })
-    return () => {
-      alive = false
-      pb.stop()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listenStrict, s.current])
-
-  useEffect(() => {
-    if (!listenStrict || phase !== 'gap') return
-    if (gap <= 0) {
-      advanceListening()
-      return
-    }
-    const id = setTimeout(() => setGap((g) => g - 1), 1000)
-    return () => clearTimeout(id)
-  }, [listenStrict, phase, gap, advanceListening])
-
-  // ---- Luyện tập: nút nghe ----
-  const playPractice = () => {
-    if (phase === 'playing') {
-      stopAudio()
-      setPhase('idle')
-      return
-    }
-    stopAudio()
-    setAudioFailed(false)
-    const pb = playQuestion(q)
-    playback.current = pb
-    setPhase('playing')
-    pb.done.then((ok) => {
-      if (playback.current !== pb) return
-      if (!ok) setAudioFailed(true)
-      setPhase('idle')
-    })
-  }
 
   const setAnswer = (a: Answer | undefined) =>
     update((p) => {
@@ -218,23 +163,22 @@ export default function ExamRunner({
   const lastSection = s.sectionIdx === sections.length - 1
 
   // ---- Màn giới thiệu phần (thi thật) ----
-  if (strict && (!s.started || (secKey === 'listening' && !armed))) {
+  if (strict && (!s.started || (secKey === 'listening' && !armed && !s.audioDone))) {
     const resume = s.started
+    const minutes = secKey === 'listening' ? Math.round((audio.duration || sectionSeconds(paper, 'listening')) / 60) : paper.minutes[secKey]
     return (
       <section className="mx-auto max-w-2xl px-4 py-10">
         <div className="box p-6 text-center md:p-8">
           <p className="text-sm font-bold text-ink-soft">
-            {paper.code ?? paper.title} · {t('exam.section_n', { n: s.sectionIdx + 1, total: sections.length })}
+            HSK {paper.level} · {paper.code} · {t('exam.section_n', { n: s.sectionIdx + 1, total: sections.length })}
           </p>
           <h1 className="mt-2 text-4xl font-extrabold" lang="zh-CN">
             {SECTION_ZH[secKey]}
           </h1>
           <p className="mt-1 text-lg font-bold">{t(`exam.section.${secKey}`)}</p>
-          <p className="mt-4 text-ink-soft">
-            {t('exam.section_info', { count: secQs.length, minutes: Math.round(sectionSeconds(paper, secKey) / 60) })}
-          </p>
-          <p className="mt-2 text-sm text-ink-soft">{t(`exam.rules.${secKey}`, { gap: LISTEN_GAP })}</p>
-          {secKey === 'listening' && paper.audio === 'tts' && <p className="mt-2 text-sm text-ink-soft">{t('exam.tts_note')}</p>}
+          <p className="mt-4 text-ink-soft">{t('exam.section_info', { count: secQs.length, minutes })}</p>
+          <p className="mt-2 text-sm text-ink-soft">{t(`exam.rules.${secKey}`, { minutes: answerWindow(paper.level) / 60 })}</p>
+          {secKey === 'listening' && !paper.audio && <p className="mt-2 text-sm font-semibold text-brick">{t('exam.no_audio')}</p>}
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <button
               type="button"
@@ -257,9 +201,8 @@ export default function ExamRunner({
     )
   }
 
-  const listeningNow = q.section === 'listening'
-  const lockedListen = strict && listeningNow
-  const clockLow = strict && s.clock < 300
+  const clockLow = strict && timed && s.clock < 300
+  const clockText = tapeRunning ? `${fmtClock(Math.max(0, audio.duration - audio.time))}` : fmtClock(s.clock)
 
   return (
     <section className="mx-auto max-w-6xl px-3 py-4 md:px-4">
@@ -267,7 +210,7 @@ export default function ExamRunner({
       <header className="box sticky top-2 z-20 flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5">
         <div className="w-full min-w-0 sm:w-auto sm:flex-1">
           <p className="truncate text-xs font-bold text-ink-soft">
-            HSK {paper.level} · {paper.code ?? t('exam.paper_n', { n: paper.number })} · {t(`exam.mode.${s.mode}`)}
+            HSK {paper.level} · {paper.code} · {t(`exam.mode.${s.mode}`)}
           </p>
           <div className="flex flex-wrap gap-1.5 pt-0.5">
             {sections.map((k, i) => (
@@ -291,20 +234,20 @@ export default function ExamRunner({
         <div
           className={clsx(
             'mr-auto flex items-center gap-1.5 rounded-full border-2 border-ink px-3 py-1 text-lg font-extrabold whitespace-nowrap tabular-nums sm:mr-0',
-            clockLow ? 'bg-coral' : 'bg-card',
+            clockLow ? 'bg-coral' : tapeRunning ? 'bg-lilac' : 'bg-card',
           )}
-          title={strict ? t('exam.time_left') : t('exam.time_used')}
+          title={tapeRunning ? t('exam.tape_left') : strict ? t('exam.time_left') : t('exam.time_used')}
         >
-          <Clock size={16} />
-          {strict && secKey === 'listening' ? t('exam.listen_progress', { n: pos + 1, total: secQs.length }) : fmtClock(s.clock)}
+          {tapeRunning ? <Volume2 size={16} /> : <Clock size={16} />}
+          {clockText}
         </div>
         {strict && !lastSection ? (
-          <button type="button" onClick={() => setConfirm('section')} disabled={secKey === 'listening'} className="btn btn-primary px-4 py-1.5 text-sm">
+          <button type="button" onClick={() => setConfirm('section')} disabled={tapeRunning} className="btn btn-primary px-4 py-1.5 text-sm">
             <ChevronRight size={15} />
             {t('exam.next_section')}
           </button>
         ) : (
-          <button type="button" onClick={() => setConfirm('submit')} className="btn btn-accent px-4 py-1.5 text-sm">
+          <button type="button" onClick={() => setConfirm('submit')} disabled={tapeRunning} className="btn btn-accent px-4 py-1.5 text-sm">
             <Send size={15} />
             {t('exam.submit')}
           </button>
@@ -314,69 +257,57 @@ export default function ExamRunner({
         </button>
       </header>
 
+      {secKey === 'listening' && (
+        <ListenBar
+          strict={strict}
+          audio={audio}
+          hasAudio={!!paper.audio}
+          done={!!s.audioDone}
+          blocked={blocked}
+          onRetry={() => audio.play().then((ok) => setBlocked(!ok))}
+        />
+      )}
+
       <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_17rem]">
         {/* Câu hỏi */}
-        <div className="box min-w-0 p-5 md:p-7">
-          <div className="flex items-center gap-3">
+        <div className="box min-w-0 p-4 md:p-6">
+          <div className="mb-3 flex items-center gap-3">
             <span className="sticker bg-sky px-3 py-1 text-lg font-extrabold tabular-nums">{q.n}</span>
+            <span className="text-sm font-bold text-ink-soft">{t(`exam.kind.${q.kind}`)}</span>
             <span className="flex-1" />
-            {!lockedListen && (
-              <button type="button" onClick={toggleFlag} className={clsx('btn px-3 py-1.5 text-xs', s.flags.includes(q.n) && 'bg-sand')}>
-                <Flag size={13} />
-                {s.flags.includes(q.n) ? t('exam.flagged') : t('exam.flag')}
+            <button type="button" onClick={toggleFlag} className={clsx('btn px-3 py-1.5 text-xs', s.flags.includes(q.n) && 'bg-sand')}>
+              <Flag size={13} />
+              <span className="hidden sm:inline">{s.flags.includes(q.n) ? t('exam.flagged') : t('exam.flag')}</span>
+            </button>
+          </div>
+
+          <QuestionView key={q.n} paper={paper} q={q} answer={s.answers[q.n]} onAnswer={setAnswer} showTranscript={!strict} />
+
+          <div className="mt-6 flex items-center justify-between gap-2 border-t-2 border-line pt-4">
+            <button type="button" disabled={!prev} onClick={() => prev && go(prev.n)} className="btn px-4 py-2 text-sm">
+              <ChevronLeft size={16} />
+              <span className="hidden sm:inline">{t('exam.prev')}</span>
+            </button>
+            <button type="button" onClick={() => setNavOpen((v) => !v)} className="btn px-3 py-2 text-sm lg:hidden">
+              {t('exam.answer_sheet')}
+            </button>
+            {next ? (
+              <button type="button" onClick={() => go(next.n)} className="btn btn-primary px-4 py-2 text-sm">
+                {t('exam.next')}
+                <ChevronRight size={16} />
+              </button>
+            ) : (
+              <button
+                type="button"
+                disabled={tapeRunning}
+                onClick={() => setConfirm(strict && !lastSection ? 'section' : 'submit')}
+                className="btn btn-accent px-4 py-2 text-sm"
+              >
+                {strict && !lastSection ? t('exam.next_section') : t('exam.submit')}
+                <ChevronRight size={16} />
               </button>
             )}
           </div>
-
-          {listeningNow && (
-            <ListenBar
-              strict={strict}
-              phase={phase}
-              gap={gap}
-              failed={audioFailed}
-              hasAudio={hasListening(q)}
-              onPlay={playPractice}
-              onSkip={advanceListening}
-            />
-          )}
-
-          <div className="mt-4">
-            <QuestionView
-              key={q.n}
-              paper={paper}
-              q={q}
-              answer={s.answers[q.n]}
-              onAnswer={setAnswer}
-              showListenText={!strict}
-            />
-          </div>
-
-          {!lockedListen && (
-            <div className="mt-6 flex items-center justify-between gap-2 border-t-2 border-line pt-4">
-              <button type="button" disabled={!prev} onClick={() => prev && go(prev.n)} className="btn px-4 py-2 text-sm">
-                <ChevronLeft size={16} />
-                <span className="hidden sm:inline">{t('exam.prev')}</span>
-              </button>
-              <button type="button" onClick={() => setNavOpen((v) => !v)} className="btn px-3 py-2 text-sm lg:hidden">
-                {t('exam.answer_sheet')}
-              </button>
-              {next ? (
-                <button type="button" onClick={() => go(next.n)} className="btn btn-primary px-4 py-2 text-sm">
-                  {t('exam.next')}
-                  <ChevronRight size={16} />
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setConfirm(strict && !lastSection ? 'section' : 'submit')}
-                  className="btn btn-accent px-4 py-2 text-sm"
-                >
-                  {strict && !lastSection ? t('exam.next_section') : t('exam.submit')}
-                  <ChevronRight size={16} />
-                </button>
-              )}
-            </div>
-          )}
         </div>
 
         {/* Bảng câu hỏi */}
@@ -394,27 +325,22 @@ export default function ExamRunner({
                 <div className="grid grid-cols-6 gap-1.5">
                   {paper.questions
                     .filter((x) => x.section === k)
-                    .map((x) => {
-                      const done = isAnswered(s.answers[x.n])
-                      const passed = strict && k === 'listening' && x.n !== q.n
-                      return (
-                        <button
-                          key={x.n}
-                          type="button"
-                          disabled={strict && k === 'listening'}
-                          onClick={() => go(x.n)}
-                          aria-current={x.n === q.n}
-                          className={clsx(
-                            'relative h-8 rounded-lg border-2 text-xs font-bold tabular-nums',
-                            x.n === q.n ? 'border-ink ring-2 ring-brick' : 'border-line',
-                            done ? 'bg-sky' : passed && s.heard.includes(x.n) ? 'bg-paper text-ink-muted' : 'bg-card',
-                          )}
-                        >
-                          {x.n}
-                          {s.flags.includes(x.n) && <span className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full border border-ink bg-sand" />}
-                        </button>
-                      )
-                    })}
+                    .map((x) => (
+                      <button
+                        key={x.n}
+                        type="button"
+                        onClick={() => go(x.n)}
+                        aria-current={x.n === q.n}
+                        className={clsx(
+                          'relative h-8 rounded-lg border-2 text-xs font-bold tabular-nums',
+                          x.n === q.n ? 'border-ink ring-2 ring-brick' : 'border-line',
+                          isAnswered(s.answers[x.n]) ? 'bg-sky' : 'bg-card',
+                        )}
+                      >
+                        {x.n}
+                        {s.flags.includes(x.n) && <span className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full border border-ink bg-sand" />}
+                      </button>
+                    ))}
                 </div>
               </div>
             ))}
@@ -441,7 +367,7 @@ export default function ExamRunner({
           onClose={() => setConfirm(null)}
           onConfirm={() => {
             if (confirm !== 'submit') return finishSection()
-            stopAudio()
+            audio.pause()
             finishing.current = true
             onSubmit(sRef.current)
           }}
@@ -451,50 +377,79 @@ export default function ExamRunner({
   )
 }
 
+/** Thanh nghe: thi thật chỉ hiện tiến trình băng; luyện tập có phát / dừng / tua. */
 function ListenBar({
   strict,
-  phase,
-  gap,
-  failed,
+  audio,
   hasAudio,
-  onPlay,
-  onSkip,
+  done,
+  blocked,
+  onRetry,
 }: {
   strict: boolean
-  phase: ListenPhase
-  gap: number
-  failed: boolean
+  audio: ListenAudio
   hasAudio: boolean
-  onPlay: () => void
-  onSkip: () => void
+  done: boolean
+  blocked: boolean
+  onRetry: () => void
 }) {
   const { t } = useTranslation()
+  const pct = audio.duration ? Math.min(100, (audio.time / audio.duration) * 100) : 0
+  let text: string
+  if (!hasAudio || audio.failed) text = t('exam.audio_failed')
+  else if (strict && done) text = t('exam.tape_done')
+  else if (strict && blocked) text = t('exam.audio_blocked')
+  else if (strict) text = t('exam.tape_playing')
+  else text = audio.playing ? t('exam.playing') : t('exam.press_play')
   return (
-    <div className="mt-4 flex flex-wrap items-center gap-3 rounded-2xl border-2 border-ink bg-lilac/60 px-4 py-2.5">
-      <Volume2 size={20} className={clsx(phase === 'playing' && 'animate-pulse')} />
-      <p className="min-w-0 flex-1 text-sm font-semibold">
-        {failed || !hasAudio
-          ? t('exam.audio_failed')
-          : phase === 'playing'
-            ? t('exam.playing')
-            : strict
-              ? t('exam.answer_window', { s: gap })
-              : t('exam.press_play')}
-      </p>
-      {strict ? (
-        phase === 'gap' && (
-          <button type="button" onClick={onSkip} className="btn px-3 py-1 text-xs">
-            {t('exam.next_now')}
-            <ChevronRight size={13} />
-          </button>
-        )
-      ) : (
-        hasAudio && (
-          <button type="button" onClick={onPlay} className="btn btn-primary px-3 py-1 text-xs">
-            {phase === 'playing' ? <Square size={13} /> : phase === 'idle' ? <Play size={13} /> : <RotateCcw size={13} />}
-            {phase === 'playing' ? t('exam.stop') : t('exam.listen')}
-          </button>
-        )
+    <div className="box sticky top-[5.5rem] z-10 mt-3 flex flex-wrap items-center gap-3 bg-lilac/70 px-4 py-2.5">
+      <Volume2 size={20} className={clsx(audio.playing && 'animate-pulse')} />
+      <p className="min-w-0 flex-1 text-sm font-semibold">{text}</p>
+      {hasAudio && !audio.failed && (
+        <div className="flex w-full items-center gap-2 sm:w-auto sm:min-w-[22rem]">
+          {!strict && (
+            <>
+              <button type="button" onClick={() => audio.seek(audio.time - 5)} className="btn h-8 w-8 p-0" aria-label={t('exam.back5')} title={t('exam.back5')}>
+                <RotateCcw size={14} />
+              </button>
+              <button
+                type="button"
+                onClick={() => (audio.playing ? audio.pause() : audio.play())}
+                className="btn btn-primary h-8 w-8 p-0"
+                aria-label={audio.playing ? t('exam.pause') : t('exam.listen')}
+              >
+                {audio.playing ? <Pause size={14} /> : <Play size={14} />}
+              </button>
+              <button type="button" onClick={() => audio.seek(audio.time + 5)} className="btn h-8 w-8 p-0" aria-label={t('exam.fwd5')} title={t('exam.fwd5')}>
+                <RotateCw size={14} />
+              </button>
+            </>
+          )}
+          {strict && blocked && !done && (
+            <button type="button" onClick={onRetry} className="btn btn-primary px-3 py-1 text-xs">
+              <Play size={13} />
+              {t('exam.listen')}
+            </button>
+          )}
+          {strict ? (
+            <div className="h-2.5 flex-1 overflow-hidden rounded-full border-2 border-ink bg-card">
+              <div className="h-full bg-brick" style={{ width: `${pct}%` }} />
+            </div>
+          ) : (
+            <input
+              type="range"
+              min={0}
+              max={Math.max(1, Math.floor(audio.duration))}
+              value={Math.floor(audio.time)}
+              onChange={(e) => audio.seek(Number(e.target.value))}
+              className="min-w-0 flex-1 accent-brick"
+              aria-label={t('exam.seek')}
+            />
+          )}
+          <span className="text-xs font-bold whitespace-nowrap tabular-nums">
+            {fmtClock(audio.time)} / {fmtClock(audio.duration)}
+          </span>
+        </div>
       )}
     </div>
   )

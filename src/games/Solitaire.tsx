@@ -113,6 +113,8 @@ export default function Solitaire() {
   const [error, setError] = useState('')
   const [game, setGame] = useState(0)
   const [budget, setBudget] = useState(999)
+  /** số thẻ úp nhiều nhất trong một cột lúc chia bài (để tính chiều cao cố định của vùng cột) */
+  const [maxDown, setMaxDown] = useState(0)
   const ms = useStopwatch(phase === 'play', game)
   const { w: W, h: H } = useCardSize(Math.max(state?.cols.length ?? 4, state?.slots.length ?? 4))
   // Phần lộ ra của thẻ ngửa bị đè: đủ thấy nhãn góc trên, không lộ chữ lớn ở giữa.
@@ -126,6 +128,7 @@ export default function Solitaire() {
     setCats(c)
     const dealt = dealSolvable(c, cfg)
     setState(dealt.state)
+    setMaxDown(Math.max(0, ...dealt.state.cols.map((col) => col.length - 1)))
     setBudget(moveBudget(dealt.solution, cfg))
     setHistory([])
     setSel(null)
@@ -425,6 +428,8 @@ export default function Solitaire() {
   const movesLeft = Math.max(0, budget - state.moves)
   const wasteTop = state.waste[state.waste.length - 1]
   const gridCols = Math.max(state.cols.length, state.slots.length)
+  const maxUp = Math.max(...cats.map((c) => c.words.length + 1))
+  const colSpace = maxDown * PEEK_DOWN + (maxUp - 1) * PEEK_UP + H
 
   const faceCard = (c: SCard, opts: { selected: boolean; onClick: () => void; onDoubleClick: () => void }) => (
     <FaceCard
@@ -613,7 +618,11 @@ export default function Solitaire() {
           })}
         </div>
 
-        {/* Các cột */}
+        {/*
+          Các cột: chiều cao cố định cho cả ván, đủ chứa cột dài nhất có thể — số thẻ úp nhiều nhất lúc chia
+          + một chồng ngửa đầy đủ của nhóm lớn nhất (thẻ nhóm + mọi thẻ từ). Thẻ ngửa trên cột luôn cùng một nhóm,
+          nên cột không thể dài hơn mức này; bàn chơi không còn giãn ra khi xếp thêm thẻ.
+        */}
         <div className="mt-4 grid gap-2 sm:gap-3" style={{ gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` }}>
           {state.cols.map((col, ci) => {
             const target = hintTo?.type === 'col' && hintTo.col === ci
@@ -622,7 +631,7 @@ export default function Solitaire() {
               <div
                 key={ci}
                 className={clsx('relative mx-auto rounded-2xl', target && 'ring-4 ring-amber-300')}
-                style={{ width: W, minHeight: Math.max(H, height) + 8 }}
+                style={{ width: W, height: Math.max(colSpace, height) + 8 }}
                 onClick={(e) => {
                   if (e.target === e.currentTarget && sel) dropOn({ type: 'col', col: ci }, `col${ci}`)
                 }}

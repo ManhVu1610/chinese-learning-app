@@ -1,8 +1,31 @@
 import clsx from 'clsx'
-import { ChevronDown, Download, Library, Minus, Plus, Printer, RotateCcw, Trash2, X } from 'lucide-react'
+import {
+  ArrowRight,
+  BookOpen,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  Eye,
+  FileText,
+  Grid3x3,
+  LayoutGrid,
+  Library,
+  Minus,
+  Palette,
+  PenLine,
+  Plus,
+  Printer,
+  RotateCcw,
+  Trash2,
+  Type,
+  X,
+  type LucideIcon,
+} from 'lucide-react'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
+import SettingsSection from '../components/ui/SettingsSection'
 import Page from '../components/layout/Page'
 import GridCell from '../components/worksheet/GridCell'
 import Sheet from '../components/worksheet/Sheet'
@@ -21,6 +44,7 @@ import {
   type CellType,
   type FontStyle,
   type Template,
+  type TemplateGroup,
   type TraceStyle,
   type WorksheetSettings,
 } from '../components/worksheet/settings'
@@ -54,6 +78,13 @@ const readJson = <T,>(key: string, fallback: T): T => {
   }
 }
 const readText = (key: string, fallback: string) => localStorage.getItem(key) ?? fallback
+
+/** Màu nền và biểu tượng riêng cho từng nhóm mẫu. */
+const groupLook: Record<TemplateGroup, { bg: string; icon: LucideIcon }> = {
+  han: { bg: 'bg-coral', icon: PenLine },
+  vocab: { bg: 'bg-sky', icon: BookOpen },
+  text: { bg: 'bg-sage', icon: FileText },
+}
 
 /** Nạp font chữ Hán viết tay (Google Fonts) một lần, cho máy chưa có KaiTi / STXingkai. */
 function useHandwritingFonts() {
@@ -111,24 +142,44 @@ function WorksheetLibrary() {
 
   return (
     <Page feature="worksheet" size="wide" description={t('worksheet.library_subtitle')}>
-      {templateGroups.map(({ group, templates }, gi) => (
-        <div key={group} className={gi ? 'mt-10' : ''}>
-          <h2 className="text-2xl font-extrabold">{t(`worksheet.group_${group}`)}</h2>
-          <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {templates.map((tp) => (
-              <Link key={tp} to={`/worksheet/${tp}`} className="box group flex flex-col p-4 transition-transform hover:-translate-y-1">
-                <div className="flex justify-center rounded-2xl bg-[#ece6dc] p-3">
-                  <div className="shadow-block-sm">
-                    <SheetThumb settings={forTemplate(defaultSettings, tp)} data={data} width={170} />
+      {templateGroups.map(({ group, templates }, gi) => {
+        const look = groupLook[group]
+        const Icon = look.icon
+        return (
+          <section key={group} className={gi ? 'mt-12' : ''}>
+            <div className="flex items-center gap-3">
+              <span className={clsx('sticker h-10 w-10', look.bg)}>
+                <Icon size={20} />
+              </span>
+              <h2 className="text-2xl font-extrabold">{t(`worksheet.group_${group}`)}</h2>
+              <span className="tag">{t('worksheet.template_count', { count: templates.length })}</span>
+            </div>
+            <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {templates.map((tp) => (
+                <Link
+                  key={tp}
+                  to={`/worksheet/${tp}`}
+                  className="box group flex flex-col p-3 transition-transform hover:-translate-y-1 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-lilac"
+                >
+                  <div className={clsx('flex justify-center rounded-2xl border-2 border-ink/15 px-3 pt-4 pb-0', look.bg)}>
+                    <div className="overflow-hidden rounded-t-md shadow-[0_-1px_6px_rgb(0_0_0/0.12)] transition-transform group-hover:-translate-y-1.5">
+                      <SheetThumb settings={forTemplate(defaultSettings, tp)} data={data} width={180} crop={0.62} />
+                    </div>
                   </div>
-                </div>
-                <h3 className="mt-3 font-extrabold">{t(`worksheet.template_${tp}`)}</h3>
-                <p className="mt-1 text-sm text-ink-soft">{t(`worksheet.desc_${tp}`)}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      ))}
+                  <div className="flex flex-1 flex-col px-1 pt-3 pb-1">
+                    <h3 className="font-extrabold">{t(`worksheet.template_${tp}`)}</h3>
+                    <p className="mt-1 flex-1 text-sm text-ink-soft">{t(`worksheet.desc_${tp}`)}</p>
+                    <span className="mt-3 inline-flex items-center gap-1 self-end text-sm font-bold text-brick">
+                      {t('worksheet.open_template')}
+                      <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )
+      })}
     </Page>
   )
 }
@@ -270,7 +321,7 @@ function WorksheetEditor({ template }: { template: Template }) {
       if (frameRef.current) {
         // Vừa bề ngang khung (trừ lề và thanh cuộn) và vừa chiều cao màn hình, để thấy trọn một trang.
         const byWidth = (frameRef.current.clientWidth - 16 - SCROLLBAR_PX) / SHEET_PX
-        const byHeight = (window.innerHeight - 140) / A4_PX
+        const byHeight = (window.innerHeight - 180) / A4_PX // trừ thanh điều hướng và thanh công cụ xem trước
         setScale(Math.max(0.25, Math.min(1, byWidth, byHeight)))
       }
       if (sheetRef.current) {
@@ -292,6 +343,8 @@ function WorksheetEditor({ template }: { template: Template }) {
     const el = viewRef.current
     if (el) setCurrent(Math.min(pages, Math.floor((el.scrollTop + pageStep / 2) / pageStep) + 1))
   }
+  useEffect(() => setCurrent((c) => Math.min(c, pages)), [pages])
+  const goPage = (p: number) => viewRef.current?.scrollTo({ top: (Math.max(1, Math.min(pages, p)) - 1) * pageStep, behavior: 'smooth' })
   const hasContent =
     group === 'vocab'
       ? words.length > 0
@@ -308,20 +361,47 @@ function WorksheetEditor({ template }: { template: Template }) {
       description={t(`worksheet.desc_${template}`)}
       crumbs={[{ label: t(`worksheet.group_${group}`) }, { label: t(`worksheet.template_${template}`) }]}
       actions={
-        <>
-          <span className="text-sm text-ink-soft">{t('worksheet.pages_exact', { count: pages })}</span>
-          <button type="button" onClick={() => window.print()} disabled={!hasContent} className="btn btn-accent px-5 py-3">
-            <Printer size={18} />
-            {t('worksheet.print')}
-          </button>
-        </>
+        <button type="button" onClick={() => window.print()} disabled={!hasContent} className="btn btn-accent px-5 py-3">
+          <Printer size={18} />
+          {t('worksheet.print')}
+        </button>
       }
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_22rem] print:block">
-        {/* Xem trước */}
         {/* Cột xem trước: khung ôm sát trang giấy, nằm giữa cột */}
         <div ref={frameRef} className="min-w-0 self-start lg:sticky lg:top-24 print:static">
-          <div className="box relative mx-auto w-fit overflow-hidden bg-[#e9e4da] p-1.5 print:w-auto print:overflow-visible print:rounded-none print:border-0 print:bg-white print:p-0 print:shadow-none">
+          <div className="box relative mx-auto w-fit overflow-hidden bg-lilac/60 print:w-auto print:overflow-visible print:rounded-none print:border-0 print:bg-white print:p-0 print:shadow-none">
+            {/* Thanh công cụ xem trước: số trang + chuyển trang */}
+            <div className="flex items-center justify-between gap-2 border-b-2 border-ink bg-card px-3 py-1.5 text-sm print:hidden">
+              <span className="flex items-center gap-1.5 font-bold">
+                <Eye size={15} />
+                {t('worksheet.preview')}
+              </span>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => goPage(current - 1)}
+                  disabled={current <= 1}
+                  aria-label={t('worksheet.prev_page')}
+                  className="btn p-1 shadow-none hover:shadow-none"
+                >
+                  <ChevronLeft size={15} />
+                </button>
+                <span className="min-w-[5.5rem] text-center font-semibold tabular-nums">
+                  {t('worksheet.page_of', { current, total: pages })}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => goPage(current + 1)}
+                  disabled={current >= pages}
+                  aria-label={t('worksheet.next_page')}
+                  className="btn p-1 shadow-none hover:shadow-none"
+                >
+                  <ChevronRight size={15} />
+                </button>
+              </div>
+            </div>
+            <div className="p-1.5 print:p-0">
             <div
               ref={viewRef}
               onScroll={onScroll}
@@ -337,17 +417,13 @@ function WorksheetEditor({ template }: { template: Template }) {
                 </div>
               </div>
             </div>
-            {pages > 1 && (
-              <span className="tag pointer-events-none absolute right-5 bottom-4 bg-card/90 print:hidden">
-                {t('worksheet.page_of', { current, total: pages })}
-              </span>
-            )}
+            </div>
           </div>
         </div>
 
         {/* Bảng điều khiển */}
         <aside className="space-y-5 print:hidden">
-          <Panel title={t('worksheet.same_group')} hint={t('worksheet.templates_hint')}>
+          <Panel icon={LayoutGrid} title={t('worksheet.same_group')} hint={t('worksheet.templates_hint')}>
             <div className="grid grid-cols-3 gap-2">
               {templateGroups
                 .find((g) => g.group === group)!
@@ -383,7 +459,7 @@ function WorksheetEditor({ template }: { template: Template }) {
           )}
 
           {group === 'vocab' && (
-            <Panel title={t('worksheet.words_title')}>
+            <Panel icon={BookOpen} title={t('worksheet.words_title')}>
               <select
                 value=""
                 onChange={(e) => e.target.value && loadSet(e.target.value)}
@@ -443,7 +519,7 @@ function WorksheetEditor({ template }: { template: Template }) {
           )}
 
           {(template === 'copy' || template === 'lined') && (
-            <Panel title={t('worksheet.text_title')}>
+            <Panel icon={FileText} title={t('worksheet.text_title')}>
               <textarea
                 value={passageText}
                 onChange={(e) => setPassageText(e.target.value)}
@@ -456,7 +532,7 @@ function WorksheetEditor({ template }: { template: Template }) {
           )}
 
           {template === 'cover' && (
-            <Panel title={t('worksheet.cover_content')}>
+            <Panel icon={BookOpen} title={t('worksheet.cover_content')}>
               {(
                 [
                   ['coverTitle', 'cover_title'],
@@ -479,7 +555,7 @@ function WorksheetEditor({ template }: { template: Template }) {
           )}
 
           {template !== 'cover' && (
-            <Panel title={t('worksheet.page')}>
+            <Panel icon={FileText} title={t('worksheet.page')} open={false} id="page">
               <label className="block text-sm font-semibold" htmlFor="ws-title">
                 {t('worksheet.title')}
               </label>
@@ -495,7 +571,7 @@ function WorksheetEditor({ template }: { template: Template }) {
           )}
 
           {(u.cell || template === 'lined') && (
-            <Panel title={template === 'lined' ? t('worksheet.line_color') : t('worksheet.cell')}>
+            <Panel icon={Palette} title={template === 'lined' ? t('worksheet.line_color') : t('worksheet.cell')} open={false} id="cell">
               {u.cell && (
                 <div className="mb-3 grid grid-cols-5 gap-1.5">
                   {(['tian', 'mi', 'square', 'hui', 'jiu'] as CellType[]).map((c) => (
@@ -539,7 +615,7 @@ function WorksheetEditor({ template }: { template: Template }) {
           )}
 
           {(u.perRow || u.traceRows || u.blankRows || u.pages) && (
-            <Panel title={t('worksheet.layout')}>
+            <Panel icon={Grid3x3} title={t('worksheet.layout')} open={false} id="layout">
               {u.perRow && (
                 <Stepper
                   label={template === 'lined' ? t('worksheet.chars_per_line') : t('worksheet.per_row')}
@@ -581,7 +657,7 @@ function WorksheetEditor({ template }: { template: Template }) {
           )}
 
           {(u.font || u.fontSize) && (
-            <Panel title={t('worksheet.text')}>
+            <Panel icon={Type} title={t('worksheet.text')} open={false} id="text">
               {u.font && (
                 <div className="grid grid-cols-2 gap-2">
                   {(['kai', 'xing'] as FontStyle[]).map((f) => (
@@ -640,7 +716,7 @@ function WorksheetEditor({ template }: { template: Template }) {
             </Panel>
           )}
 
-          <Panel title={t('worksheet.display')}>
+          <Panel icon={Eye} title={t('worksheet.display')} open={false} id="display">
             {u.pinyin && <Toggle label={t('editor.col_pinyin')} value={settings.showPinyin} onChange={(v) => set('showPinyin', v)} />}
             {u.meaning && <Toggle label={t('editor.col_meaning')} value={settings.showMeaning} onChange={(v) => set('showMeaning', v)} />}
             <button
@@ -657,7 +733,15 @@ function WorksheetEditor({ template }: { template: Template }) {
               {t('worksheet.reset')}
             </button>
           </Panel>
-          <p className="text-xs text-ink-soft">{t('worksheet.print_hint')}</p>
+          {/* Thanh in dính dưới cùng: luôn thấy nút in dù đã cuộn xuống các mục cài đặt */}
+          <p className="px-1 text-xs text-ink-soft">{t('worksheet.print_hint')}</p>
+          <div className="box sticky bottom-4 z-10 flex items-center justify-between gap-3 bg-sand px-4 py-2.5">
+            <span className="text-sm font-bold">{t('worksheet.pages_exact', { count: pages })}</span>
+            <button type="button" onClick={() => window.print()} disabled={!hasContent} className="btn btn-accent px-4 py-2">
+              <Printer size={16} />
+              {t('worksheet.print')}
+            </button>
+          </div>
         </aside>
       </div>
     </Page>
@@ -686,7 +770,7 @@ function HanPanel({
   const edit = (c: string, k: 'pinyin' | 'hanViet' | 'meaning', v: string) => setEdits((e) => ({ ...e, [c]: { ...e[c], [k]: v } }))
 
   return (
-    <Panel title={t('worksheet.han_title')}>
+    <Panel icon={PenLine} title={t('worksheet.han_title')}>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -733,8 +817,9 @@ function HanPanel({
           aria-expanded={listOpen}
           className="flex w-full items-center gap-2 bg-paper px-3 py-2 text-left text-sm font-semibold"
         >
-          <ChevronDown size={15} className={clsx('transition-transform', !listOpen && '-rotate-90')} />
-          {t('worksheet.han_in_print', { count: items.length })}
+          <ChevronDown size={15} className={clsx('shrink-0 transition-transform', !listOpen && '-rotate-90')} />
+          <span className="flex-1">{t('worksheet.han_in_print', { count: items.length })}</span>
+          <span className="text-xs font-normal text-ink-muted">{t('worksheet.han_edit_hint')}</span>
         </button>
         {listOpen && (
           <ul className="max-h-72 divide-y-2 divide-line overflow-y-auto border-t-2 border-ink">
@@ -781,15 +866,27 @@ function HanPanel({
   )
 }
 
-function Panel({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+function Panel({
+  title,
+  hint,
+  icon,
+  open = true,
+  id,
+  children,
+}: {
+  title: string
+  hint?: string
+  icon?: LucideIcon
+  /** Mở sẵn hay thu gọn khi vào trang */
+  open?: boolean
+  /** Khoá để nhớ trạng thái mở / đóng */
+  id?: string
+  children: ReactNode
+}) {
   return (
-    <div className="box p-4">
-      <div className="mb-3 flex items-baseline justify-between gap-2">
-        <h2 className="font-bold">{title}</h2>
-        {hint && <span className="text-xs text-ink-muted">{hint}</span>}
-      </div>
+    <SettingsSection title={title} hint={hint} icon={icon} defaultOpen={open} storageKey={id && `worksheet_${id}`}>
       {children}
-    </div>
+    </SettingsSection>
   )
 }
 
